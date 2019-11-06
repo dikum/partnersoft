@@ -71,6 +71,57 @@ class Partner extends Model
 
 
 
+    public function setSurnameAttribute($surname)
+    {
+        $this->attribute['surname'] = strtolower($surname);
+    }
+
+    public function getSurnameAttribute($surname)
+    {
+        return ucwords($surname);
+    }
+
+    public function setFirst_nameAttribute($first_name)
+    {
+        $this->attribute['first_name'] = strtolower($first_name);
+    }
+
+    public function getFirstNameAttribute($first_name)
+    {
+        return ucwords($first_name);
+    }
+
+    public function setMiddle_nameAttribute($middle_name)
+    {
+        $this->attribute['middle_name'] = strtolower($middle_name);
+    }
+
+    public function getMiddle_nameAttribute($middle_name)
+    {
+        return ucwords($middle_name);
+    }
+
+    public function setEmailAttribute($email)
+    {
+        $this->attribute['email'] = strtolower($email);
+    }
+
+    public function getEmailAttribute($email)
+    {
+        return ucwords($email);
+    }
+
+    public function setEmail2Attribute($email2)
+    {
+        $this->attribute['email2'] = strtolower($email2);
+    }
+
+    public function getEmail2Attribute($email2)
+    {
+        return ucwords($email2);
+    }
+
+
 
     public function emails()
     {

@@ -25,6 +25,25 @@ class User extends Authenticatable
         'admin',
     ];
 
+    public function setNameAttribute($name)
+    {
+        $this->attribute['name'] = strtolower($name);
+    }
+
+    public function getNameAttribute($name)
+    {
+        return ucwords($name);
+    }
+
+    public function setEmailAttribute($email)
+    {
+        $this->attribute['email'] = strtolower($email);
+    }
+
+    public function getEmailAttribute($email)
+    {
+        return ucwords($email);
+    }
 
     public function payments()
     {
