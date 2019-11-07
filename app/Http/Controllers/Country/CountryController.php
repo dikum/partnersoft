@@ -16,7 +16,9 @@ class CountryController extends ApiBaseController
      */
     public function index()
     {
-        //
+        $countries = Country::all();
+
+        return $this->showAll($countries);
     }
 
     /**
@@ -48,7 +50,9 @@ class CountryController extends ApiBaseController
      */
     public function show($id)
     {
-        //
+        $country = Country::findOrFail($id);
+
+        return $this->showOne($country);
     }
 
     /**

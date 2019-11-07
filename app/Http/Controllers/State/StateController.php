@@ -15,7 +15,9 @@ class StateController extends ApiBaseController
      */
     public function index()
     {
-        //
+        $states = State::all();
+
+        return $this->showAll($states);
     }
 
     /**
@@ -47,7 +49,9 @@ class StateController extends ApiBaseController
      */
     public function show($id)
     {
-        //
+        $state = State::findOrFail($id);
+
+        return $this->showOne($state);
     }
 
     /**

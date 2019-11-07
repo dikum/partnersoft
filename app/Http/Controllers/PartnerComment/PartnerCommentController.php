@@ -16,7 +16,9 @@ class PartnerCommentController extends ApiBaseController
      */
     public function index()
     {
-         return response()->json(['data'=>PartnerComment::all()], 200);
+         $comments = PartnerComment::all();
+
+         return $this->showAll($comments);
     }
 
     /**
@@ -61,7 +63,7 @@ class PartnerCommentController extends ApiBaseController
     {
         $comment = PartnerComment::findOrFail($id);
 
-        return response()->json(['data'=>$comment], 200);
+        return $this->showOne($comment);
     }
 
     /**

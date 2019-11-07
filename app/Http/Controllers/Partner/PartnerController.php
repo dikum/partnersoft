@@ -19,7 +19,9 @@ class PartnerController extends ApiBaseController
      */
     public function index()
     {
-        return response()->json(['data'=>Partner::all()], 200);
+        $partners = Partner::all();
+
+        return $this->showAll($partners);
     }
 
     /**
@@ -98,7 +100,7 @@ class PartnerController extends ApiBaseController
     {
         $partner = Partner::findOrFail($id);
 
-        return response()->json(['data'=>$partner], 200);
+        return $this->showOne($partner);
     }
 
     /**

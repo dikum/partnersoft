@@ -18,7 +18,7 @@ class EmailController extends ApiBaseController
     {
         $emails = Email::all();
 
-        return response()->json(['data'=>$emails], 200);
+        return showAll($emails);
     }
 
     /**
@@ -67,7 +67,7 @@ class EmailController extends ApiBaseController
     {
         $email = Email::findOrFail($id);
 
-        return response()->json(['data'=>$email], 200);
+        return $this->showOne($email);
     }
 
     /**

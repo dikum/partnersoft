@@ -16,7 +16,9 @@ class SmsController extends ApiBaseController
      */
     public function index()
     {
-        return response()->json(['data'=>Sms::all()],200);
+        $sms = SmsController::all();
+
+        return $this->showAll($sms);
     }
 
     /**
@@ -64,7 +66,7 @@ class SmsController extends ApiBaseController
     {
         $sms = Sms::findOrFail($id);
 
-        return response()->json(['data'=>$sms], 200);
+        return $this->showOne($sms);
     }
 
     /**

@@ -18,7 +18,7 @@ class BankController extends ApiBaseController
     {
         $banks = Bank::all();
 
-        return response()->json(['data'=>$banks], 200);
+        return $this->showAll($banks);
     }
 
     /**
@@ -63,7 +63,7 @@ class BankController extends ApiBaseController
     {
         $bank = Bank::findOrFail($id);
 
-        return response()->json(['data'=>$bank], 200);
+        return $this->showOne($bank);
     }
 
     /**

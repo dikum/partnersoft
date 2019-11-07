@@ -17,7 +17,8 @@ class BankStatementController extends ApiBaseController
      */
     public function index()
     {
-        return response()->json(['data'=>BankStatement::all()], 200);
+        $bank_statements = BankStatement::all();
+        return $this->showAll($bank_statements);
     }
 
     /**
@@ -71,7 +72,7 @@ class BankStatementController extends ApiBaseController
     {
         $bank_statement = BankStatement::findOrFail($id);
 
-        return response()->json(['data'=>$bank_statement], 200);
+        return $this->showOne($bank_statement);
     }
 
     /**

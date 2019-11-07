@@ -16,7 +16,9 @@ class MessageTemplateController extends ApiBaseController
      */
     public function index()
     {
-        return response()->json(['data'=>MessageTemplate::all()]);
+        $messages = MessageTemplate::all();
+
+        return showAll($messages);
     }
 
     /**
@@ -61,7 +63,7 @@ class MessageTemplateController extends ApiBaseController
     {
         $message = MessageTemplate::findOrFail($id);
 
-        return response()->json(['data'=>$message], 200);
+        return $this->showOne($message);
     }
 
     /**

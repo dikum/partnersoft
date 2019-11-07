@@ -18,7 +18,7 @@ class UserController extends ApiBaseController
     {
         $users = User::all();
 
-        return response()->json(['data', $users], 200);
+        return $this->showAll($users);
     }
 
     /**
@@ -66,7 +66,7 @@ class UserController extends ApiBaseController
     {
         $user = User::findOrFail($id);
 
-        return response()->json(['data'=>$user], 200);
+        return $this->showOne($user);
     }
 
     /**

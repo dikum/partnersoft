@@ -77,3 +77,18 @@ Route::resource('currencies', 'Currency\CurrencyController', ['except' => ['edit
 *Payment
 */
 Route::resource('payments', 'Payment\PaymentController', ['except' => ['edit', 'create']]);
+
+/**
+*Continent
+*/
+Route::resource('continents', 'Continent\ContinentController', ['only' => ['show', 'index']]);
+
+/**
+*Continent
+*/
+Route::resource('countries', 'Country\CountryController', ['only' => ['show', 'index']]);
+
+/**
+*State
+*/
+Route::resource('states', 'State\StateController', ['only' => ['show', 'index']]);

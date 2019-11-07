@@ -18,7 +18,7 @@ class CurrencyController extends ApiBaseController
     {
         $currencies = Currency::all();
 
-        return response()->json(['data', $currencies], 200);
+        return $this->showAll($currencies);
     }
 
     /**
@@ -63,7 +63,7 @@ class CurrencyController extends ApiBaseController
     {
         $currency = Currency::findOrFail($id);
 
-        return response()->json(['data'=>$currency], 200);
+        return $this->showOne($currency);
     }
 
     /**

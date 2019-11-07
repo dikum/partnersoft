@@ -20,7 +20,9 @@ class PaymentController extends ApiBaseController
      */
     public function index()
     {
-        return response()->json(['data'=>Payment::all()], 200);
+        $payments = Payment::all();
+
+        return $this->showAll($payments);
     }
 
     /**
@@ -67,7 +69,7 @@ class PaymentController extends ApiBaseController
     {
         $payment = Payment::findOrFail($id);
 
-        return response()->json(['data'=>$payment], 200);
+        return $this->showOne($payment);
     }
 
     /**

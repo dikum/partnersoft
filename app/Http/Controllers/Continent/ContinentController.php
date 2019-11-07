@@ -16,7 +16,8 @@ class ContinentController extends ApiBaseController
      */
     public function index()
     {
-        //
+        $continents = Continent::all();
+        return $this->showAll($continents);
     }
 
     /**
@@ -37,7 +38,7 @@ class ContinentController extends ApiBaseController
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -48,7 +49,8 @@ class ContinentController extends ApiBaseController
      */
     public function show($id)
     {
-        //
+        $continent = Continent::findOrFail($id);
+        return $this->showOne($continent);
     }
 
     /**

@@ -16,7 +16,9 @@ class TitleController extends ApiBaseController
      */
     public function index()
     {
-        //
+        $titles = Title::all();
+
+        return $this->showAll($titles);
     }
 
     /**
@@ -60,7 +62,7 @@ class TitleController extends ApiBaseController
     {
         $title = Title::findOrFail($id);
 
-        return response()->json(['data'=>$title], 200);
+        return $this->showOne($title);
     }
 
     /**
