@@ -28,17 +28,7 @@ class TitleController extends ApiBaseController
      */
     public function create()
     {
-         $rules = [
-            'title' => 'required',
-        ];
-
-        $this->validate($request, $rules);
-
-        $data = $request->all();
-
-        $title = Title::create($data);
-
-        return response()->json(['data'=>$title], 201);
+        
     }
 
     /**
@@ -49,7 +39,17 @@ class TitleController extends ApiBaseController
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'title' => 'required',
+        ];
+
+        $this->validate($request, $rules);
+
+        $data = $request->all();
+
+        $title = Title::create($data);
+
+        return $this->showOne($title, 201);
     }
 
     /**
@@ -97,7 +97,7 @@ class TitleController extends ApiBaseController
 
         $title->save();
 
-        return response()->json(['data' => $title], 200);
+        return $this->showOne($title);
     }
 
     /**
@@ -110,6 +110,6 @@ class TitleController extends ApiBaseController
     {
         $title = Title::findOrFail($id);
         $title->delete();
-        return response()->json(['data' => $title], 200);
+        return $this->showOne($title);
     }
 }

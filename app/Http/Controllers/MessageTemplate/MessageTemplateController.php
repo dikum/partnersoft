@@ -50,7 +50,7 @@ class MessageTemplateController extends ApiBaseController
 
         $message = MessageTemplate::create($data);
 
-        return response()->json(['data'=>$message], 201);
+        return $this->showOne($message, 201);
     }
 
     /**
@@ -86,25 +86,25 @@ class MessageTemplateController extends ApiBaseController
      */
     public function update(Request $request, $id)
     {
-        $message_template = MessageTemplate::findOrFail($id);
+        $message = MessageTemplate::findOrFail($id);
 
         //$this->validate($request, $rules);
 
         if($request->has('title'))
-            $message_template->title = $request->title;
+            $message->title = $request->title;
 
         if($request->has('message'))
-            $message_template->message = $request->message;
+            $message->message = $request->message;
 
 
-        if(!$message_template->isDirty())
+        if(!$message->isDirty())
         {
             return response()->json(['error' => 'No field has been updated', 'code' => 422], 422);
         }
 
-        $message_template->save();
+        $message->save();
 
-        return response()->json(['data' => $message_template], 200);
+        return $this->showOne($message);
     }
 
     /**
@@ -115,8 +115,8 @@ class MessageTemplateController extends ApiBaseController
      */
     public function destroy($id)
     {
-        $message_template = MessageTemplate::findOrFail($id);
-        $message_template->delete();
-        return response()->json(['data' => $message_template], 200);
+        $message = MessageTemplate::findOrFail($id);
+        $message->delete();
+        return $this->showOne($message);
     }
 }

@@ -88,6 +88,6 @@ class CountryController extends ApiBaseController
     {
         $country = Country::findOrFail($id);
         $country->delete();
-        return response()->json(['data' => $country], 200);
+        return $this->showOne($country);
     }
 }

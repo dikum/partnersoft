@@ -54,7 +54,7 @@ class EmailController extends ApiBaseController
 
         $email = Email::create($data);
 
-        return response()->json(['data'=>$email], 201);
+        return $this->showOne($email, 201);
     }
 
     /**

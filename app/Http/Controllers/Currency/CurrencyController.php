@@ -102,7 +102,7 @@ class CurrencyController extends ApiBaseController
 
         $currency->save();
 
-        return response()->json(['data' => $currency], 200);
+        return $this->showOne($currency);
     }
 
     /**
@@ -115,6 +115,6 @@ class CurrencyController extends ApiBaseController
     {
         $currency = Currency::findOrFail($id);
         $currency->delete();
-        return response()->json(['data' => $currency], 200);
+        return $this->showOne($currency);
     }
 }

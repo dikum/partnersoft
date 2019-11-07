@@ -56,7 +56,7 @@ class PaymentController extends ApiBaseController
 
         $payment = Payment::create($data);
 
-        return response()->json(['data'=>$payment], 201);
+        return $this->showOne($payment, 201);
     }
 
     /**
@@ -118,7 +118,7 @@ class PaymentController extends ApiBaseController
 
         $payment->save();
 
-        return response()->json(['data' => $payment], 200);
+        return $this->showOne($payment);
     }
 
     /**

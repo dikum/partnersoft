@@ -87,7 +87,7 @@ class PartnerController extends ApiBaseController
 
         $partner = Partner::create($data);
 
-        return response()->json(['data'=>$partner], 201);
+        return $this->showOne($partner, 201);
     }
 
     /**
@@ -238,7 +238,7 @@ class PartnerController extends ApiBaseController
 
         $partner->save();
 
-        return response()->json(['data' => $partner], 200);
+        return $this->showOne($partner);
     }
 
     /**
@@ -251,6 +251,6 @@ class PartnerController extends ApiBaseController
     {
         $partner = Partner::findOrFail($id);
         $partner->delete();
-        return response()->json(['data' => $partner], 200);
+        return $this->showOne($partner);
     }
 }

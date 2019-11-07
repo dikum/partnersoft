@@ -59,7 +59,7 @@ class BankStatementController extends ApiBaseController
 
         $bank_statement = BankStatement::create($data);
 
-        return response()->json(['data'=>$bank_statement], 201);
+        return $this->showOne($bank_statement, 201);
     }
 
     /**

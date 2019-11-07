@@ -50,7 +50,7 @@ class BankController extends ApiBaseController
 
         $bank = Bank::create($data);
 
-        return response()->json(['data'=>$bank], 201);
+        return $this->showOne($bank, 201);
     }
 
     /**
@@ -101,7 +101,7 @@ class BankController extends ApiBaseController
 
         $bank->save();
 
-        return response()->json(['data' => $bank], 200);
+        return $this->showOne($bank);
     }
     
 
@@ -115,6 +115,6 @@ class BankController extends ApiBaseController
     {
         $bank = Bank::findOrFail($id);
         $bank->delete();
-        return response()->json(['data' => $bank], 200);
+        return $this->showOne($bank);
     }
 }

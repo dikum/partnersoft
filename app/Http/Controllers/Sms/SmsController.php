@@ -53,7 +53,7 @@ class SmsController extends ApiBaseController
 
         $sms = Sms::create($data);
 
-        return response()->json(['data'=>$sms], 201);
+        return $this->showOne($sms, 201);
     }
 
     /**

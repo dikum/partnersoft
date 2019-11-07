@@ -50,7 +50,7 @@ class PartnerCommentController extends ApiBaseController
 
         $sms = Sms::create($data);
 
-        return response()->json(['data'=>$sms], 201);
+        return $this->showOne($sms, 201);
     }
 
     /**
@@ -103,7 +103,7 @@ class PartnerCommentController extends ApiBaseController
 
         $comment->save();
 
-        return response()->json(['data' => $comment], 200);
+        return $this->showOne($comment);
     }
 
     /**
@@ -116,6 +116,6 @@ class PartnerCommentController extends ApiBaseController
     {
         $comment = PartnerComment::findOrFail($id);
         $comment->delete();
-        return response()->json(['data' => $comment], 200);
+        return $this->showOne($comment);
     }
 }
