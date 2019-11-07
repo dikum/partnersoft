@@ -97,7 +97,7 @@ class CurrencyController extends ApiBaseController
 
         if(!$currency->isDirty())
         {
-            return response()->json(['error' => 'No field has been updated', 'code' => 422], 422);
+            return $this->errorResponse('No field has been updated', 422);
         }
 
         $currency->save();

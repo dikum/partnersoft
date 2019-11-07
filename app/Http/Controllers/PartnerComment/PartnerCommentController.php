@@ -90,7 +90,7 @@ class PartnerCommentController extends ApiBaseController
 
         if($request->has('partner_id'))
         {
-            return response()->json(['error' => 'Sorry, the Partnership ID field cannot be updated', 'code' => 409], 409);
+            return $this->errorResponse('Sorry, the Partnership ID field cannot be updated', 409);
         }
 
         if($request->has('comment'))
@@ -98,7 +98,7 @@ class PartnerCommentController extends ApiBaseController
 
         if(!$comment->isDirty())
         {
-            return response()->json(['error' => 'No field has been updated', 'code' => 422], 422);
+            return $this->errorResponse('No field has been updated', 422);
         }
 
         $comment->save();

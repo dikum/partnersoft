@@ -99,7 +99,7 @@ class MessageTemplateController extends ApiBaseController
 
         if(!$message->isDirty())
         {
-            return response()->json(['error' => 'No field has been updated', 'code' => 422], 422);
+            return $this->errorResponse()->json('No field has been updated', 422);
         }
 
         $message->save();

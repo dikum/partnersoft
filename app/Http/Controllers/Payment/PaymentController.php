@@ -113,7 +113,7 @@ class PaymentController extends ApiBaseController
        
         if(!$payment->isDirty())
         {
-            return response()->json(['error' => 'No field has been updated', 'code' => 422], 422);
+            return $this->errorResponse('No field has been updated', 422);
         }
 
         $payment->save();

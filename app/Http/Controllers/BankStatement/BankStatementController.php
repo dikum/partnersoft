@@ -108,6 +108,6 @@ class BankStatementController extends ApiBaseController
     {
         $bank_statement = BankStatement::findOrFail($id);
         $bank_statement->delete();
-        return response()->json(['data' => $bank_statement], 200);
+        return $this->showOne($bank_statement);
     }
 }
