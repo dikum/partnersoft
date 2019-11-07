@@ -40,10 +40,6 @@ class User extends Authenticatable
         $this->attribute['email'] = strtolower($email);
     }
 
-    public function getEmailAttribute($email)
-    {
-        return ucwords($email);
-    }
 
     public function payments()
     {

@@ -106,10 +106,6 @@ class Partner extends Model
         $this->attribute['email'] = strtolower($email);
     }
 
-    public function getEmailAttribute($email)
-    {
-        return ucwords($email);
-    }
 
     public function setEmail2Attribute($email2)
     {
