@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Sms;
 
+use App\Http\Controllers\ApiBaseController;
 use App\Http\Controllers\Controller;
 use App\Sms;
 use Illuminate\Http\Request;
 
-class SmsController extends Controller
+class SmsController extends ApiBaseController
 {
     /**
      * Display a listing of the resource.

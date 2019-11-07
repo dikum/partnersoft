@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Email;
 
 use App\Email;
+use App\Http\Controllers\ApiBaseController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class EmailController extends Controller
+class EmailController extends ApiBaseController
 {
     /**
      * Display a listing of the resource.

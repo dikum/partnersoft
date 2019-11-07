@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Continent;
 
 use App\Continent;
+use App\Http\Controllers\ApiBaseController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ContinentController extends Controller
+class ContinentController extends ApiBaseController
 {
     /**
      * Display a listing of the resource.

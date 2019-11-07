@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Payment;
 
 use App\BankStatement;
+use App\Http\Controllers\ApiBaseController;
 use App\Http\Controllers\Controller;
 use App\Partner;
 use App\Payment;
@@ -10,7 +11,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 
-class PaymentController extends Controller
+class PaymentController extends ApiBaseController
 {
     /**
      * Display a listing of the resource.

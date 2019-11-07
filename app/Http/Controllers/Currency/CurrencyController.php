@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Currency;
 
 use App\Currency;
+use App\Http\Controllers\ApiBaseController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class CurrencyController extends Controller
+class CurrencyController extends ApiBaseController
 {
     /**
      * Display a listing of the resource.

@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Bank;
 
 use App\Bank;
+use App\Http\Controllers\ApiBaseController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class BankController extends Controller
+class BankController extends ApiBaseController
 {
     /**
      * Display a listing of the resource.

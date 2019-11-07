@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\MessageTemplate;
 
+use App\Http\Controllers\ApiBaseController;
 use App\Http\Controllers\Controller;
 use App\MessageTemplate;
 use Illuminate\Http\Request;
 
-class MessageTemplateController extends Controller
+class MessageTemplateController extends ApiBaseController
 {
     /**
      * Display a listing of the resource.

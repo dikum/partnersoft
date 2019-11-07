@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\State;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\ApiBaseController;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
-class StateController extends Controller
+class StateController extends ApiBaseController
 {
     /**
      * Display a listing of the resource.

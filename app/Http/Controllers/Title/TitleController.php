@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Title;
 
+use App\Http\Controllers\ApiBaseController;
 use App\Http\Controllers\Controller;
 use App\Title;
 use Illuminate\Http\Request;
 
-class TitleController extends Controller
+class TitleController extends ApiBaseController
 {
     /**
      * Display a listing of the resource.

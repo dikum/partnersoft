@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\PartnerComment;
 
+use App\Http\Controllers\ApiBaseController;
 use App\Http\Controllers\Controller;
 use App\PartnerComment;
 use Illuminate\Http\Request;
 
-class PartnerCommentController extends Controller
+class PartnerCommentController extends ApiBaseController
 {
     /**
      * Display a listing of the resource.

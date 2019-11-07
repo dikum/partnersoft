@@ -4,12 +4,13 @@ namespace App\Http\Controllers\Partner;
 
 use App\Country;
 use App\Currency;
+use App\Http\Controllers\ApiBaseController;
 use App\Http\Controllers\Controller;
 use App\Partner;
 use App\State;
 use Illuminate\Http\Request;
 
-class PartnerController extends Controller
+class PartnerController extends ApiBaseController
 {
     /**
      * Display a listing of the resource.

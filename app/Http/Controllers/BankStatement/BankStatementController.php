@@ -4,10 +4,11 @@ namespace App\Http\Controllers\BankStatement;
 
 use App\BankStatement;
 use App\Currency;
+use App\Http\Controllers\ApiBaseController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class BankStatementController extends Controller
+class BankStatementController extends ApiBaseController
 {
     /**
      * Display a listing of the resource.

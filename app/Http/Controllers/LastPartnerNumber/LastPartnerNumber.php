@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\LastPartnerNumber;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\ApiBaseController;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
-class LastPartnerNumber extends Controller
+class LastPartnerNumber extends ApiBaseController
 {
     /**
      * Display a listing of the resource.
