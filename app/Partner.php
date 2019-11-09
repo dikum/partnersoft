@@ -156,6 +156,7 @@ class Partner extends Model
         'password', 
         'remember_token',
         'verification_token',
+        'deleted_at',
     ];
 
     public function isVerified()

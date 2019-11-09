@@ -26,4 +26,14 @@ class Sms extends Model
     {
     	return $this->belongsTo(Partner::class);
     }
+
+     /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'deleted_at',
+    ];
+
 }

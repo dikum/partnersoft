@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Payment extends Model
 {
     use SoftDeletes;
-    
+
     const PAYMENT_ENTERED_BY_SYSTEM = 'system';
 
     protected $dates = ['deleted_at'];
@@ -36,4 +36,14 @@ class Payment extends Model
     {
     	return $this->belongsTo(User::class);
     }
+
+     /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'deleted_at',
+    ];
+
 }
