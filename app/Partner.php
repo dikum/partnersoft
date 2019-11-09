@@ -7,9 +7,12 @@ use App\Payment;
 use App\Sms;
 use App\Title;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Partner extends Model
 {
+    use SoftDeletes;
+
 	const PENDING_STATUS = 'pending';
 	const ACTIVE_STATUS = 'active';
 
@@ -34,6 +37,7 @@ class Partner extends Model
     
     const REGISTERED_BY_SELF = 'self';
 
+    protected $dates = ['deleted_at'];
     protected $fillable = [
     	'partner_id',
     	'title_id',
@@ -73,7 +77,7 @@ class Partner extends Model
 
     public function setSurnameAttribute($surname)
     {
-        $this->attribute['surname'] = strtolower($surname);
+        $this->attributes['surname'] = strtolower($surname);
     }
 
     public function getSurnameAttribute($surname)
@@ -83,7 +87,7 @@ class Partner extends Model
 
     public function setFirst_nameAttribute($first_name)
     {
-        $this->attribute['first_name'] = strtolower($first_name);
+        $this->attributes['first_name'] = strtolower($first_name);
     }
 
     public function getFirstNameAttribute($first_name)
@@ -93,7 +97,7 @@ class Partner extends Model
 
     public function setMiddle_nameAttribute($middle_name)
     {
-        $this->attribute['middle_name'] = strtolower($middle_name);
+        $this->attributes['middle_name'] = strtolower($middle_name);
     }
 
     public function getMiddle_nameAttribute($middle_name)
@@ -103,20 +107,14 @@ class Partner extends Model
 
     public function setEmailAttribute($email)
     {
-        $this->attribute['email'] = strtolower($email);
+        $this->attributes['email'] = strtolower($email);
     }
 
 
     public function setEmail2Attribute($email2)
     {
-        $this->attribute['email2'] = strtolower($email2);
+        $this->attributes['email2'] = strtolower($email2);
     }
-
-    public function getEmail2Attribute($email2)
-    {
-        return ucwords($email2);
-    }
-
 
 
     public function emails()

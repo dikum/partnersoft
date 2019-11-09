@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class PartnerComment extends Model
 {
+	use SoftDeletes;
+
+	protected $dates = ['deleted_at'];
 	protected $fillable = [
 		'partner_id',
     	'comment',

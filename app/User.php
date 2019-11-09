@@ -3,12 +3,13 @@
 namespace App;
 
 use App\Payment;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, SoftDeletes;
 
     const ADMIN_USER = 'true';
     const REGULAR_USER = 'false';
@@ -18,6 +19,8 @@ class User extends Authenticatable
      *
      * @var array
      */
+
+    protected $dates = ['deleted_at'];
     protected $fillable = [
         'name', 
         'email', 
@@ -27,7 +30,7 @@ class User extends Authenticatable
 
     public function setNameAttribute($name)
     {
-        $this->attribute['name'] = strtolower($name);
+        $this->attributes['name'] = strtolower($name);
     }
 
     public function getNameAttribute($name)
@@ -37,7 +40,7 @@ class User extends Authenticatable
 
     public function setEmailAttribute($email)
     {
-        $this->attribute['email'] = strtolower($email);
+        $this->attributes['email'] = strtolower($email);
     }
 
 

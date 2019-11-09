@@ -6,9 +6,13 @@ use App\Bank;
 use App\Currency;
 use App\Payment;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class BankStatement extends Model
 {
+    use SoftDeletes;
+
+    protected $dates = ['deleted_at'];
     protected $fillable = [
         'transaction_id',
     	'bank_id',
