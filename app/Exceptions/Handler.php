@@ -64,7 +64,7 @@ class Handler extends ExceptionHandler
         if($exception instanceof ModelNotFoundException)
         {
             $modelName = strtolower(class_basename($exception->getModel()));
-            return $this->errorResponse("Sorry, the resource {$modelName} you are looking for does not exist", 404);
+            return $this->errorResponse("Sorry, the {$modelName} resource  you are looking for does not exist", 404);
         }
 
         if($exception instanceof AuthenticationException)
@@ -94,7 +94,8 @@ class Handler extends ExceptionHandler
 
         if(config('app.debug'))
             return parent::render($request, $exception);
-        return $this->errorResponse("Unexpected Error. Please try again.", 500)
+
+        return $this->errorResponse("Unexpected Error. Please try again.", 500);
     }
 
     protected function convertValidationExceptionToResponse(ValidationException $e, $request)

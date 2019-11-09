@@ -48,6 +48,7 @@ class CreatePartnersTable extends Migration
             $table->rememberToken();
             $table->string('verification_token')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('title_id')->references('id')->on('titles');
             $table->foreign('currency_id')->references('id')->on('currencies');

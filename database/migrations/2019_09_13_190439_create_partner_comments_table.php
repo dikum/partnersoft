@@ -18,6 +18,7 @@ class CreatePartnerCommentsTable extends Migration
             $table->integer('partner_id')->unsigned();
             $table->text('comment');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('partner_id')->references('id')->on('partners');
         });

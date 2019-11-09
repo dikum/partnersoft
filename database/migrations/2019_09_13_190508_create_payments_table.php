@@ -18,12 +18,14 @@ class CreatePaymentsTable extends Migration
             $table->integer('partner_id')->unsigned();
             $table->integer('bankstatement_id')->unsigned();
             $table->string('entered_by');
+            $table->timestamps();
+            $table->softDeletes();
 
 
 
             $table->foreign('partner_id')->references('id')->on('partners');
             $table->foreign('bankstatement_id')->references('id')->on('bank_statements');
-            $table->timestamps();
+    
         });
     }
 

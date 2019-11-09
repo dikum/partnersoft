@@ -22,6 +22,7 @@ class CreateSmsTable extends Migration
             $table->text('message');
             $table->string('status')->default(Sms::MESSAGE_SENT);
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('partner_id')->references('id')->on('partners');
 

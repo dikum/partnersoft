@@ -27,8 +27,8 @@ class CreateBankStatementsTable extends Migration
             $table->string('payment_channel');
             $table->string('email');
             $table->string('phone');
-
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('bank_id')->references('id')->on('banks');
             $table->foreign('currency_id')->references('id')->on('currencies');
