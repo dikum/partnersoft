@@ -81,10 +81,10 @@ Route::resource('payments', 'Payment\PaymentController', ['except' => ['edit', '
 /**
 *Continent
 */
-Route::resource('continents', 'Continent\ContinentController', ['only' => ['show', 'index']]);
+Route::resource('continents', 'Continent\ContinentController', ['only' => ['show', 'index', 'destroy']]);
 
 /**
-*Continent
+*Countries
 */
 Route::resource('countries', 'Country\CountryController', ['only' => ['show', 'index']]);
 

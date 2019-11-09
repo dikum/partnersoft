@@ -86,6 +86,6 @@ class ContinentController extends ApiBaseController
     {
         $continent = Continent::findOrFail($id);
         $continent->delete();
-        return response()->json(['data' => $continent], 200);
+        return $this->showOne($continent);
     }
 }
