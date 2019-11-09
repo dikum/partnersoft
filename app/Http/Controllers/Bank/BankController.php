@@ -59,10 +59,8 @@ class BankController extends ApiBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Bank $bank)
     {
-        $bank = Bank::findOrFail($id);
-
         return $this->showOne($bank);
     }
 
@@ -84,10 +82,8 @@ class BankController extends ApiBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Bank $bank)
     {
-        $bank = Bank::findOrFail($id);
-
         if($request->has('bank'))
             $bank->bank = $request->bank;
 
@@ -111,9 +107,8 @@ class BankController extends ApiBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Bank $bank)
     {
-        $bank = Bank::findOrFail($id);
         $bank->delete();
         return $this->showOne($bank);
     }

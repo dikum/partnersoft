@@ -65,10 +65,8 @@ class PaymentController extends ApiBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Payment $payment)
     {
-        $payment = Payment::findOrFail($id);
-
         return $this->showOne($payment);
     }
 
@@ -90,9 +88,8 @@ class PaymentController extends ApiBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Payment $payment)
     {
-        $payment = Payment::findOrFail($id);
 
         $rules = [
 
@@ -127,9 +124,8 @@ class PaymentController extends ApiBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Payment $payment)
     {
-        $payment = Payment::findOrFail($id);
         $payment->delete();
         return response()->json(['data' => $payment], 200);
     }

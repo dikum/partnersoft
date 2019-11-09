@@ -59,10 +59,8 @@ class CurrencyController extends ApiBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Currency $currency)
     {
-        $currency = Currency::findOrFail($id);
-
         return $this->showOne($currency);
     }
 
@@ -111,9 +109,8 @@ class CurrencyController extends ApiBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Currency $currency)
     {
-        $currency = Currency::findOrFail($id);
         $currency->delete();
         return $this->showOne($currency);
     }

@@ -96,10 +96,8 @@ class PartnerController extends ApiBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Partner $partner)
     {
-        $partner = Partner::findOrFail($id);
-
         return $this->showOne($partner);
     }
 
@@ -121,10 +119,8 @@ class PartnerController extends ApiBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Partner $partner)
     {
-
-        $partner = Partner::findOrFail($id);
 
         $rules = [
             'partner_id' => 'nullable',
@@ -247,9 +243,8 @@ class PartnerController extends ApiBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Partner $partner)
     {
-        $partner = Partner::findOrFail($id);
         $partner->delete();
         return $this->showOne($partner);
     }

@@ -59,10 +59,8 @@ class MessageTemplateController extends ApiBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(MessageTemplate $message)
     {
-        $message = MessageTemplate::findOrFail($id);
-
         return $this->showOne($message);
     }
 
@@ -84,10 +82,8 @@ class MessageTemplateController extends ApiBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, MessageTemplate $message)
     {
-        $message = MessageTemplate::findOrFail($id);
-
         //$this->validate($request, $rules);
 
         if($request->has('title'))
@@ -113,9 +109,8 @@ class MessageTemplateController extends ApiBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(MessageTemplate $message)
     {
-        $message = MessageTemplate::findOrFail($id);
         $message->delete();
         return $this->showOne($message);
     }

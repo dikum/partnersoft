@@ -47,10 +47,8 @@ class StateController extends ApiBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(State $state)
     {
-        $state = State::findOrFail($id);
-
         return $this->showOne($state);
     }
 

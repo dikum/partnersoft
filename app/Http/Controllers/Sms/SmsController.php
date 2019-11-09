@@ -62,10 +62,8 @@ class SmsController extends ApiBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Sms $sms)
     {
-        $sms = Sms::findOrFail($id);
-
         return $this->showOne($sms);
     }
 

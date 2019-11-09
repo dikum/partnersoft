@@ -59,10 +59,8 @@ class PartnerCommentController extends ApiBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(PartnerComment $comment)
     {
-        $comment = PartnerComment::findOrFail($id);
-
         return $this->showOne($comment);
     }
 
@@ -84,9 +82,8 @@ class PartnerCommentController extends ApiBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, PartnerComment $comment)
     {
-        $comment = PartnerComment::findOrFail($id);
 
         if($request->has('partner_id'))
         {
@@ -112,9 +109,8 @@ class PartnerCommentController extends ApiBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(PartnerComment $comment)
     {
-        $comment = PartnerComment::findOrFail($id);
         $comment->delete();
         return $this->showOne($comment);
     }

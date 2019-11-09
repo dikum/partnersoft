@@ -48,10 +48,8 @@ class CountryController extends ApiBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Country $country)
     {
-        $country = Country::findOrFail($id);
-
         return $this->showOne($country);
     }
 
@@ -84,9 +82,8 @@ class CountryController extends ApiBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Country $country)
     {
-        $country = Country::findOrFail($id);
         $country->delete();
         return $this->showOne($country);
     }

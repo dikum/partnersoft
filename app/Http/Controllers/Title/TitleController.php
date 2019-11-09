@@ -58,10 +58,8 @@ class TitleController extends ApiBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Title $title)
     {
-        $title = Title::findOrFail($id);
-
         return $this->showOne($title);
     }
 
@@ -83,10 +81,8 @@ class TitleController extends ApiBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Title $title)
     {
-        $title = Title::findOrFail($id);
-
         if($request->has('title'))
             $title->title = $request->title;
 
@@ -106,9 +102,8 @@ class TitleController extends ApiBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Title $title)
     {
-        $title = Title::findOrFail($id);
         $title->delete();
         return $this->showOne($title);
     }

@@ -47,9 +47,8 @@ class ContinentController extends ApiBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Continent $continent)
     {
-        $continent = Continent::findOrFail($id);
         return $this->showOne($continent);
     }
 
@@ -82,9 +81,8 @@ class ContinentController extends ApiBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Continent $continent)
     {
-        $continent = Continent::findOrFail($id);
         $continent->delete();
         return $this->showOne($continent);
     }

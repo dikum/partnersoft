@@ -63,10 +63,8 @@ class EmailController extends ApiBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Email $email)
     {
-        $email = Email::findOrFail($id);
-
         return $this->showOne($email);
     }
 
