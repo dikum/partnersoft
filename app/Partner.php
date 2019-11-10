@@ -100,7 +100,7 @@ class Partner extends Model
         $this->attributes['middle_name'] = strtolower($middle_name);
     }
 
-    public function getMiddle_nameAttribute($middle_name)
+    public function getMiddleNameAttribute($middle_name)
     {
         return ucwords($middle_name);
     }

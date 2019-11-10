@@ -16,7 +16,7 @@ class SmsController extends ApiBaseController
      */
     public function index()
     {
-        $sms = SmsController::all();
+        $sms = Sms::all();
 
         return $this->showAll($sms);
     }
