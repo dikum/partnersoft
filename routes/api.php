@@ -38,6 +38,7 @@ Route::resource('messagetemplates', 'MessageTemplate\MessageTemplateController')
 */
 Route::resource('partners', 'Partner\PartnerController', ['except' => ['create', 'edit']]);
 Route::resource('partners.messages', 'Partner\PartnerMessageController', ['only' => ['index']]);
+Route::resource('partners.comments', 'Partner\PartnerCommentController', ['only' => ['index']]);
 
 /**
 *PartnerComment
