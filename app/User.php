@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\PartnerComment;
 use App\Payment;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -47,6 +48,11 @@ class User extends Authenticatable
     public function payments()
     {
         return $this->hasMany(Payment::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(PartnerComment::class);
     }
 
     public function isAdmin()

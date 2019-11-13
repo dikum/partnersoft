@@ -90,6 +90,11 @@ class PartnerCommentController extends ApiBaseController
             return $this->errorResponse('Sorry, the Partnership ID field cannot be updated', 409);
         }
 
+        if($request->has('user_id'))
+        {
+            return $this->errorResponse('Sorry, the User ID field cannot be updated', 409);
+        }
+
         if($request->has('comment'))
             $comment->comment = $request->comment;
 

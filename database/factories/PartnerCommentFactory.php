@@ -2,6 +2,7 @@
 
 use App\Partner;
 use App\PartnerComment;
+use App\User;
 use Faker\Generator as Faker;
 
 /*
@@ -18,6 +19,7 @@ use Faker\Generator as Faker;
 $factory->define(PartnerComment::class, function (Faker $faker) {
     return [
         'partner_id' => Partner::all()->random()->id,
+        'user_id' => User::all()->random()->id,
         'comment' => $faker->paragraph(2),
     ];
 });

@@ -16,11 +16,13 @@ class CreatePartnerCommentsTable extends Migration
         Schema::create('partner_comments', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('partner_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->text('comment');
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('partner_id')->references('id')->on('partners');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
