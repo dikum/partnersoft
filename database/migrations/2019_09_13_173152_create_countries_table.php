@@ -33,7 +33,6 @@ class CreateCountriesTable extends Migration
     public function down()
     {
         Schema::table('countries', function (Blueprint $table) {
-            //$table->dropForeign(['continent_id']);
         });
         Schema::dropIfExists('countries');
     }
