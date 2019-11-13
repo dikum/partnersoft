@@ -22,6 +22,13 @@ class PaymentController extends ApiBaseController
     {
         $payments = Payment::all();
 
+        $bankstatements = collect();
+
+        foreach($payments as $payment)
+        {
+            $bankstatements = $bankstatements->merge($payment->bank_statement);
+        }
+
         return $this->showAll($payments);
     }
 

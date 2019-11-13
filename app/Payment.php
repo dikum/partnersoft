@@ -18,7 +18,7 @@ class Payment extends Model
     protected $fillable = [
     	'partner_id',
     	'bank_statement_id',
-    	'entered_by',
+    	'user_id',
     ];
 
 

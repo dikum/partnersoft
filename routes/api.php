@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 *User
 */
 Route::resource('users', 'User\UserController', ['except' => ['edit', 'create']]);
+Route::resource('users.payments', 'User\UserPaymentController', ['only' => ['index']]);
 
 /**
 *BankStatement
