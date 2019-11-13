@@ -2,6 +2,7 @@
 
 use App\Email;
 use App\Partner;
+use App\User;
 use Faker\Generator as Faker;
 
 /*
@@ -19,6 +20,7 @@ $factory->define(Email::class, function (Faker $faker) {
 	$partner = Partner::all()->random();
     return [
         'partner_id' => $partner->id,
+        'user_id' => User::all()->random()->id,
         'sender' => 'info@emmanuel.tv',
         'recipient' => $faker->safeEmail,
         'subject' => $faker->word,

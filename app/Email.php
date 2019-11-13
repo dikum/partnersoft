@@ -9,13 +9,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Email extends Model
 {
     use SoftDeletes;
-    
+
 	const MESSAGE_SENT = 'sent';
 	const MESSAGE_RESENT = 'resent';
 
     protected $dates = ['deleted_at'];
     protected $fillable = [
     	'partner_id',
+        'user_id',
     	'sender',
     	'recipient',
     	'subject',

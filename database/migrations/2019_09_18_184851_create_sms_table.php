@@ -17,6 +17,7 @@ class CreateSmsTable extends Migration
         Schema::create('sms', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('partner_id')->unsigned();
+            $table->integer('user_id')->nullable()->unsigned();
             $table->string('sender');
             $table->string('recipient');
             $table->text('message');
@@ -25,6 +26,7 @@ class CreateSmsTable extends Migration
             $table->softDeletes();
 
             $table->foreign('partner_id')->references('id')->on('partners');
+            $table->foreign('user_id')->references('id')->on('users');
 
         });
     }

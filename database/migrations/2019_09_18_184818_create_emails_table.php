@@ -18,6 +18,7 @@ class CreateEmailsTable extends Migration
         Schema::create('emails', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('partner_id')->unsigned();
+            $table->integer('user_id')->nullable()->unsigned();
             $table->string('sender');
             $table->string('recipient');
             $table->string('subject');
@@ -27,6 +28,7 @@ class CreateEmailsTable extends Migration
             $table->softDeletes();
 
             $table->foreign('partner_id')->references('id')->on('partners');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

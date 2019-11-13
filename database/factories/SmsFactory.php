@@ -2,6 +2,7 @@
 
 use App\Partner;
 use App\Sms;
+use App\User;
 use Faker\Generator as Faker;
 
 /*
@@ -19,6 +20,7 @@ $factory->define(Sms::class, function (Faker $faker) {
 	$partner = Partner::all()->random();
     return [
         'partner_id' => $partner->id,
+        'user_id' => User::all()->random()->id,
         'sender' => '+234808765527',
         'recipient' => $faker->numberBetween(1000,50000),
         'message' => $faker->paragraph(2),

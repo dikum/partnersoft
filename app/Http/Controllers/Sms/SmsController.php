@@ -41,6 +41,7 @@ class SmsController extends ApiBaseController
     {
          $rules = [
             'partner_id' => 'required',
+            'user_id' => 'required',
             'sender' => 'required',
             'recipient' => 'required',
             'message' => 'required',
