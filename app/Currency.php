@@ -10,6 +10,7 @@ class Currency extends Model
     protected $fillable = [
     	'currency',
     	'currency_code',
+    	'minimum_amount',
     ];
 
     public function bank_statements()

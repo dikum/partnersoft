@@ -42,6 +42,7 @@ class CurrencyController extends ApiBaseController
         $rules = [
             'currency' => 'required',
             'currency_code' => 'required',
+            'minimum_amount' => 'required',
         ];
 
         $this->validate($request, $rules);
@@ -92,6 +93,9 @@ class CurrencyController extends ApiBaseController
 
         if($request->has('currency_code'))
             $currency->currency_code = $request->currency_code;
+
+        if($request->has('minimum_amount'))
+            $currency->minimum_amount = $request->minimum_amount;
 
         if(!$currency->isDirty())
         {

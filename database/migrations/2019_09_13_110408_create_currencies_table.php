@@ -17,6 +17,7 @@ class CreateCurrenciesTable extends Migration
             $table->increments('id');
             $table->string('currency');
             $table->string('currency_code');
+            $table->decimal('minimum_amount',9,2);
             $table->timestamps();
         });
     }
