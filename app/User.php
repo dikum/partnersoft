@@ -2,9 +2,11 @@
 
 namespace App;
 
+use App\Email;
 use App\Partner;
 use App\PartnerComment;
 use App\Payment;
+use App\Sms;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -59,6 +61,16 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany(PartnerComment::class);
+    }
+
+    public function sms()
+    {
+        return $this->hasMany(Sms::class);
+    }
+
+    public function emails()
+    {
+        return $this->hasMany(Email::class);
     }
 
     public function isAdmin()
