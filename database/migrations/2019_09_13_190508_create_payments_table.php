@@ -16,7 +16,7 @@ class CreatePaymentsTable extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('partner_id')->unsigned();
-            $table->integer('bankstatement_id')->unsigned();
+            $table->integer('bank_statement_id')->unsigned();
             $table->string('entered_by');
             $table->timestamps();
             $table->softDeletes();
@@ -24,7 +24,7 @@ class CreatePaymentsTable extends Migration
 
 
             $table->foreign('partner_id')->references('id')->on('partners');
-            $table->foreign('bankstatement_id')->references('id')->on('bank_statements');
+            $table->foreign('bank_statement_id')->references('id')->on('bank_statements');
     
         });
     }

@@ -17,7 +17,7 @@ class Payment extends Model
     protected $dates = ['deleted_at'];
     protected $fillable = [
     	'partner_id',
-    	'bankstatement_id',
+    	'bank_statement_id',
     	'entered_by',
     ];
 

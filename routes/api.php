@@ -39,6 +39,7 @@ Route::resource('messagetemplates', 'MessageTemplate\MessageTemplateController')
 Route::resource('partners', 'Partner\PartnerController', ['except' => ['create', 'edit']]);
 Route::resource('partners.messages', 'Partner\PartnerMessageController', ['only' => ['index']]);
 Route::resource('partners.comments', 'Partner\PartnerCommentController', ['only' => ['index']]);
+Route::resource('partners.payments', 'Partner\PartnerPaymentController', ['only' => ['index']]);
 
 /**
 *PartnerComment
@@ -51,9 +52,10 @@ Route::resource('partnercomments', 'PartnerComment\PartnerCommentController', ['
 Route::resource('partnermessages', 'PartnerMessage\PartnerMessageController', ['only' => ['index', 'show', 'store']]);
 
 /**
-*Payment
+*BankStatement
 */
 Route::resource('bankstatements', 'BankStatement\BankStatementController', ['except' => ['edit', 'create']]);
+Route::resource('bankstatements.payment', 'BankStatement\BankStatementPaymentController', ['only' => ['index']]);
 
 /**
 *Sms
@@ -79,6 +81,7 @@ Route::resource('currencies', 'Currency\CurrencyController', ['except' => ['edit
 *Payment
 */
 Route::resource('payments', 'Payment\PaymentController', ['except' => ['edit', 'create']]);
+Route::resource('payments.bankstatements', 'Payment\PaymentBankStatementController', ['only' => ['index']]);
 
 /**
 *Continent

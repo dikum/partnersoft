@@ -20,7 +20,7 @@ use Faker\Generator as Faker;
 $factory->define(Payment::class, function (Faker $faker) {
     return [
         'partner_id' => Partner::all()->random()->id,
-        'bankstatement_id' => BankStatement::all()->random()->id,
+        'bank_statement_id' => BankStatement::all()->random()->id,
         'entered_by' => $faker->randomElement([User::all()->random()->name, 'system']),
     ];
 });
