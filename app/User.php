@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Partner;
 use App\PartnerComment;
 use App\Payment;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -44,6 +45,11 @@ class User extends Authenticatable
         $this->attributes['email'] = strtolower($email);
     }
 
+
+    public function partners()
+    {
+        return $this->hasMany(Partner::class);
+    }
 
     public function payments()
     {

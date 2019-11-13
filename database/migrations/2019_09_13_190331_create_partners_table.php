@@ -17,6 +17,7 @@ class CreatePartnersTable extends Migration
         Schema::create('partners', function (Blueprint $table) {
             $table->increments('id');
             $table->string('partner_id')->nullable();
+            $table->integer('user_id')->nullable()->unsigned();
             $table->integer('title_id')->unsigned();
             $table->integer('state_id')->unsigned();
             $table->integer('currency_id')->unsigned();
@@ -42,7 +43,6 @@ class CreatePartnersTable extends Migration
 
             $table->string('preflang')->default(Partner::ENGLISH_PREFERRED_LANGUAGE);
             $table->string('status')->default(Partner::PENDING_STATUS);
-            $table->string('registered_by');
             $table->string('password');
             $table->string('verified')->default(Partner::UNVERIFIED_PARTNER);
             $table->rememberToken();
@@ -50,6 +50,8 @@ class CreatePartnersTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
+
+            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('title_id')->references('id')->on('titles');
             $table->foreign('currency_id')->references('id')->on('currencies');
             $table->foreign('state_id')->references('id')->on('states');

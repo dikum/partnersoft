@@ -40,6 +40,7 @@ class Partner extends Model
     protected $dates = ['deleted_at'];
     protected $fillable = [
     	'partner_id',
+        'user_id',
     	'title_id',
         'state_id',
         'currency_id',
@@ -66,7 +67,6 @@ class Partner extends Model
         'donation_amount',
 
     	'status',
-    	'registered_by',
     	'password',
     	'verified',
         'remember_token',
@@ -116,6 +116,10 @@ class Partner extends Model
         $this->attributes['email2'] = strtolower($email2);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function emails()
     {
