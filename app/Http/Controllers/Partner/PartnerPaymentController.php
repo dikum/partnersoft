@@ -18,12 +18,8 @@ class PartnerPaymentController extends ApiBaseController
      */
     public function index(Partner $partner)
     {
-        $payments = $partner->payments;
-        $bank_statements = collect();
-        foreach($payments as $payment)
-        {
-           $bank_statements =  $bank_statements->merge($payment->bank_statement);
-        }
+        $payments = $partner->payments()->with('bank_statement')->get();
+        
         return $this->showAll($payments);
     }
 }
