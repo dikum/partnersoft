@@ -16,14 +16,7 @@ class UserPaymentController extends ApiBaseController
      */
     public function index(User $user)
     {
-        $payments = $user->payments;
-
-        $bankstatemnts = collect();
-
-        foreach($payments as $payment)
-        {
-            $bankstatemnts = $bankstatemnts->merge($payment->bank_statement);
-        }
+        $payments = $user->payments()->with('bank_statement')->get();
 
         return $this->showAll($payments);
     }
