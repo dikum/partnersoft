@@ -47,9 +47,9 @@ class PartnerController extends ApiBaseController
             'title_id' => 'required',
 
             //Partner
-            'surname' => 'required',
-            'middle_name' => 'nullable',
-            'first_name' => 'required',
+                'surname' => 'required',
+                'middle_name' => 'nullable',
+                'first_name' => 'required',
             'sex' => 'required',
             'date_of_birth' => 'required',
             'marital_status' => 'required',
@@ -247,5 +247,17 @@ class PartnerController extends ApiBaseController
     {
         $partner->delete();
         return $this->showOne($partner);
+    }
+
+    public function verify($token)
+    {
+        $partner = Partner::where('verification_token', $token)->firstOrFail();
+
+        $partner->verified = Partner::VERIFIED_PARTNER;
+        $partner->verification_token = null;
+
+        $partner->save();
+
+        return $this->showMessage("Account Verified");
     }
 }
