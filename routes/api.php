@@ -43,6 +43,7 @@ Route::resource('partners', 'Partner\PartnerController', ['except' => ['create',
 Route::resource('partners.messages', 'Partner\PartnerMessageController', ['only' => ['index']]);
 Route::resource('partners.comments', 'Partner\PartnerCommentController', ['only' => ['index']]);
 Route::resource('partners.payments', 'Partner\PartnerPaymentController', ['only' => ['index']]);
+Route::name('verify')->get('partners/verify/{token}', 'Partner/Partner\PartnerController@verify');
 
 /**
 *PartnerComment
