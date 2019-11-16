@@ -17,7 +17,6 @@ class CreatePartnersTable extends Migration
         Schema::create('partners', function (Blueprint $table) {
             $table->increments('id');
             $table->string('partner_id')->nullable();
-            $table->integer('user_id')->nullable()->unsigned();
             $table->integer('title_id')->unsigned();
             $table->integer('state_id')->unsigned();
             $table->integer('currency_id')->unsigned();
@@ -25,7 +24,7 @@ class CreatePartnersTable extends Migration
             $table->string('middle_name')->nullable();
             $table->string('first_name');
             $table->string('sex');
-            $table->dateTime('date_of_birth');
+            $table->date('date_of_birth');
             $table->string('marital_status');
             $table->string('occupation');
             $table->text('note')->nullable();
@@ -51,7 +50,6 @@ class CreatePartnersTable extends Migration
             $table->softDeletes();
 
 
-            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('title_id')->references('id')->on('titles');
             $table->foreign('currency_id')->references('id')->on('currencies');
             $table->foreign('state_id')->references('id')->on('states');

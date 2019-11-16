@@ -8,12 +8,11 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class PartnerCreated extends Mailable
+class PartnerMailChanged extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $partner;
-
     /**
      * Create a new message instance.
      *
@@ -31,7 +30,6 @@ class PartnerCreated extends Mailable
      */
     public function build()
     {
-        //return $this->view('view.name');
-        return $this->text('emails.welcome_partner');
+        return $this->text('emails.partner_confirm')->subject('Please confirm your new Email Address');
     }
 }

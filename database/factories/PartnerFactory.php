@@ -25,7 +25,6 @@ $factory->define(Partner::class, function (Faker $faker) {
 	$gender = $faker->randomElement(['male', 'female']);
     return [
         'partner_id' => $partner_id = Country::all()->random()->country_code . '939748',
-        'user_id' => User::all()->random()->id,
     	'title_id' => Title::all()->random()->id,
     	'state_id' => State::all()->random()->id,
     	'surname' => $faker->firstName($gender),

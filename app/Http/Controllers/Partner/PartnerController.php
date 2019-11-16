@@ -47,9 +47,9 @@ class PartnerController extends ApiBaseController
             'title_id' => 'required',
 
             //Partner
-                'surname' => 'required',
-                'middle_name' => 'nullable',
-                'first_name' => 'required',
+            'surname' => 'required',
+            'middle_name' => 'nullable',
+            'first_name' => 'required',
             'sex' => 'required',
             'date_of_birth' => 'required',
             'marital_status' => 'required',

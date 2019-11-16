@@ -44,6 +44,26 @@ class DatabaseSeeder extends Seeder
         Title::truncate();
         User::truncate();
 
+
+
+        Bank::flushEventListeners();
+        BankStatement::flushEventListeners();
+        Continent::flushEventListeners();
+        Country::flushEventListeners();
+        Currency::flushEventListeners();
+        Email::flushEventListeners();
+        LastPartnerNumber::flushEventListeners();
+        MessageTemplate::flushEventListeners();
+        Partner::flushEventListeners();
+        PartnerComment::flushEventListeners();
+        Payment::flushEventListeners();
+        Sms::flushEventListeners();
+        State::flushEventListeners();
+        Title::flushEventListeners();
+        User::flushEventListeners();
+
+
+
         $bankQuantity = 2;
         $bankStatementQuantity = 100;
         $continentQuantity = 7;

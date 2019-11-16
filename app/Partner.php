@@ -40,7 +40,6 @@ class Partner extends Model
     protected $dates = ['deleted_at'];
     protected $fillable = [
     	'partner_id',
-        'user_id',
     	'title_id',
         'state_id',
         'currency_id',
