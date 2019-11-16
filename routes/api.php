@@ -44,6 +44,7 @@ Route::resource('partners.messages', 'Partner\PartnerMessageController', ['only'
 Route::resource('partners.comments', 'Partner\PartnerCommentController', ['only' => ['index']]);
 Route::resource('partners.payments', 'Partner\PartnerPaymentController', ['only' => ['index']]);
 Route::name('verify')->get('partners/verify/{token}', 'Partner\PartnerController@verify');
+Route::name('resend')->get('partners/{partner}/resend', 'Partner\PartnerController@resend');
 
 /**
 *PartnerComment
