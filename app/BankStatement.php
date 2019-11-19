@@ -42,4 +42,8 @@ class BankStatement extends Model
     {
     	return $this->hasOne(Payment::class);
     }
+
+     protected $hidden = [ 
+        'deleted_at',
+    ];
 }
