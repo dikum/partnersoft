@@ -164,7 +164,7 @@ class Partner extends Model
 
     public function isVerified()
     {
-    	return $this->verified == Partner::VERIFIED_USER;
+    	return $this->verified == Partner::VERIFIED_PARTNER;
     }
 
     public static function generateVerificationCode()

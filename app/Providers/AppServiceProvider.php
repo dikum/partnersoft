@@ -21,12 +21,19 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
 
         Partner::created(function ($partner){
-            Mail::to($partner->email)->send(new PartnerCreated($partner));
+            retry(5, function() use ($partner){
+                Mail::to($partner->email)->send(new PartnerCreated($partner));
+            }, 1000);
         });
 
         Partner::updated(function ($partner){
-            if($partner->isDirty('email'))
+            retry(5, function() use ($partner){
+
+                if($partner->isDirty('email'))
                 Mail::to($partner->email)->send(new PartnerMailChanged($partner));
+
+            }, 1000);
+            
         });
     }
 

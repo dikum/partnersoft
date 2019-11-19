@@ -6,9 +6,11 @@ use App\Country;
 use App\Currency;
 use App\Http\Controllers\ApiBaseController;
 use App\Http\Controllers\Controller;
+use App\Mail\PartnerCreated;
 use App\Partner;
 use App\State;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class PartnerController extends ApiBaseController
 {
@@ -259,5 +261,15 @@ class PartnerController extends ApiBaseController
         $partner->save();
 
         return $this->showMessage("Account Verified");
+    }
+
+    public function resend(Partner $partner)
+    {
+        if($partner->isVerified())
+            return $this->errorResponse('Partner is already verified', 409);
+
+        Mail::to($partner->email)->send(new PartnerCreated($partner));
+
+        return $this->showMessage('Verification link resent!');
     }
 }
