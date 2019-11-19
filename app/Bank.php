@@ -17,4 +17,8 @@ class Bank extends Model
     	return $this->hasMany(BankStatement::class);
     }
 
+    protected $hidden = [ 
+        'deleted_at',
+    ];
+
 }
