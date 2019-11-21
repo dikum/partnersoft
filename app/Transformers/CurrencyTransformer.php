@@ -2,6 +2,7 @@
 
 namespace App\Transformers;
 
+use App\Currency;
 use League\Fractal\TransformerAbstract;
 
 class CurrencyTransformer extends TransformerAbstract
