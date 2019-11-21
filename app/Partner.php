@@ -50,7 +50,6 @@ class Partner extends Model
     	'date_of_birth',
     	'marital_status',
     	'occupation',
-    	'note',
     	'preflang',
 
         'birth_country', //Country ID

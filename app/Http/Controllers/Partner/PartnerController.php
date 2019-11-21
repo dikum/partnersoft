@@ -193,9 +193,6 @@ class PartnerController extends ApiBaseController
         if($request->has('postal_address'))
             $partner->postal_address = $request->postal_address;
 
-        if($request->has('note'))
-            $partner->note = $request->note;
-
         if($request->has('sex'))
             $partner->sex = $request->sex;
 

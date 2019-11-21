@@ -27,7 +27,6 @@ class CreatePartnersTable extends Migration
             $table->date('date_of_birth');
             $table->string('marital_status');
             $table->string('occupation');
-            $table->text('note')->nullable();
             $table->string('donation_type');
             $table->float('donation_amount', 8,2);
 
