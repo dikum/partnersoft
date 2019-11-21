@@ -15,7 +15,7 @@ class EmailTransformer extends TransformerAbstract
     public function transform(Email $email)
     {
         return [
-            'userIdentifier' => (int)$email->id,
+            'emailIdentifier' => (int)$email->id,
             'partnerIdentifier' => (int)$email->partner_id,
             'enteredByUser' => (int)$email->user_id,
             'fromEmail' => (string)$email->sender,
