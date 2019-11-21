@@ -2,6 +2,7 @@
 
 namespace App\Transformers;
 
+use App\Email;
 use League\Fractal\TransformerAbstract;
 
 class EmailTransformer extends TransformerAbstract
