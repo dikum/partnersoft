@@ -23,7 +23,6 @@ class Email extends Model
     	'subject',
     	'message',
     	'status',
-
     ];
 
     public function partner()
@@ -35,4 +34,8 @@ class Email extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    protected $hidden = [
+        'deleted_at',
+    ];
 }
