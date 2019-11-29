@@ -20,8 +20,8 @@ class CountryTransformer extends TransformerAbstract
             'countryName' => (string)$country->country,
             'countryDialingCode' => (string)$country->dial_code,
             'countryShortName' => (string)$country->country_code,
-            'createdDate' => $bank->created_at,
-            'changeDate' => $bank->updated_at,
+            'createdDate' => $country->created_at,
+            'changeDate' => $country->updated_at,
         ];
     }
 }
