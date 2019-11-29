@@ -3,6 +3,7 @@
 namespace App;
 
 use App\BankStatement;
+use App\Transformers\BankTransformer;
 use Illuminate\Database\Eloquent\Model;
 use Ryancco\HasUuidRouteKey\HasUuidRouteKey;
 
@@ -11,6 +12,8 @@ class Bank extends Model
 	use Traits\UsesUuid;
 
 	protected $primaryKey = 'bank_id';
+
+	public $transformer = BankTransformer::class;
     protected $fillable = [
     	'bank',
     	'bank_code',
@@ -20,5 +23,9 @@ class Bank extends Model
     {
     	return $this->hasMany(BankStatement::class);
     }
+
+    protected $hidden = [ 
+        'deleted_at',
+    ];
 
 }

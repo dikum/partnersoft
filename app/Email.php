@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Partner;
+use App\Transformers\EmailTransformer;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -17,6 +18,7 @@ class Email extends Model
 	const MESSAGE_RESENT = 'resent';
 
     protected $primaryKey = 'email_id';
+    public $transformer = EmailTransformer::class;
     protected $dates = ['deleted_at'];
     protected $fillable = [
     	'partner_id',
@@ -26,7 +28,6 @@ class Email extends Model
     	'subject',
     	'message',
     	'status',
-
     ];
 
     public function partner()
@@ -38,4 +39,8 @@ class Email extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    protected $hidden = [
+        'deleted_at',
+    ];
 }

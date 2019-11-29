@@ -18,7 +18,7 @@ class EmailController extends ApiBaseController
     {
         $emails = Email::all();
 
-        return showAll($emails);
+        return $this->showAll($emails);
     }
 
     /**

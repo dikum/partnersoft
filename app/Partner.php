@@ -6,6 +6,7 @@ use App\PartnerComment;
 use App\Payment;
 use App\Sms;
 use App\Title;
+use App\Transformers\PartnerTransformer;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -40,6 +41,8 @@ class Partner extends Model
     const REGISTERED_BY_SELF = 'self';
 
     protected $primaryKey = 'partner_uuid';
+
+    public $transformer = PartnerTransformer::class;
     protected $dates = ['deleted_at'];
     protected $fillable = [
     	'partner_id',
@@ -53,7 +56,6 @@ class Partner extends Model
     	'date_of_birth',
     	'marital_status',
     	'occupation',
-    	'note',
     	'preflang',
 
         'birth_country', //Country ID

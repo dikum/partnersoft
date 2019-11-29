@@ -1,22 +1,29 @@
 {
     "name": "laravel/laravel",
     "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
     "license": "MIT",
     "type": "project",
     "require": {
         "php": ">=7.0.0",
-        "fideloper/proxy": "~3.3",
+        "fideloper/proxy": "~4.0",
         "guzzlehttp/guzzle": "^6.4",
-<<<<<<< Updated upstream
+
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0"
-=======
+
         "laravel/framework": "^5.8.0",
         "laravel/tinker": "~1.0",
         "ryancco/laravel-uuid-models": "^1.0",
         "spatie/laravel-fractal": "^5.6"
->>>>>>> Stashed changes
+
+        "laravel/framework": "^5.8.0",
+        "laravel/tinker": "~1.0",
+        "spatie/laravel-fractal": "^5.6"
+
     },
     "require-dev": {
         "filp/whoops": "~2.0",
@@ -41,8 +48,7 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": [
-            ]
+            "dont-discover": []
         }
     },
     "scripts": {
