@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Country extends Model
 {
+
+    use Traits\UsesUuid;
+
     protected $fillable = [
       'continent_id',
       'country',

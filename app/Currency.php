@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Currency extends Model
 {
+	use Traits\UsesUuid;
+	
     protected $fillable = [
     	'currency',
     	'currency_code',

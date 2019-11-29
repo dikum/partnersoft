@@ -12,6 +12,8 @@ class BankStatement extends Model
 {
     use SoftDeletes;
 
+    use Traits\UsesUuid;
+    
     protected $dates = ['deleted_at'];
     protected $fillable = [
         'transaction_id',

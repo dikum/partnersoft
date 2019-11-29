@@ -13,6 +13,7 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+    use Traits\UsesUuid;
     use Notifiable, SoftDeletes;
 
     const ADMIN_USER = 'true';

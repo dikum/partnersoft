@@ -13,6 +13,8 @@ class Partner extends Model
 {
     use SoftDeletes;
 
+    use Traits\UsesUuid;
+    
 	const PENDING_STATUS = 'pending';
 	const ACTIVE_STATUS = 'active';
 

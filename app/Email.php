@@ -11,6 +11,8 @@ class Email extends Model
 {
     use SoftDeletes;
 
+    use Traits\UsesUuid;
+
 	const MESSAGE_SENT = 'sent';
 	const MESSAGE_RESENT = 'resent';
 
