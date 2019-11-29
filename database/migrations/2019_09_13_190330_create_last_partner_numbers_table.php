@@ -15,6 +15,7 @@ class CreateLastPartnerNumbersTable extends Migration
     {
         Schema::create('last_partner_numbers', function (Blueprint $table) {
             $table->increments('id');
+            $table->uuid('last_partner_number_id')->primary();
             $table->integer('last_number')->unsigned();
             $table->timestamps();
         });

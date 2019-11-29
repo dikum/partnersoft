@@ -16,6 +16,7 @@ class CreatePartnersTable extends Migration
     {
         Schema::create('partners', function (Blueprint $table) {
             $table->increments('id');
+            $table->uuid('partner_uuid')->primary();
             $table->string('partner_id')->nullable();
             $table->integer('title_id')->unsigned();
             $table->integer('state_id')->unsigned();

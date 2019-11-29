@@ -15,6 +15,7 @@ class CreateCountriesTable extends Migration
     {
         Schema::create('countries', function (Blueprint $table) {
             $table->increments('id');
+            $table->uuid('country_id')->primary();
             $table->integer('continent_id')->unsigned();
             $table->string('country');
             $table->string('dial_code');

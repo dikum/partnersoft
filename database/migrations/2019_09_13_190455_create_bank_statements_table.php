@@ -15,6 +15,7 @@ class CreateBankStatementsTable extends Migration
     {
         Schema::create('bank_statements', function (Blueprint $table) {
             $table->increments('id');
+            $table->uuid('bank_statement_id')->primary();
             $table->string('transaction_id');
             $table->string('bank_id');
             $table->integer('currency_id')->unsigned();

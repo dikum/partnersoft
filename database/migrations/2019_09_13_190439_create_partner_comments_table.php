@@ -15,6 +15,7 @@ class CreatePartnerCommentsTable extends Migration
     {
         Schema::create('partner_comments', function (Blueprint $table) {
             $table->increments('id');
+            $table->uuid('comment_id')->primary();
             $table->integer('partner_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->text('comment');
