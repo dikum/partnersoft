@@ -15,11 +15,11 @@ class MessageTemplateTransformer extends TransformerAbstract
     public function transform(MessageTemplate $message)
     {
         return [
-            'messageTemplateIdentifier' => (int)$message->id,
+            'messageTemplateIdentifier' => (string)$message->message_template_id,
             'messageTitle' => (string)$message->title,
             'messageTemplate' => (string)$message->message,
-            'createdDate' => $message->created_at,
-            'changeDate' => $message->updated_at,
+            'createdDate' => (string)$message->created_at,
+            'changeDate' => (string)$message->updated_at,
         ];
     }
 }

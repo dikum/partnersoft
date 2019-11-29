@@ -15,7 +15,7 @@ class PartnerTransformer extends TransformerAbstract
     public function transform(Partner $partner)
     {
         return [
-            'partnerIdentifier' => (int)$partner->id,
+            'partnerIdentifier' => (string)$partner->partner_id,
             'titleIdentifier' => (int)$partner->title_id,
             'stateIdentifier' => (int)$partner->state_id,
             'currencyIdentifier' => (int)$partner->currency_id,
@@ -39,8 +39,8 @@ class PartnerTransformer extends TransformerAbstract
             'pledgeAmount' => $partner->donation_amount,
             'status' => (string)$partner->status,
             'isVerified' => (int)$partner->verified,
-            'createdDate' => $partner->created_at,
-            'changeDate' => $partner->updated_at,
+            'createdDate' => (string)$partner->created_at,
+            'changeDate' => (string)$partner->updated_at,
         ];
 
     }

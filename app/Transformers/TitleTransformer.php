@@ -15,10 +15,10 @@ class TitleTransformer extends TransformerAbstract
     public function transform(Title $title)
     {
         return [
-            'titleIdentifier' => (int)$title->id,
+            'titleIdentifier' => (string)$title->title_id,
             'titleName' => (string)$title->title,
-            'createdDate' => $title->created_at,
-            'changeDate' => $title->updated_at,
+            'createdDate' => (string)$title->created_at,
+            'changeDate' => (string)$title->updated_at,
         ];
     }
 }

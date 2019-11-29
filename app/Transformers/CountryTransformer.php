@@ -15,13 +15,13 @@ class CountryTransformer extends TransformerAbstract
     public function transform(Country $country)
     {
         return [
-            'countryIdentifier' => (int)$country->id,
-            'continentIdentifier' => (int)$country->continent_id,
+            'countryIdentifier' => (string)$country->country_id,
+            'continentIdentifier' => (string)$country->continent_id,
             'countryName' => (string)$country->country,
             'countryDialingCode' => (string)$country->dial_code,
             'countryShortName' => (string)$country->country_code,
-            'createdDate' => $country->created_at,
-            'changeDate' => $country->updated_at,
+            'createdDate' => (string)$country->created_at,
+            'changeDate' => (string)$country->updated_at,
         ];
     }
 }

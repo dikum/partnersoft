@@ -15,11 +15,11 @@ class ContinentTransformer extends TransformerAbstract
     public function transform(Continent $continent)
     {
         return [
-            'continentIdentifier' => (int)$continent->id,
+            'continentIdentifier' => (string)$continent->continent_id,
             'continentName' => (string)$continent->continent,
             'continentShortName' => (string)$bank->continentCode,
-            'createdDate' => $continent->created_at,
-            'changeDate' => $continent->updated_at,
+            'createdDate' => (string)$continent->created_at,
+            'changeDate' => (string)$continent->updated_at,
         ];
     }
 }

@@ -15,15 +15,15 @@ class SmsTransformer extends TransformerAbstract
     public function transform(Sms $sms)
     {
         return [
-            'smsIdentifier' => (int)$sms->id,
+            'smsIdentifier' => (string)$sms->sms_id,
             'partnerIdentifier' => (int)$sms->partner_id,
             'enteredByUser' => (int)$sms->user_id,
             'fromNumber' => (string)$sms->sender,
             'toNumber' => (string)$sms->recipient,
             'messageBody' => (string)$sms->message,
             'messageStatus' => (string)$sms->status,
-            'createdDate' => $sms->created_at,
-            'changeDate' => $sms->updated_at,
+            'createdDate' => (string)$sms->created_at,
+            'changeDate' => (string)$sms->updated_at,
         ];
     }
 }

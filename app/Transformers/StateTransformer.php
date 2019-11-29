@@ -15,10 +15,10 @@ class StateTransformer extends TransformerAbstract
     public function transform(State $state)
     {
         return [
-            'stateIdentifier' => (int)$state->id,
+            'stateIdentifier' => (string)$state->state_id,
             'stateName' => (string)$state->state,
-            'createdDate' => $title->created_at,
-            'changeDate' => $title->updated_at,
+            'createdDate' => (string)$title->created_at,
+            'changeDate' => (string)$title->updated_at,
         ];
     }
 }

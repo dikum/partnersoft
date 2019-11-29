@@ -15,12 +15,12 @@ class PaymentTransformer extends TransformerAbstract
     public function transform(Payment $payment)
     {
         return [
-            'paymentIdentifier' => (int)$payment->id,
+            'paymentIdentifier' => (string)$payment->payment_id,
             'partnerIdentifier' => (int)$payment->partner_id,
             'bankStatementIdentifier' => (int)$payment->bank_statment_id,
             'userIdentifier' => (int)$payment->user_id,
-            'createdDate' => $payment->created_at,
-            'changeDate' => $payment->updated_at,
+            'createdDate' => (string)$payment->created_at,
+            'changeDate' => (string)$payment->updated_at,
         ];
     }
 }

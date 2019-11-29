@@ -15,11 +15,11 @@ class UserTransformer extends TransformerAbstract
     public function transform(User $user)
     {
         return [
-            'userIdentifier' => (int)$user->id,
+            'userIdentifier' => (string)$user->user_id,
             'fullname' => (string)$user->name,
             'isAdministrator' => ($user->admin === User::ADMIN_USER),
-            'createdDate' => $user->created_at,
-            'changeDate' => $user->updated_at,
+            'createdDate' => (string)$user->created_at,
+            'changeDate' => (string)$user->updated_at,
         ];
     }
 }

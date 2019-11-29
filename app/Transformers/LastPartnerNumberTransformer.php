@@ -15,10 +15,10 @@ class LastPartnerNumberTransformer extends TransformerAbstract
     public function transform(LastPartnerNumber $number)
     {
         return [
-            'numberIdentifier' => (int)$number->id,
+            'numberIdentifier' => (int)$number->last_partner_number_id,
             'lastPartnerNumber' => (int)$number->last_number,
-            'createdDate' => $number->created_at,
-            'changeDate' => $number->updated_at,
+            'createdDate' => (string)$number->created_at,
+            'changeDate' => (string)$number->updated_at,
         ];
     }
 }
