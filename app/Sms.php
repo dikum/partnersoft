@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Partner;
+use App\Transformers\SmsTransformer;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -14,6 +15,7 @@ class Sms extends Model
 	const MESSAGE_SENT = 'sent';
 	const MESSAGE_RESENT = 'resent';
 
+    public $transformer = SmsTransformer::class;
     protected $dates = ['deleted_at'];
     protected $fillable = [
     	'partner_id',

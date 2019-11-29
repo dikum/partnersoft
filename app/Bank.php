@@ -3,10 +3,13 @@
 namespace App;
 
 use App\BankStatement;
+use App\Transformers\BankTransformer;
 use Illuminate\Database\Eloquent\Model;
 
 class Bank extends Model
 {
+
+	public $transformer = BankTransformer::class;
     protected $fillable = [
     	'bank',
     	'bank_code',

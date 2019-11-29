@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Partner;
+use App\Transformers\EmailTransformer;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -14,6 +15,7 @@ class Email extends Model
 	const MESSAGE_SENT = 'sent';
 	const MESSAGE_RESENT = 'resent';
 
+    public $transformer = EmailTransformer::class;
     protected $dates = ['deleted_at'];
     protected $fillable = [
     	'partner_id',

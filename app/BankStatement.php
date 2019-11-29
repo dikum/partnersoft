@@ -5,6 +5,7 @@ namespace App;
 use App\Bank;
 use App\Currency;
 use App\Payment;
+use App\Transformers\BankStatementTransformer;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -12,6 +13,7 @@ class BankStatement extends Model
 {
     use SoftDeletes;
 
+    public $transformer = BankStatementTransformer::class;
     protected $dates = ['deleted_at'];
     protected $fillable = [
         'transaction_id',
@@ -46,4 +48,5 @@ class BankStatement extends Model
      protected $hidden = [ 
         'deleted_at',
     ];
+
 }

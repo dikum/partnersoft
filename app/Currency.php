@@ -3,10 +3,13 @@
 namespace App;
 
 use App\BankStatement;
+use App\Transformers\CurrencyTransformer;
 use Illuminate\Database\Eloquent\Model;
 
 class Currency extends Model
 {
+
+	public $transformer = CurrencyTransformer::class;
     protected $fillable = [
     	'currency',
     	'currency_code',

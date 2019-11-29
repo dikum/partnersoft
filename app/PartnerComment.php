@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Partner;
+use App\Transformers\PartnerCommentTransformer;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -11,6 +12,7 @@ class PartnerComment extends Model
 {
 	use SoftDeletes;
 
+	public $transformer = PartnerCommentTransformer::class;
 	protected $dates = ['deleted_at'];
 	protected $fillable = [
 		'partner_id',
