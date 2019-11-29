@@ -14,16 +14,15 @@ class CreatePartnerCommentsTable extends Migration
     public function up()
     {
         Schema::create('partner_comments', function (Blueprint $table) {
-            $table->increments('id');
             $table->uuid('comment_id')->primary();
-            $table->integer('partner_id')->unsigned();
-            $table->integer('user_id')->unsigned();
+            $table->string('partner_id');
+            $table->string('user_id');
             $table->text('comment');
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('partner_id')->references('id')->on('partners');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('partner_id')->references('partner_uuid')->on('partners');
+            $table->foreign('user_id')->references('user_id')->on('users');
         });
     }
 

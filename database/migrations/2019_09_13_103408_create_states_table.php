@@ -15,7 +15,6 @@ class CreateStatesTable extends Migration
     public function up()
     {
         Schema::create('states', function (Blueprint $table) {
-            $table->increments('id');
             $table->uuid('state_id')->primary();
             $table->string('state')->default(State::NOT_AVAILABLE);
             $table->timestamps();

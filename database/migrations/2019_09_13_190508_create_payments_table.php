@@ -14,17 +14,16 @@ class CreatePaymentsTable extends Migration
     public function up()
     {
         Schema::create('payments', function (Blueprint $table) {
-            $table->increments('id');
             $table->uuid('payment_id')->primary();
-            $table->integer('partner_id')->unsigned();
-            $table->integer('bank_statement_id')->unsigned();
-            $table->integer('user_id')->nullable()->unsigned();
+            $table->string('partner_id');
+            $table->string('bank_statement_id');
+            $table->string('user_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('partner_id')->references('id')->on('partners');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('bank_statement_id')->references('id')->on('bank_statements');
+            $table->foreign('partner_id')->references('partner_uuid')->on('partners');
+            $table->foreign('user_id')->references('user_id')->on('users');
+            $table->foreign('bank_statement_id')->references('bank_statement_id')->on('bank_statements');
     
         });
     }

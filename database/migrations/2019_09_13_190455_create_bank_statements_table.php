@@ -14,11 +14,10 @@ class CreateBankStatementsTable extends Migration
     public function up()
     {
         Schema::create('bank_statements', function (Blueprint $table) {
-            $table->increments('id');
             $table->uuid('bank_statement_id')->primary();
             $table->string('transaction_id');
             $table->string('bank_id');
-            $table->integer('currency_id')->unsigned();
+            $table->string('currency_id');
             $table->string('partner_id')->nullable();
             $table->string('depositor');
             $table->text('description');
@@ -31,8 +30,8 @@ class CreateBankStatementsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('bank_id')->references('id')->on('banks');
-            $table->foreign('currency_id')->references('id')->on('currencies');
+            $table->foreign('bank_id')->references('bank_id')->on('banks');
+            $table->foreign('currency_id')->references('currency_id')->on('currencies');
         });
     }
 

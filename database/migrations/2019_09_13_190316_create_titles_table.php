@@ -14,7 +14,6 @@ class CreateTitlesTable extends Migration
     public function up()
     {
         Schema::create('titles', function (Blueprint $table) {
-            $table->increments('id');
             $table->uuid('title_id')->primary();
             $table->string('title');
             $table->timestamps();

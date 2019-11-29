@@ -15,12 +15,11 @@ class CreatePartnersTable extends Migration
     public function up()
     {
         Schema::create('partners', function (Blueprint $table) {
-            $table->increments('id');
             $table->uuid('partner_uuid')->primary();
             $table->string('partner_id')->nullable();
-            $table->integer('title_id')->unsigned();
-            $table->integer('state_id')->unsigned();
-            $table->integer('currency_id')->unsigned();
+            $table->string('title_id');
+            $table->string('state_id');
+            $table->string('currency_id');
             $table->string('surname');
             $table->string('middle_name')->nullable();
             $table->string('first_name');
@@ -32,8 +31,8 @@ class CreatePartnersTable extends Migration
             $table->string('donation_type');
             $table->float('donation_amount', 8,2);
 
-            $table->integer('birth_country')->unsigned(); //Country ID
-            $table->integer('residential_country')->unsigned(); //Country ID
+            $table->string('birth_country'); //Country ID
+            $table->string('residential_country'); //Country ID
             $table->string('email');
             $table->string('email2')->nullable();
             $table->string('phone');
@@ -51,11 +50,11 @@ class CreatePartnersTable extends Migration
             $table->softDeletes();
 
 
-            $table->foreign('title_id')->references('id')->on('titles');
-            $table->foreign('currency_id')->references('id')->on('currencies');
-            $table->foreign('state_id')->references('id')->on('states');
-            $table->foreign('birth_country')->references('id')->on('countries');
-            $table->foreign('residential_country')->references('id')->on('countries');
+            $table->foreign('title_id')->references('title_id')->on('titles');
+            $table->foreign('currency_id')->references('currency_id')->on('currencies');
+            $table->foreign('state_id')->references('state_id')->on('states');
+            $table->foreign('birth_country')->references('country_id')->on('countries');
+            $table->foreign('residential_country')->references('country_id')->on('countries');
         });
     }
 

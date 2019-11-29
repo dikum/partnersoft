@@ -14,15 +14,14 @@ class CreateCountriesTable extends Migration
     public function up()
     {
         Schema::create('countries', function (Blueprint $table) {
-            $table->increments('id');
             $table->uuid('country_id')->primary();
-            $table->integer('continent_id')->unsigned();
+            $table->string('continent_id');
             $table->string('country');
             $table->string('dial_code');
             $table->string('country_code');
             $table->timestamps();
 
-            $table->foreign('continent_id')->references('id')->on('continents')->onDelete('cascade');
+            $table->foreign('continent_id')->references('continent_id')->on('continents')->onDelete('cascade');
         });
     }
 
