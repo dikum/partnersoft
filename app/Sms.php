@@ -16,6 +16,7 @@ class Sms extends Model
 	const MESSAGE_SENT = 'sent';
 	const MESSAGE_RESENT = 'resent';
 
+    protected $primaryKey = 'sms_id';
     protected $dates = ['deleted_at'];
     protected $fillable = [
     	'partner_id',

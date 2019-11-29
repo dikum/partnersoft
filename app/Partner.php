@@ -14,7 +14,7 @@ class Partner extends Model
     use SoftDeletes;
 
     use Traits\UsesUuid;
-    
+
 	const PENDING_STATUS = 'pending';
 	const ACTIVE_STATUS = 'active';
 
@@ -39,6 +39,7 @@ class Partner extends Model
     
     const REGISTERED_BY_SELF = 'self';
 
+    protected $primaryKey = 'partner_uuid';
     protected $dates = ['deleted_at'];
     protected $fillable = [
     	'partner_id',

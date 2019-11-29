@@ -12,7 +12,8 @@ class PartnerComment extends Model
 	use SoftDeletes;
 
 	use Traits\UsesUuid;
-	
+
+	protected $primaryKey = 'comment_id';
 	protected $dates = ['deleted_at'];
 	protected $fillable = [
 		'partner_id',

@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Title extends Model
 {
 	use Traits\UsesUuid;
-	
+
+	protected $primaryKey = 'title_id';
     protected $fillabel = [
     	'title',
     ];

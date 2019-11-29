@@ -10,6 +10,7 @@ class Bank extends Model
 {
 	use Traits\UsesUuid;
 
+	protected $primaryKey = 'bank_id';
     protected $fillable = [
     	'bank',
     	'bank_code',

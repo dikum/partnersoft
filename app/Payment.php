@@ -13,9 +13,10 @@ class Payment extends Model
     use SoftDeletes;
 
     use Traits\UsesUuid;
-    
+
     const PAYMENT_ENTERED_BY_SYSTEM = 'system';
 
+    protected $primaryKey = 'payment_id';
     protected $dates = ['deleted_at'];
     protected $fillable = [
     	'partner_id',
