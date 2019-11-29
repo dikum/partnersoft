@@ -17,8 +17,8 @@ class PartnerTransformer extends TransformerAbstract
         return [
             'partnerIdentifier' => (int)$partner->id,
             'titleIdentifier' => (int)$partner->title_id,
-            'stateIdentifier' => (int)$partner_state_id,
-            'currencyIdentifier' => (int)$partner_currency_id,
+            'stateIdentifier' => (int)$partner->state_id,
+            'currencyIdentifier' => (int)$partner->currency_id,
             'lastName' => (string)$partner->surname,
             'middleName' => (string)$partner->middle_name,
             'firstName' => (string)$partner->first_name,
@@ -39,8 +39,8 @@ class PartnerTransformer extends TransformerAbstract
             'pledgeAmount' => $partner->donation_amount,
             'status' => (string)$partner->status,
             'isVerified' => (int)$partner->verified,
-            'createdDate' => $user->created_at,
-            'changeDate' => $user->updated_at,
+            'createdDate' => $partner->created_at,
+            'changeDate' => $partner->updated_at,
         ];
 
     }
