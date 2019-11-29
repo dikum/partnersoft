@@ -17,8 +17,8 @@ class LastPartnerNumberTransformer extends TransformerAbstract
         return [
             'numberIdentifier' => (int)$number->id,
             'lastPartnerNumber' => (int)$number->last_number,
-            'createdDate' => $bank->created_at,
-            'changeDate' => $bank->updated_at,
+            'createdDate' => $number->created_at,
+            'changeDate' => $number->updated_at,
         ];
     }
 }
