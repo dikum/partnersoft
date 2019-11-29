@@ -17,7 +17,7 @@ class BankTransformer extends TransformerAbstract
         return [
             'bankIdentifier' => (int)$bank->id,
             'bankName' => (string)$bank->bank,
-            'bankCode' => (string)$bank->bank_code,
+            'bankShortName' => (string)$bank->bank_code,
             'createdDate' => $bank->created_at,
             'changeDate' => $bank->updated_at,
         ];
