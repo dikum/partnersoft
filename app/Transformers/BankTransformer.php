@@ -15,11 +15,11 @@ class BankTransformer extends TransformerAbstract
     public function transform(Bank $bank)
     {
         return [
-            'bankIdentifier' => (int)$bank->id,
+            'bankIdentifier' => (string)$bank->bank_id,
             'bankName' => (string)$bank->bank,
             'bankShortName' => (string)$bank->bank_code,
-            'createdDate' => $bank->created_at,
-            'changeDate' => $bank->updated_at,
+            'createdDate' => (string)$bank->created_at,
+            'changeDate' => (string)$bank->updated_at,
         ];
     }
 }
