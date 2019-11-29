@@ -43,13 +43,13 @@ class UserController extends ApiBaseController
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6|confirmed',
-            'admin' => 'required| in:' . User::ADMIN_USER . ',' . User::REGULAR_USER,
         ];
 
         $this->validate($request, $rules);
 
         $data = $request->all();
         $data['password'] = bcrypt($request->password);
+        $data['admin'] = User::REGULAR_USER;
 
         $user = User::create($data);
 
