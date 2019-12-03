@@ -22,4 +22,19 @@ class MessageTemplateTransformer extends TransformerAbstract
             'changeDate' => (string)$message->updated_at,
         ];
     }
+
+    public static function originalAttribute($index)
+    {
+        $attributes = [
+
+            'messageTemplateIdentifier' => 'message_template_id',
+            'messageTitle' => 'title',
+            'messageTemplate' => 'message',
+            'createdDate' => 'created_at',
+            'changeDate' => 'updated_at',
+
+        ];
+
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
 }

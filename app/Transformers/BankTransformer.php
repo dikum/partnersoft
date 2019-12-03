@@ -22,4 +22,19 @@ class BankTransformer extends TransformerAbstract
             'changeDate' => (string)$bank->updated_at,
         ];
     }
+
+    public static function originalAttribute($index)
+    {
+        $attributes = [
+
+            'bankIdentifier' => 'bank_id',
+            'bankName' => 'bank',
+            'bankShortName' => 'bank_code',
+            'createdDate' => 'created_at',
+            'changeDate' => 'updated_at',
+
+        ];
+
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
 }

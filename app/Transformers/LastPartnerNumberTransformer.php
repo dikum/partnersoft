@@ -21,4 +21,18 @@ class LastPartnerNumberTransformer extends TransformerAbstract
             'changeDate' => (string)$number->updated_at,
         ];
     }
+
+    public static function originalAttribute($index)
+    {
+        $attributes = [
+
+            'numberIdentifier' => 'last_partner_number_id',
+            'lastPartnerNumber' => 'last_number',
+            'createdDate' => 'created_at',
+            'changeDate' => 'updated_at',
+
+        ];
+
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
 }

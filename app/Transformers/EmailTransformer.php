@@ -27,4 +27,25 @@ class EmailTransformer extends TransformerAbstract
             'changeDate' => (string)$email->updated_at,
         ];
     }
+
+
+    public static function originalAttribute($index)
+    {
+        $attributes = [
+
+            'emailIdentifier' => 'email_id',
+            'partnerIdentifier' => 'partner_id',
+            'enteredByUser' => 'user_id',
+            'fromEmail' => 'sender',
+            'toEmail' => 'recipient',
+            'emailSubject'=> 'subject',
+            'messageBody' => 'message',
+            'messageStatus' => 'status',
+            'createdDate' => 'created_at',
+            'changeDate' => 'updated_at',
+
+        ];
+
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
 }

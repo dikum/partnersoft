@@ -24,4 +24,21 @@ class CountryTransformer extends TransformerAbstract
             'changeDate' => (string)$country->updated_at,
         ];
     }
+
+    public static function originalAttribute($index)
+    {
+        $attributes = [
+
+            'countryIdentifier' => 'country_id',
+            'continentIdentifier' => 'continent_id',
+            'countryName' => 'country',
+            'countryDialingCode' => 'dial_code',
+            'countryShortName' => 'country_code',
+            'createdDate' => 'created_at',
+            'changeDate' => 'updated_at',
+
+        ];
+
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
 }

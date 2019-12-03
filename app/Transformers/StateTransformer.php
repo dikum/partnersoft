@@ -21,4 +21,18 @@ class StateTransformer extends TransformerAbstract
             'changeDate' => (string)$title->updated_at,
         ];
     }
+
+    public static function originalAttribute($index)
+    {
+        $attributes = [
+
+            'stateIdentifier' => 'state_id',
+            'stateName' => 'state',
+            'createdDate' => 'created_at',
+            'changeDate' => 'updated_at',
+
+        ];
+
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
 }

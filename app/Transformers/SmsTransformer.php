@@ -26,4 +26,23 @@ class SmsTransformer extends TransformerAbstract
             'changeDate' => (string)$sms->updated_at,
         ];
     }
+
+    public static function originalAttribute($index)
+    {
+        $attributes = [
+
+            'smsIdentifier' => 'sms_id',
+            'partnerIdentifier' => 'partner_id',
+            'enteredByUser' => 'user_id',
+            'fromNumber' => 'sender',
+            'toNumber' => 'recipient',
+            'messageBody' => 'message',
+            'messageStatus' => 'status',
+            'createdDate' => 'created_at',
+            'changeDate' => 'updated_at',
+
+        ];
+
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
 }

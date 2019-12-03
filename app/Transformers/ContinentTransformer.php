@@ -22,4 +22,20 @@ class ContinentTransformer extends TransformerAbstract
             'changeDate' => (string)$continent->updated_at,
         ];
     }
+
+
+    public static function originalAttribute($index)
+    {
+        $attributes = [
+
+            'continentIdentifier' => 'continent_id',
+            'continentName' => 'continent',
+            'continentShortName' => 'continentCode',
+            'createdDate' => 'created_at',
+            'changeDate' => 'updated_at',
+
+        ];
+
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
 }

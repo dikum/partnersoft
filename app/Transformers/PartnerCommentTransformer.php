@@ -23,4 +23,20 @@ class PartnerCommentTransformer extends TransformerAbstract
             'changeDate' => (string)$comment->updated_at,
         ];
     }
+
+    public static function originalAttribute($index)
+    {
+        $attributes = [
+
+            'commentIdentifier' => 'comment_id',
+            'partnerIdentifier' => 'partner_id',
+            'userIdentifier' => 'user_id',
+            'commentBody' => 'comment',
+            'createdDate' => 'created_at',
+            'changeDate' => 'updated_at',
+
+        ];
+
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
 }

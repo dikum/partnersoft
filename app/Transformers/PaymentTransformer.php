@@ -23,4 +23,20 @@ class PaymentTransformer extends TransformerAbstract
             'changeDate' => (string)$payment->updated_at,
         ];
     }
+
+    public static function originalAttribute($index)
+    {
+        $attributes = [
+
+            'paymentIdentifier' => 'payment_id',
+            'partnerIdentifier' => 'partner_id',
+            'bankStatementIdentifier' => 'bank_statment_id',
+            'userIdentifier' => 'user_id',
+            'createdDate' => 'created_at',
+            'changeDate' => 'updated_at',
+
+        ];
+
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
 }

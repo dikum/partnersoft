@@ -45,4 +45,41 @@ class PartnerTransformer extends TransformerAbstract
         ];
 
     }
+
+    public static function originalAttribute($index)
+    {
+        $attributes = [
+
+            'partnerIdentifier' => 'partner_uuid',
+            'friendlyIdentifier' => 'partner_id',
+            'titleIdentifier' => 'title_id',
+            'stateIdentifier' => 'state_id',
+            'currencyIdentifier' => 'currency_id',
+            'lastName' => 'surname',
+            'middleName' => 'middle_name',
+            'firstName' => 'first_name',
+            'gender' => 'sex',
+            'birthDate' => 'date_of_birth',
+            'marital_status' => 'marital_status',
+            'job' => 'occupation',
+            'preferredLanguage' => 'preflang',
+            'countryOfBirth' => 'birth_country',
+            'countryOfResidence' => 'residential_country',
+            'emailAddress1' => 'email',
+            'emailAddress2' => 'email2',
+            'phoneNumber1' => 'phone',
+            'phoneNumber2' => 'phone2',
+            'homeAddress' => 'residential_address',
+            'postalAddress' => 'postal_address',
+            'typeOfDonation' => 'donation_type',
+            'pledgeAmount' => 'donation_amount',
+            'status' => 'status',
+            'isVerified' => 'verified',
+            'createdDate' => 'created_at',
+            'changeDate' => 'updated_at',
+
+        ];
+
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
 }

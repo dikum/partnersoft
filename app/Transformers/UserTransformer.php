@@ -22,4 +22,19 @@ class UserTransformer extends TransformerAbstract
             'changeDate' => (string)$user->updated_at,
         ];
     }
+
+    public static function originalAttribute($index)
+    {
+        $attributes = [
+
+            'userIdentifier' => 'user_id',
+            'fullname' => 'name',
+            'isAdministrator' => 'admin',
+            'createdDate' => 'created_at',
+            'changeDate' => 'updated_at',
+
+        ];
+
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
 }

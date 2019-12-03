@@ -21,4 +21,18 @@ class TitleTransformer extends TransformerAbstract
             'changeDate' => (string)$title->updated_at,
         ];
     }
+
+    public static function originalAttribute($index)
+    {
+        $attributes = [
+
+            'titleIdentifier' => 'title_id',
+            'titleName' => 'title',
+            'createdDate' => 'created_at',
+            'changeDate' => 'updated_at',
+
+        ];
+
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
 }
