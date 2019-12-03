@@ -8,6 +8,8 @@ use App\State;
 use App\Title;
 use App\User;
 use Faker\Generator as Faker;
+use Illuminate\Support\Str;
+use Ramsey\Uuid\uuid;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,9 +26,10 @@ $factory->define(Partner::class, function (Faker $faker) {
 	static $password;
 	$gender = $faker->randomElement(['male', 'female']);
     return [
+        'partner_uuid' => (string) Str::uuid(),
         'partner_id' => $partner_id = Country::all()->random()->country_code . '939748',
-    	'title_id' => Title::all()->random()->id,
-    	'state_id' => State::all()->random()->id,
+    	'title_id' => Title::all()->random()->title_id,
+    	'state_id' => State::all()->random()->state_id,
     	'surname' => $faker->firstName($gender),
     	'middle_name' => $faker->randomElement([$faker->firstName($gender), '']),
     	'first_name' => $faker->firstName($gender),
@@ -34,10 +37,9 @@ $factory->define(Partner::class, function (Faker $faker) {
     	'date_of_birth' => $faker->dateTime('now'),
     	'marital_status' => $faker->randomElement([Partner::MARRIED_MARITAL_STATUS, Partner::DIVORCED_MARITAL_STATUS, Partner::SINGLE_MARITAL_STATUS]),
     	'occupation' => $faker->jobTitle,
-    	'note' => $faker->paragraph(1),
 
-    	'birth_country' => Country::all()->random()->id,
-    	'residential_country' => Country::all()->random()->id,
+    	'birth_country' => Country::all()->random()->country_id,
+    	'residential_country' => Country::all()->random()->country_id,
     	'email' => $faker->unique()->safeEmail,
     	'email2' => $faker->randomElement([$faker->unique()->safeEmail, '']),
     	'phone' => $faker->numberBetween(1000,50000),
@@ -45,7 +47,7 @@ $factory->define(Partner::class, function (Faker $faker) {
     	'residential_address' => $faker->address,
     	'postal_address' => $faker->postcode . ' '. $faker->state . ' ' .$faker->city . ' ' .$faker->country,
 
-    	'currency_id' => Currency::all()->random()->id,
+    	'currency_id' => Currency::all()->random()->currency_id,
         'donation_type' => $faker->randomElement([Partner::DONATION, Partner::EMMANUELTV]),
         'donation_amount' => $faker->randomFloat(2, 5000, 1000000),
 

@@ -15,7 +15,8 @@ class PartnerTransformer extends TransformerAbstract
     public function transform(Partner $partner)
     {
         return [
-            'partnerIdentifier' => (string)$partner->partner_id,
+            'partnerIdentifier' => (string)$partner->partner_uuid,
+            'friendlyIdentifier' => (string)$partner->partner_id,
             'titleIdentifier' => (int)$partner->title_id,
             'stateIdentifier' => (int)$partner->state_id,
             'currencyIdentifier' => (int)$partner->currency_id,

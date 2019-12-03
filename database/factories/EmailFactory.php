@@ -4,6 +4,8 @@ use App\Email;
 use App\Partner;
 use App\User;
 use Faker\Generator as Faker;
+use Illuminate\Support\Str;
+use Ramsey\Uuid\uuid;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,8 +21,9 @@ use Faker\Generator as Faker;
 $factory->define(Email::class, function (Faker $faker) {
 	$partner = Partner::all()->random();
     return [
-        'partner_id' => $partner->id,
-        'user_id' => User::all()->random()->id,
+    	'email_id' => (string) Str::uuid(),
+        'partner_id' => $partner->partner_uuid,
+        'user_id' => User::all()->random()->user_id,
         'sender' => 'info@emmanuel.tv',
         'recipient' => $faker->safeEmail,
         'subject' => $faker->word,

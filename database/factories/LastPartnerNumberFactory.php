@@ -2,6 +2,7 @@
 
 use App\LastPartnerNumber;
 use Faker\Generator as Faker;
+use Ramsey\Uuid\uuid;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,7 @@ use Faker\Generator as Faker;
 
 $factory->define(LastPartnerNumber::class, function (Faker $faker) {
     return [
+    	'last_partner_number_id' => (string) Str::uuid(),
         'last_number' => $faker->numberBetween(500,100),
     ];
 });

@@ -2,6 +2,8 @@
 
 use App\Continent;
 use Faker\Generator as Faker;
+use Illuminate\Support\Str;
+use Ramsey\Uuid\uuid;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +18,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Continent::class, function (Faker $faker) {
     return [
+    	'continent_id' => (string) Str::uuid(),
         'continent' => $continent = $faker->word,
         'continent_code' => substr($continent, 0, 3),
     ];

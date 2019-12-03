@@ -4,6 +4,8 @@ use App\Partner;
 use App\Sms;
 use App\User;
 use Faker\Generator as Faker;
+use Illuminate\Support\Str;
+use Ramsey\Uuid\uuid;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,8 +21,9 @@ use Faker\Generator as Faker;
 $factory->define(Sms::class, function (Faker $faker) {
 	$partner = Partner::all()->random();
     return [
-        'partner_id' => $partner->id,
-        'user_id' => User::all()->random()->id,
+    	'sms_id' => (string) Str::uuid(),
+        'partner_id' => $partner->partner_uuid,
+        'user_id' => User::all()->random()->user_id,
         'sender' => '+234808765527',
         'recipient' => $faker->numberBetween(1000,50000),
         'message' => $faker->paragraph(2),

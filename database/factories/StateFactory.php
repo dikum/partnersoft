@@ -2,6 +2,8 @@
 
 use App\State;
 use Faker\Generator as Faker;
+use Illuminate\Support\Str;
+use Ramsey\Uuid\uuid;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +18,7 @@ use Faker\Generator as Faker;
 
 $factory->define(State::class, function (Faker $faker) {
     return [
+    	'state_id' => (string) Str::uuid(),
         'state' => $faker->unique()->state,
     ];
 });

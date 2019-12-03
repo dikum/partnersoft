@@ -5,6 +5,8 @@ use App\BankStatement;
 use App\Currency;
 use App\Partner;
 use Faker\Generator as Faker;
+use Illuminate\Support\Str;
+use Ramsey\Uuid\uuid;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,9 +22,10 @@ use Faker\Generator as Faker;
 $factory->define(BankStatement::class, function (Faker $faker) {
 	$partner = Partner::all()->random();
     return [
+        'bank_statement_id' => (string) Str::uuid(),
     	'transaction_id' => $faker->md5,
-        'bank_id' => Bank::all()->random()->id,
-        'currency_id' => Currency::all()->random()->id,
+        'bank_id' => Bank::all()->random()->bank_id,
+        'currency_id' => Currency::all()->random()->currency_id,
         'partner_id' => $partner->partner_id,
         'depositor' => $faker->name,
         'description' => $faker->paragraph(1),

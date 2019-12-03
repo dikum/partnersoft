@@ -5,6 +5,8 @@ use App\Partner;
 use App\Payment;
 use App\User;
 use Faker\Generator as Faker;
+use Illuminate\Support\Str;
+use Ramsey\Uuid\uuid;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,8 +21,9 @@ use Faker\Generator as Faker;
 
 $factory->define(Payment::class, function (Faker $faker) {
     return [
-        'partner_id' => Partner::all()->random()->id,
-        'bank_statement_id' => BankStatement::all()->random()->id,
-        'user_id' => $faker->randomElement([User::all()->random()->id, null]),
+    	'payment_id' => (string) Str::uuid(),
+        'partner_id' => Partner::all()->random()->partner_uuid,
+        'bank_statement_id' => BankStatement::all()->random()->bank_statement_id,
+        'user_id' => $faker->randomElement([User::all()->random()->user_id, null]),
     ];
 });

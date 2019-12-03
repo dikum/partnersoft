@@ -2,6 +2,8 @@
 
 use App\Currency;
 use Faker\Generator as Faker;
+use Illuminate\Support\Str;
+use Ramsey\Uuid\uuid;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +18,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Currency::class, function (Faker $faker) {
     return [
+    	'currency_id' => (string) Str::uuid(),
         'currency' => $currency = $faker->unique()->currencyCode,
         'currency_code' => $currency,
         'minimum_amount' => 5000.00,

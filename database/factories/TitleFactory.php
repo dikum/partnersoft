@@ -2,6 +2,8 @@
 
 use App\Title;
 use Faker\Generator as Faker;
+use Illuminate\Support\Str;
+use Ramsey\Uuid\uuid;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +18,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Title::class, function (Faker $faker) {
     return [
+    	'title_id' => (string) Str::uuid(),
         'title' => $faker->unique()->title,
     ];
 });

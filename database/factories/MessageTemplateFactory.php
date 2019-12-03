@@ -3,6 +3,8 @@
 use App\MessageTemplate;
 use App\Partner;
 use Faker\Generator as Faker;
+use Illuminate\Support\Str;
+use Ramsey\Uuid\uuid;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +19,7 @@ use Faker\Generator as Faker;
 
 $factory->define(MessageTemplate::class, function (Faker $faker) {
     return [
+    	'message_template_id' => (string) Str::uuid(),
         'title' => 'welcome',
         'message' => $faker->paragraph(2),
     ];

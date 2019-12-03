@@ -4,6 +4,8 @@ use App\Partner;
 use App\PartnerComment;
 use App\User;
 use Faker\Generator as Faker;
+use Illuminate\Support\Str;
+use Ramsey\Uuid\uuid;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,8 +20,9 @@ use Faker\Generator as Faker;
 
 $factory->define(PartnerComment::class, function (Faker $faker) {
     return [
-        'partner_id' => Partner::all()->random()->id,
-        'user_id' => User::all()->random()->id,
+    	'comment_id' => (string) Str::uuid(),
+        'partner_id' => Partner::all()->random()->partner_uuid,
+        'user_id' => User::all()->random()->user_id,
         'comment' => $faker->paragraph(2),
     ];
 });
