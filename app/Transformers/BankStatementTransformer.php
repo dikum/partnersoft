@@ -29,6 +29,17 @@ class BankStatementTransformer extends TransformerAbstract
             'payerPhone' => (string)$bank_statement->phone,
             'createdDate' => (string)$bank_statement->created_at,
             'changedDate' => (string)$bank_statement->updated_at,
+
+            'links' => [
+                [
+                    'rel' => 'self',
+                    'href' => route('bankstatements.show', $bank_statement->bank_statement_id),
+                ],
+                [
+                    'rel' => 'bankstatements.payment',
+                    'href' => route('bankstatements.messages.index', $bank_statement->bank_statement_id),
+                ],
+            ],
         ];
     }
 
