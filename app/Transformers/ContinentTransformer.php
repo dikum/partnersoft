@@ -17,7 +17,7 @@ class ContinentTransformer extends TransformerAbstract
         return [
             'continentIdentifier' => (string)$continent->continent_id,
             'continentName' => (string)$continent->continent,
-            'continentShortName' => (string)$bank->continentCode,
+            'continentShortName' => (string)$continent->continentCode,
             'createdDate' => (string)$continent->created_at,
             'changeDate' => (string)$continent->updated_at,
         ];
