@@ -4,6 +4,7 @@ namespace App;
 
 use App\BankStatement;
 use App\Partner;
+use App\Transformers\PaymentTransformer;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -17,6 +18,7 @@ class Payment extends Model
     const PAYMENT_ENTERED_BY_SYSTEM = 'system';
 
     protected $primaryKey = 'payment_id';
+    public $transformer = PaymentTransformer::class;
     protected $dates = ['deleted_at'];
     protected $fillable = [
     	'partner_id',
