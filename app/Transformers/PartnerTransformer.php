@@ -42,6 +42,25 @@ class PartnerTransformer extends TransformerAbstract
             'isVerified' => (int)$partner->verified,
             'createdDate' => (string)$partner->created_at,
             'changeDate' => (string)$partner->updated_at,
+
+            'links' => [
+                [
+                    'rel' => 'self',
+                    'href' => route('partners.show', $partner->partner_uuid),
+                ],
+                [
+                    'rel' => 'partners.messages',
+                    'href' => route('partners.messages.index', $partner->partner_uuid),
+                ],
+                [
+                    'rel' => 'partners.comments',
+                    'href' => route('partners.comments.index', $partner->partner_uuid),
+                ],
+                [
+                    'rel' => 'partners.payments',
+                    'href' => route('partners.payments.index', $partner->partner_uuid),
+                ], 
+            ],
         ];
 
     }
