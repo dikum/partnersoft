@@ -56,27 +56,27 @@ class User extends Authenticatable
 
     public function partners()
     {
-        return $this->hasMany(Partner::class);
+        return $this->hasMany(Partner::class, 'user_id');
     }
 
     public function payments()
     {
-        return $this->hasMany(Payment::class);
+        return $this->hasMany(Payment::class, 'user_id');
     }
 
     public function comments()
     {
-        return $this->hasMany(PartnerComment::class);
+        return $this->hasMany(PartnerComment::class, 'user_id');
     }
 
     public function sms()
     {
-        return $this->hasMany(Sms::class);
+        return $this->hasMany(Sms::class, 'user_id');
     }
 
     public function emails()
     {
-        return $this->hasMany(Email::class);
+        return $this->hasMany(Email::class, 'user_id');
     }
 
     public function isAdmin()
