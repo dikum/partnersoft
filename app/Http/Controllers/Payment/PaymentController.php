@@ -18,17 +18,10 @@ class PaymentController extends ApiBaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Payment $payment)
     {
         $payments = Payment::all();
-
-        $bankstatements = collect();
-
-        foreach($payments as $payment)
-        {
-            $bankstatements = $bankstatements->merge($payment->bank_statement);
-        }
-
+        
         return $this->showAll($payments);
     }
 
