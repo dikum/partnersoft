@@ -16,6 +16,6 @@ class Title extends Model
 
     public function partners()
     {
-    	return $this->hasMany(Partner::class);
+    	return $this->hasMany(Partner::class, 'title_id');
     }
 }
