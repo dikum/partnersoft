@@ -127,22 +127,22 @@ class Partner extends Model
 
     public function emails()
     {
-    	return $this->hasMany(Email::class);
+    	return $this->hasMany(Email::class, 'partner_id');
     }
 
     public function sms()
     {
-    	return $this->hasMany(Sms::class);
+    	return $this->hasMany(Sms::class, 'partner_id');
     }
 
     public function payments()
     {
-    	return $this->hasMany(Payment::class);
+    	return $this->hasMany(Payment::class, 'partner_id');
     }
 
     public function partner_comments()
     {
-    	return $this->hasMany(PartnerComment::class);
+    	return $this->hasMany(PartnerComment::class, 'partner_id');
     }
 
     public function title()
