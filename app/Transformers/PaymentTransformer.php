@@ -16,9 +16,9 @@ class PaymentTransformer extends TransformerAbstract
     {
         return [
             'paymentIdentifier' => (string)$payment->payment_id,
-            'partnerIdentifier' => (int)$payment->partner_id,
-            'bankStatementIdentifier' => (int)$payment->bank_statment_id,
-            'userIdentifier' => (int)$payment->user_id,
+            'partnerIdentifier' => (string)$payment->partner_id,
+            'bankStatementIdentifier' => (string)$payment->bank_statment_id,
+            'userIdentifier' => (string)$payment->user_id,
             'createdDate' => (string)$payment->created_at,
             'changeDate' => (string)$payment->updated_at,
         ];
@@ -30,7 +30,7 @@ class PaymentTransformer extends TransformerAbstract
 
             'paymentIdentifier' => 'payment_id',
             'partnerIdentifier' => 'partner_id',
-            'bankStatementIdentifier' => 'bank_statment_id',
+            'bankStatementIdentifier' => 'bank_statement_id',
             'userIdentifier' => 'user_id',
             'createdDate' => 'created_at',
             'changeDate' => 'updated_at',
