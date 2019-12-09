@@ -21,6 +21,17 @@ class PaymentTransformer extends TransformerAbstract
             'userIdentifier' => (string)$payment->user_id,
             'createdDate' => (string)$payment->created_at,
             'changeDate' => (string)$payment->updated_at,
+
+            'links' => [
+                [
+                    'rel' => 'self',
+                    'href' => route('payments.show', $payment->payment_id),
+                ],
+                [
+                    'rel' => 'payments.bankstatements',
+                    'href' => route('payments.bankstatements.index', $payment->payment_id),
+                ], 
+            ],
         ];
     }
 
