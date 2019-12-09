@@ -16,8 +16,8 @@ class SmsTransformer extends TransformerAbstract
     {
         return [
             'smsIdentifier' => (string)$sms->sms_id,
-            'partnerIdentifier' => (int)$sms->partner_id,
-            'enteredByUser' => (int)$sms->user_id,
+            'partnerIdentifier' => (string)$sms->partner_id,
+            'enteredByUser' => (string)$sms->user_id,
             'fromNumber' => (string)$sms->sender,
             'toNumber' => (string)$sms->recipient,
             'messageBody' => (string)$sms->message,
