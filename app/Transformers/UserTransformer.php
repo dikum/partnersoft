@@ -30,6 +30,17 @@ class UserTransformer extends TransformerAbstract
                     'rel' => 'users.payments',
                     'href' => route('users.payments.index', $user->user_id),
                 ],
+                [
+                    'rel' => 'users.comments',
+                    'href' => route('users.comments.index', $user->user_id),
+                ],
+                [
+                    'rel' => 'users.partners',
+                    'href' => route('users.partners.index', $user->user_id),
+                ], [
+                    'rel' => 'users.messages',
+                    'href' => route('users.messages.index', $user->user_id),
+                ],
             ],
         ];
     }
