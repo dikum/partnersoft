@@ -21,7 +21,7 @@ class Bank extends Model
 
     public function bank_statements()
     {
-    	return $this->hasMany(BankStatement::class);
+    	return $this->hasMany(BankStatement::class, 'bank_id');
     }
 
     protected $hidden = [ 
