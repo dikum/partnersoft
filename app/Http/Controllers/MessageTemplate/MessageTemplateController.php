@@ -5,10 +5,19 @@ namespace App\Http\Controllers\MessageTemplate;
 use App\Http\Controllers\ApiBaseController;
 use App\Http\Controllers\Controller;
 use App\MessageTemplate;
+use App\Transformers\MessageTemplateTransformer;
 use Illuminate\Http\Request;
 
 class MessageTemplateController extends ApiBaseController
 {
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->middleware('transform.input:' . MessageTemplateTransformer::class)->only(['store', 'update']);
+    }
+
     /**
      * Display a listing of the resource.
      *

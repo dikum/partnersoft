@@ -5,10 +5,19 @@ namespace App\Http\Controllers\Sms;
 use App\Http\Controllers\ApiBaseController;
 use App\Http\Controllers\Controller;
 use App\Sms;
+use App\Transformers\SmsTransformer;
 use Illuminate\Http\Request;
 
 class SmsController extends ApiBaseController
 {
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->middleware('transform.input:' . SmsTransformer::class)->only(['store', 'update']);
+    }
+
     /**
      * Display a listing of the resource.
      *

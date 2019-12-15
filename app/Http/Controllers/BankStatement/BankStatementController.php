@@ -6,10 +6,19 @@ use App\BankStatement;
 use App\Currency;
 use App\Http\Controllers\ApiBaseController;
 use App\Http\Controllers\Controller;
+use App\Transformers\BankStatementTransformer;
 use Illuminate\Http\Request;
 
 class BankStatementController extends ApiBaseController
 {
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->middleware('transform.input:' . BankStatementTransformer::class)->only(['store']);
+    }
+
     /**
      * Display a listing of the resource.
      *

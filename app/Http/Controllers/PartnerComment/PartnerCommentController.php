@@ -5,10 +5,19 @@ namespace App\Http\Controllers\PartnerComment;
 use App\Http\Controllers\ApiBaseController;
 use App\Http\Controllers\Controller;
 use App\PartnerComment;
+use App\Transformers\PartnerCommentTransformer;
 use Illuminate\Http\Request;
 
 class PartnerCommentController extends ApiBaseController
 {
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->middleware('transform.input:' . PartnerCommentTransformer::class)->only(['store', 'update']);
+    }
+
     /**
      * Display a listing of the resource.
      *

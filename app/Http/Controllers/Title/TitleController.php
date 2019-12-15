@@ -5,10 +5,19 @@ namespace App\Http\Controllers\Title;
 use App\Http\Controllers\ApiBaseController;
 use App\Http\Controllers\Controller;
 use App\Title;
+use App\Transformers\TitleTransformer;
 use Illuminate\Http\Request;
 
 class TitleController extends ApiBaseController
 {
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->middleware('transform.input:' . TitleTransformer::class)->only(['store', 'update']);
+    }
+
     /**
      * Display a listing of the resource.
      *

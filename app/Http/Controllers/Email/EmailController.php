@@ -5,10 +5,20 @@ namespace App\Http\Controllers\Email;
 use App\Email;
 use App\Http\Controllers\ApiBaseController;
 use App\Http\Controllers\Controller;
+use App\Transformers\EmailTransformer;
 use Illuminate\Http\Request;
 
 class EmailController extends ApiBaseController
 {
+
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->middleware('transform.input:' . EmailTransformer::class)->only(['store']);
+    }
+
     /**
      * Display a listing of the resource.
      *

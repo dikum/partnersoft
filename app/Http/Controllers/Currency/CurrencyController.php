@@ -5,10 +5,19 @@ namespace App\Http\Controllers\Currency;
 use App\Currency;
 use App\Http\Controllers\ApiBaseController;
 use App\Http\Controllers\Controller;
+use App\Transformers\CurrencyTransformer;
 use Illuminate\Http\Request;
 
 class CurrencyController extends ApiBaseController
 {
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->middleware('transform.input:' . CurrencyTransformer::class)->only(['store', 'update']);
+    }
+
     /**
      * Display a listing of the resource.
      *

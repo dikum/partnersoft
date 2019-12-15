@@ -4,11 +4,20 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\ApiBaseController;
 use App\Http\Controllers\Controller;
+use App\Transformers\UserTransformer;
 use App\User;
 use Illuminate\Http\Request;
 
 class UserController extends ApiBaseController
 {
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->middleware('transform.input:' . UserTransformer::class)->only(['store', 'update']);
+    }
+
     /**
      * Display a listing of the resource.
      *

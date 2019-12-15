@@ -9,11 +9,21 @@ use App\Http\Controllers\Controller;
 use App\Mail\PartnerCreated;
 use App\Partner;
 use App\State;
+use App\Transformers\PartnerTransformer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class PartnerController extends ApiBaseController
 {
+
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->middleware('transform.input:' . PartnerTransformer::class)->only(['store', 'update']);
+    }
+
     /**
      * Display a listing of the resource.
      *

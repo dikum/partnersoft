@@ -7,12 +7,21 @@ use App\Http\Controllers\ApiBaseController;
 use App\Http\Controllers\Controller;
 use App\Partner;
 use App\Payment;
+use App\Transformers\PaymentTransformer;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 
 class PaymentController extends ApiBaseController
 {
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->middleware('transform.input:' . PaymentTransformer::class)->only(['store', 'update']);
+    }
+
     /**
      * Display a listing of the resource.
      *
