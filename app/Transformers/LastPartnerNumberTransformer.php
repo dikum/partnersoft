@@ -35,4 +35,18 @@ class LastPartnerNumberTransformer extends TransformerAbstract
 
         return isset($attributes[$index]) ? $attributes[$index] : null;
     }
+
+    public static function transformedAttribute($index)
+    {
+        $attributes = [
+
+            'last_partner_number_id' => 'numberIdentifier',
+            'last_number' => 'lastPartnerNumber',
+            'created_at' => 'createdDate',
+            'updated_at' => 'changeDate',
+
+        ];
+
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
 }

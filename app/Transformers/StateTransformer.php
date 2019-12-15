@@ -35,4 +35,18 @@ class StateTransformer extends TransformerAbstract
 
         return isset($attributes[$index]) ? $attributes[$index] : null;
     }
+
+    public static function transformedAttribute($index)
+    {
+        $attributes = [
+
+            'state_id' => 'stateIdentifier',
+            'state' => 'stateName',
+            'created_at' => 'createdDate',
+            'updated_at' => 'changeDate',
+
+        ];
+
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
 }

@@ -101,4 +101,41 @@ class PartnerTransformer extends TransformerAbstract
 
         return isset($attributes[$index]) ? $attributes[$index] : null;
     }
+
+    public static function transformedAttribute($index)
+    {
+        $attributes = [
+
+            'partner_uuid' => 'partnerIdentifier',
+            'partner_id' => 'friendlyIdentifier',
+            'title_id' => 'titleIdentifier',
+            'state_id' => 'stateIdentifier',
+            'currency_id' => 'currencyIdentifier',
+            'surname' => 'lastName',
+            'middle_name' => 'middleName',
+            'first_name' => 'firstName',
+            'sex' => 'gender',
+            'date_of_birth' => 'birthDate',
+            'marital_status' => 'marital_status',
+            'occupation' => 'job',
+            'preflang' => 'preferredLanguage',
+            'birth_country' => 'countryOfBirth',
+            'residential_country' => 'countryOfResidence',
+            'email' => 'emailAddress1',
+            'email2' => 'emailAddress2',
+            'phone' => 'phoneNumber1',
+            'phone2' => 'phoneNumber2',
+            'residential_address' => 'homeAddress',
+            'postal_address' => 'postalAddress',
+            'donation_type' => 'typeOfDonation',
+            'donation_amount' => 'pledgeAmount',
+            'status' => 'status',
+            'verified' => 'isVerified',
+            'created_at' => 'createdDate',
+            'updated_at' => 'changeDate',
+
+        ];
+
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
 }

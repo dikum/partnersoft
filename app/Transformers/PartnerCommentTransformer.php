@@ -39,4 +39,20 @@ class PartnerCommentTransformer extends TransformerAbstract
 
         return isset($attributes[$index]) ? $attributes[$index] : null;
     }
+
+    public static function transformedAttribute($index)
+    {
+        $attributes = [
+
+            'comment_id' => 'commentIdentifier',
+            'partner_id' => 'partnerIdentifier',
+            'user_id' => 'userIdentifier',
+            'comment' => 'commentBody',
+            'created_at' => 'createdDate',
+            'updated_at' => 'changeDate',
+
+        ];
+
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
 }

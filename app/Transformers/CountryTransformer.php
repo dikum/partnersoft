@@ -41,4 +41,21 @@ class CountryTransformer extends TransformerAbstract
 
         return isset($attributes[$index]) ? $attributes[$index] : null;
     }
+
+    public static function transformedAttribute($index)
+    {
+        $attributes = [
+
+            'country_id' => 'countryIdentifier',
+            'continent_id' => 'continentIdentifier',
+            'country' => 'countryName',
+            'dial_code' => 'countryDialingCode',
+            'country_code' => 'countryShortName',
+            'created_at' => 'createdDate',
+            'updated_at' => 'changeDate',
+
+        ];
+
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
 }

@@ -37,4 +37,19 @@ class MessageTemplateTransformer extends TransformerAbstract
 
         return isset($attributes[$index]) ? $attributes[$index] : null;
     }
+
+    public static function transformedAttribute($index)
+    {
+        $attributes = [
+
+            'message_template_id' => 'messageTemplateIdentifier',
+            'title' => 'messageTitle',
+            'message' => 'messageTemplate',
+            'created_at' => 'createdDate',
+            'updated_at' => 'changeDate',
+
+        ];
+
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
 }

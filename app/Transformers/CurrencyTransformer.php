@@ -40,4 +40,21 @@ class CurrencyTransformer extends TransformerAbstract
 
         return isset($attributes[$index]) ? $attributes[$index] : null;
     }
+
+
+    public static function transformedAttribute($index)
+    {
+        $attributes = [
+
+            'currency_id' => 'currencyIdentifier',
+            'currency' => 'currencyName',
+            'currency_code' => 'currencyShortName',
+            'minimum_amount' => 'minimumAmount',
+            'created_at' => 'createdDate',
+            'updated_at' => 'changeDate',
+
+        ];
+
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
 }

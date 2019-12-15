@@ -37,4 +37,20 @@ class BankTransformer extends TransformerAbstract
 
         return isset($attributes[$index]) ? $attributes[$index] : null;
     }
+
+
+    public static function transformedAttribute($index)
+    {
+        $attributes = [
+
+            'bank_id' => 'bankIdentifier',
+            'bank' => 'bankName',
+            'bank_code' => 'bankShortName',
+            'created_at' => 'createdDate',
+            'updated_at' 'changeDate',
+
+        ];
+
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }    
 }

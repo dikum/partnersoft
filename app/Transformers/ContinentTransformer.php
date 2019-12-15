@@ -38,4 +38,20 @@ class ContinentTransformer extends TransformerAbstract
 
         return isset($attributes[$index]) ? $attributes[$index] : null;
     }
+
+
+    public static function transformedAttribute($index)
+    {
+        $attributes = [
+
+            'continent_id' => 'continentIdentifier',
+            'continent' => 'continentName',
+            'continentCode' => 'continentShortName',
+            'created_at' => 'createdDate',
+            'updated_at' => 'changeDate',
+
+        ];
+
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
 }

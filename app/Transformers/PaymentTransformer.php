@@ -50,4 +50,20 @@ class PaymentTransformer extends TransformerAbstract
 
         return isset($attributes[$index]) ? $attributes[$index] : null;
     }
+
+    public static function transformedAttribute($index)
+    {
+        $attributes = [
+
+            'payment_id' => 'paymentIdentifier',
+            'partner_id' => 'partnerIdentifier',
+            'bank_statement_id' => 'bankStatementIdentifier',
+            'user_id' => 'userIdentifier',
+            'created_at' => 'createdDate',
+            'updated_at' => 'changeDate',
+
+        ];
+
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
 }

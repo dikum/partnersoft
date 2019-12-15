@@ -49,7 +49,7 @@ class BankStatementTransformer extends TransformerAbstract
 
             'bankStatementIdentifier' => 'bank_statement_id',
             'transactionIdentifier' => 'transaction_id',
-            'currency_id' => 'currency_id',
+            'currencyIdentifier' => 'currency_id',
             'partnerIdentifier' => 'partner_id',
             'depositorName' => 'depositor',
             'paymentDescription' => 'description',
@@ -66,4 +66,29 @@ class BankStatementTransformer extends TransformerAbstract
 
         return isset($attributes[$index]) ? $attributes[$index] : null;
     }
+
+    public static function transformedAttribute($index)
+    {
+        $attributes = [
+
+            'bank_statement_id' => 'bankStatementIdentifier',
+            'transaction_id' => 'transactionIdentifier',
+            'currency_id' => 'currencyIdentifier',
+            'partner_id' => 'partnerIdentifier',
+            'depositor' => 'depositorName',
+            'description' => 'paymentDescription',
+            'amount' => 'amountPaid',
+            'payment_date' => 'datePaid',
+            'value_date' => 'valueDate',
+            'payment_channel' => 'payment_method',
+            'email' => 'payerEmail',
+            'phone' => 'payerPhone',
+            'created_at' => 'createdDate',
+            'updated_at' => 'changedDate',
+
+        ];
+
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
+
 }

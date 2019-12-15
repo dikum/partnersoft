@@ -48,4 +48,24 @@ class EmailTransformer extends TransformerAbstract
 
         return isset($attributes[$index]) ? $attributes[$index] : null;
     }
+
+    public static function transformedAttribute($index)
+    {
+        $attributes = [
+
+            'email_id' => 'emailIdentifier',
+            'partner_id' => 'partnerIdentifier',
+            'user_id' => 'enteredByUser',
+            'sender' => 'fromEmail',
+            'recipient' => 'toEmail',
+            'subject' => 'emailSubject',
+            'message' => 'messageBody',
+            'status' => 'messageStatus',
+            'created_at' => 'createdDate',
+            'updated_at' => 'changeDate',
+
+        ];
+
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
 }
