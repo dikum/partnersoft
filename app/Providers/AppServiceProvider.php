@@ -2,9 +2,10 @@
 
 namespace App\Providers;
 
-use App\Mail\PartnerCreated;
-use App\Mail\PartnerMailChanged;
+use App\Mail\UserCreated;
+use App\Mail\UserMailChanged;
 use App\Partner;
+use App\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
@@ -20,17 +21,18 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-        Partner::created(function ($partner){
-            retry(5, function() use ($partner){
-                Mail::to($partner->email)->send(new PartnerCreated($partner));
+        User::created(function ($user){
+            retry(5, function() use ($user){
+                if($user->email != null)
+                    Mail::to($user->email)->send(new UserCreated($user));
             }, 1000);
         });
 
-        Partner::updated(function ($partner){
-            retry(5, function() use ($partner){
+        User::updated(function ($user){
+            retry(5, function() use ($user){
 
-                if($partner->isDirty('email'))
-                Mail::to($partner->email)->send(new PartnerMailChanged($partner));
+                if($user->isDirty('email'))
+                Mail::to($user->email)->send(new UserMailChanged($user));
 
             }, 1000);
             
