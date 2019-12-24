@@ -17,7 +17,7 @@ class CreateEmailsTable extends Migration
     {
         Schema::create('emails', function (Blueprint $table) {
             $table->uuid('email_id')->primary();
-            $table->string('partner_id');
+            $table->string('partner_id')->nullable();
             $table->string('user_id')->nullable();
             $table->string('sender');
             $table->string('recipient');
