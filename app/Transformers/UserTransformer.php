@@ -18,7 +18,9 @@ class UserTransformer extends TransformerAbstract
             'userIdentifier' => (string)$user->user_id,
             'fullname' => (string)$user->name,
             'emailAddress' => (string)$user->email,
-            'isAdministrator' => ($user->admin === User::ADMIN_USER),
+            'userType' => $user->type,
+            'userBranch' => $user->branch,
+            'isVerified' => (int)$user->verified,
             'createdDate' => (string)$user->created_at,
             'changeDate' => (string)$user->updated_at,
 
@@ -53,8 +55,8 @@ class UserTransformer extends TransformerAbstract
             'userIdentifier' => 'user_id',
             'fullname' => 'name',
             'emailAddress' => 'email',
-            'password' => 'password',
-            'isAdministrator' => 'admin',
+            'userType' => 'type',
+            'userBranch' => 'branch',
             'createdDate' => 'created_at',
             'changeDate' => 'updated_at',
 
@@ -70,8 +72,8 @@ class UserTransformer extends TransformerAbstract
             'user_id' => 'userIdentifier',
             'name' => 'fullname',
             'email' => 'emailAddress',
-            'password' => 'password',
-            'admin' => 'isAdministrator',
+            'type' => 'userType',
+            'branch' => 'userBranch',
             'created_at' => 'createdDate',
             'updated_at' => 'changeDate',
 
