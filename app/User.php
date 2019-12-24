@@ -17,8 +17,16 @@ class User extends Authenticatable
     use Traits\UsesUuid;
     use Notifiable, SoftDeletes;
 
-    const ADMIN_USER = 'true';
-    const REGULAR_USER = 'false';
+    const ADMIN_USER = 'admin';
+    const REGULAR_USER = 'regular';
+    const PARTNER_USER = 'partner';
+
+    const VERIFIED_USER = '1';
+    const UNVERIFIED_USER = '0';
+
+    const LAGOS_BRANCH = 'lagos';
+    const SOUTH_AFRICA_BRANCH = 'south africa';
+    const GHANA_BRANCH = 'ghana';
 
     /**
      * The attributes that are mass assignable.
@@ -35,7 +43,11 @@ class User extends Authenticatable
         'name', 
         'email', 
         'password',
-        'admin',
+        'type',
+        'branch',
+        'verified',
+        'remember_token',
+        'verification_token',
     ];
 
     public function setNameAttribute($name)
@@ -54,9 +66,16 @@ class User extends Authenticatable
     }
 
 
+    //User can register many partners
     public function partners()
     {
         return $this->hasMany(Partner::class, 'user_id');
+    }
+
+    //User is a partner
+    public function partner()
+    {
+        return $this->hasOne(Partner::class, 'user_id');
     }
 
     public function payments()
@@ -81,7 +100,27 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        return $this->admin == User::ADMIN_USER;
+        return $this->type == User::ADMIN_USER;
+    }
+
+    public function isRegularUser()
+    {
+        return $this->type == User::REGULAR_USER;
+    }
+
+    public function isPartner()
+    {
+        return $this->type == User::PARTNER_USER;
+    }
+
+    public function isVerified()
+    {
+        return $this->verified == Partner::VERIFIED_USER;
+    }
+
+    public static function generateVerificationCode()
+    {
+        return str_random(40);
     }
 
 
@@ -92,7 +131,8 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password', 
-        'remember_token', 
+        'remember_token',
+        'verification_token', 
         'deleted_at',
     ];
 }
