@@ -39,10 +39,12 @@ Route::resource('messagetemplates', 'MessageTemplate\MessageTemplateController')
 /**
 *Partner
 */
-Route::resource('partners', 'Partner\PartnerController', ['except' => ['create', 'edit']]);
+Route::resource('partners', 'Partner\PartnerController', ['except' => ['create', 'edit', 'store']]);
 Route::resource('partners.messages', 'Partner\PartnerMessageController', ['only' => ['index']]);
 Route::resource('partners.comments', 'Partner\PartnerCommentController', ['only' => ['index']]);
 Route::resource('partners.payments', 'Partner\PartnerPaymentController', ['only' => ['index']]);
+Route::resource('partners.user', 'Partner\PartnerUserController', ['only' => ['index']]);
+Route::resource('partners.register', 'Partner\PartnerRegisterController', ['only' => ['index']]);
 Route::name('verify')->get('partners/verify/{token}', 'Partner\PartnerController@verify');
 Route::name('resend')->get('partners/{partner}/resend', 'Partner\PartnerController@resend');
 
