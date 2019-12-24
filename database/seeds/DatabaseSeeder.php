@@ -79,7 +79,7 @@ class DatabaseSeeder extends Seeder
         $emailQuantity = 25;
         $stateQuantity = 36;
         $titleQuantity = 5;
-        $userQuantity = 5;
+        $userQuantity = 100;
 
 
         factory(Bank::class, $bankQuantity)->create();
