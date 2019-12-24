@@ -25,8 +25,8 @@ class CreateBankStatementsTable extends Migration
             $table->dateTime('payment_date');
             $table->dateTime('value_date');
             $table->string('payment_channel');
-            $table->string('email');
-            $table->string('phone');
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
