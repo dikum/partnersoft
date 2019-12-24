@@ -18,11 +18,16 @@ use Ramsey\Uuid\uuid;
 
 $factory->define(User::class, function (Faker $faker) {
 	static $password;
+	$type = $faker->randomElement([User::ADMIN_USER, User::REGULAR_USER, User::PARTNER_USER]);
     return [
     	'user_id' => (string) Str::uuid(),
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
-        'admin' => $faker->randomElement([User::ADMIN_USER, User::REGULAR_USER]),
+        'type' => $type,
+        'branch' => $faker->randomElement([User::LAGOS_BRANCH, User::SOUTH_AFRICA_BRANCH, User::GHANA_BRANCH]),
+        'remember_token' => str_random(10),
+    	'verified' => $verified =  $faker->randomElement([User::VERIFIED_USER, User::UNVERIFIED_USER]),
+    	'verification_token' => $verified == User::VERIFIED_USER ? null : User::generateVerificationCode(),
     ];
 });
