@@ -24,39 +24,42 @@ use Ramsey\Uuid\uuid;
 
 $factory->define(Partner::class, function (Faker $faker) {
 	static $password;
+
+    $partner_id;
+
 	$gender = $faker->randomElement(['male', 'female']);
+
     return [
         'partner_uuid' => (string) Str::uuid(),
-        'partner_id' => $partner_id = Country::all()->random()->country_code . '939748',
+        'partner_id' => $faker->randomElement([$partner_id = Country::all()->random()->country_code . '939748'], null),
+        'user_id' => User::all()->random()->user_id,
+        'registered_by' => $faker->randomElement([User::all()->random()->user_id, null]),
     	'title_id' => Title::all()->random()->title_id,
     	'state_id' => State::all()->random()->state_id,
-    	'surname' => $faker->firstName($gender),
-    	'middle_name' => $faker->randomElement([$faker->firstName($gender), '']),
-    	'first_name' => $faker->firstName($gender),
     	'sex' => $gender,
     	'date_of_birth' => $faker->dateTime('now'),
     	'marital_status' => $faker->randomElement([Partner::MARRIED_MARITAL_STATUS, Partner::DIVORCED_MARITAL_STATUS, Partner::SINGLE_MARITAL_STATUS]),
     	'occupation' => $faker->jobTitle,
-
     	'birth_country' => Country::all()->random()->country_id,
     	'residential_country' => Country::all()->random()->country_id,
-    	'email' => $faker->unique()->safeEmail,
     	'email2' => $faker->randomElement([$faker->unique()->safeEmail, '']),
     	'phone' => $faker->numberBetween(1000,50000),
     	'phone2' => $faker->numberBetween(1000,50000),
     	'residential_address' => $faker->address,
     	'postal_address' => $faker->postcode . ' '. $faker->state . ' ' .$faker->city . ' ' .$faker->country,
-
     	'currency_id' => Currency::all()->random()->currency_id,
         'donation_type' => $faker->randomElement([Partner::DONATION, Partner::EMMANUELTV]),
         'donation_amount' => $faker->randomFloat(2, 5000, 1000000),
-
-    	'preflang' => $faker->randomElement([Partner::ENGLISH_PREFERRED_LANGUAGE, Partner::SPANISH_PREFERRED_LANGUAGE, Partner::FRENCH_PREFERRED_LANGUAGE]),
-    	'status' => $partner_id == '' ? Partner::PENDING_STATUS : Partner::ACTIVE_STATUS,
-    	'password' => $password ?: $password = bcrypt('secret'),
-    	//'remember_token' => str_random(10),
-    	'verified' => $verified = $faker->randomElement([Partner::VERIFIED_PARTNER, Partner::UNVERIFIED_PARTNER]),
-    	'verification_token' => $verified == Partner::VERIFIED_PARTNER ? null : Partner::generateVerificationCode(),
-    	
+    	'preflang' => $faker->randomElement([Partner::ENGLISH_PREFERRED_LANGUAGE, Partner::SPANISH_PREFERRED_LANGUAGE, Partner::FRENCH_PREFERRED_LANGUAGE]),    	
     ];
 });
+
+
+function generate_user_id()
+{
+    $user_id = User::all()->random()->user_id;
+
+    if(!Partner::where('user_id', $user_id)->get()->count() > 0)
+        generate_user_id();
+    return $user_id;
+}
