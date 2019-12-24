@@ -16,12 +16,6 @@ class Partner extends Model
 
     use Traits\UsesUuid;
 
-	const PENDING_STATUS = 'pending';
-	const ACTIVE_STATUS = 'active';
-
-	const VERIFIED_PARTNER = '1';
-	const UNVERIFIED_PARTNER = '0';
-
     const SINGLE_MARITAL_STATUS = 'single';
     const MARRIED_MARITAL_STATUS = 'married';
     const DIVORCED_MARITAL_STATUS = 'divorced';
@@ -46,12 +40,11 @@ class Partner extends Model
     protected $dates = ['deleted_at'];
     protected $fillable = [
     	'partner_id',
+        'user_id',
+        'registered_by',
     	'title_id',
         'state_id',
         'currency_id',
-    	'surname',
-    	'middle_name',
-    	'first_name',
     	'sex',
     	'date_of_birth',
     	'marital_status',
@@ -60,7 +53,6 @@ class Partner extends Model
 
         'birth_country', //Country ID
         'residential_country', //Country ID
-        'email',
         'email2',
         'phone',
         'phone2',
@@ -69,80 +61,43 @@ class Partner extends Model
 
         'donation_type',
         'donation_amount',
-
-    	'status',
-    	'password',
-    	'verified',
-        'remember_token',
-    	'verification_token',
     ];
-
-
-
-    public function setSurnameAttribute($surname)
-    {
-        $this->attributes['surname'] = strtolower($surname);
-    }
-
-    public function getSurnameAttribute($surname)
-    {
-        return ucwords($surname);
-    }
-
-    public function setFirst_nameAttribute($first_name)
-    {
-        $this->attributes['first_name'] = strtolower($first_name);
-    }
-
-    public function getFirstNameAttribute($first_name)
-    {
-        return ucwords($first_name);
-    }
-
-    public function setMiddle_nameAttribute($middle_name)
-    {
-        $this->attributes['middle_name'] = strtolower($middle_name);
-    }
-
-    public function getMiddleNameAttribute($middle_name)
-    {
-        return ucwords($middle_name);
-    }
-
-    public function setEmailAttribute($email)
-    {
-        $this->attributes['email'] = strtolower($email);
-    }
-
 
     public function setEmail2Attribute($email2)
     {
         $this->attributes['email2'] = strtolower($email2);
     }
 
+    //Belongs to probable user that registered the partner
     public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    //User that is a partner
+    public function user_partner()
     {
         return $this->belongsTo(User::class);
     }
 
     public function emails()
     {
-    	return $this->hasMany(Email::class, 'partner_id');
+    	return $this->hasMany(Email::class, 'partner_uuid');
     }
 
     public function sms()
     {
-    	return $this->hasMany(Sms::class, 'partner_id');
+    	return $this->hasMany(Sms::class, 'partner_uuid');
     }
 
     public function payments()
     {
-    	return $this->hasMany(Payment::class, 'partner_id');
+    	return $this->hasMany(Payment::class, 'partner_uuid');
     }
 
     public function partner_comments()
     {
-    	return $this->hasMany(PartnerComment::class, 'partner_id');
+    	return $this->hasMany(PartnerComment::class, 'partner_uuid');
     }
 
     public function title()
@@ -161,19 +116,8 @@ class Partner extends Model
      * @var array
      */
     protected $hidden = [
-        'password', 
-        'remember_token',
-        'verification_token',
         'deleted_at',
     ];
 
-    public function isVerified()
-    {
-    	return $this->verified == Partner::VERIFIED_PARTNER;
-    }
-
-    public static function generateVerificationCode()
-    {
-    	return str_random(40);
-    }
+    
 }
