@@ -16,7 +16,7 @@ class CreateSmsTable extends Migration
     {
         Schema::create('sms', function (Blueprint $table) {
             $table->uuid('sms_id')->primary();
-            $table->string('partner_id');
+            $table->string('partner_id')->nullable();
             $table->string('user_id')->nullable();
             $table->string('sender');
             $table->string('recipient');
