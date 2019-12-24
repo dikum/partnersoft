@@ -54,52 +54,7 @@ class PartnerController extends ApiBaseController
      */
     public function store(Request $request)
     {
-        $rules = [
-            //Title
-            'title_id' => 'required',
-
-            //Partner
-            'surname' => 'required',
-            'middle_name' => 'nullable',
-            'first_name' => 'required',
-            'sex' => 'required',
-            'date_of_birth' => 'required',
-            'marital_status' => 'required',
-            'occupation' => 'required',
-            'note' => 'nullable',
-            'preflang' => 'required',
-            'password' => 'required|min:6|confirmed',
-
-            //Contact
-            'birth_country' => 'required', //Country ID
-            'residential_country' =>'required', //Country ID
-            'state_id' => 'required',
-            'email' => 'required|email|unique:partners',
-            'email2' => 'nullable|email',
-            'phone' => 'required',
-            'phone2' => 'nullable',
-            'residential_address' => 'required',
-            'postal_address' => 'required',
-
-            //Pledge
-            'currency_id' => 'required',
-            'donation_type' => 'required',
-            'donation_amount' => 'required',
-        ];
-
-        $this->validate($request, $rules);
-
-        $data = $request->all();
-        $data['password'] = bcrypt($request->password);
-        $data['verified'] = Partner::UNVERIFIED_PARTNER;
-        $data['partner_id'] = Partner::PARTNER_ID;
-        $data['status'] = Partner::PENDING_STATUS;
-        $data['registered_by'] = Partner::REGISTERED_BY_SELF;
-        $data['verification_token'] = Partner::generateVerificationCode();
-
-        $partner = Partner::create($data);
-
-        return $this->showOne($partner, 201);
+        
     }
 
     /**
