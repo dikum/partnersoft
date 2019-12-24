@@ -55,11 +55,11 @@ class BankStatementController extends ApiBaseController
             'partner_id' => 'nullable',
             'description' => 'nullable',
             'amount' => 'required',
-            'payment_date' => 'required',
-            'value_date' => 'required',
+            'payment_date' => 'required|date',
+            'value_date' => 'required|date',
             'payment_channel' => 'required',
             'email' => 'nullable|email',
-            'phone' => 'nullable',
+            'phone' => 'required',
         ];
 
         $this->validate($request, $rules);
