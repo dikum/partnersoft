@@ -28,6 +28,10 @@ class User extends Authenticatable
     const SOUTH_AFRICA_BRANCH = 'south africa';
     const GHANA_BRANCH = 'ghana';
 
+    const ACTIVE_USER = 'active';
+    const INACTIVE_USER = 'inactive';
+    const SUSPENDED_USER = 'suspended';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -40,7 +44,8 @@ class User extends Authenticatable
 
     protected $dates = ['deleted_at'];
     protected $fillable = [
-        'name', 
+        'name',
+        'status',
         'email', 
         'password',
         'type',

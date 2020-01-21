@@ -3,14 +3,16 @@
 namespace App;
 
 use App\Partner;
+use App\Transformers\TitleTransformer;
 use Illuminate\Database\Eloquent\Model;
 
 class Title extends Model
 {
 	use Traits\UsesUuid;
 
+	public $transformer = TitleTransformer::class;
 	protected $primaryKey = 'title_id';
-    protected $fillabel = [
+    protected $fillable = [
     	'title',
     ];
 

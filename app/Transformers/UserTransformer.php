@@ -16,6 +16,7 @@ class UserTransformer extends TransformerAbstract
     {
         return [
             'userIdentifier' => (string)$user->user_id,
+            'userStatus' => (string)$user->status,
             'fullname' => (string)$user->name,
             'emailAddress' => (string)$user->email,
             'userType' => $user->type,
@@ -53,6 +54,7 @@ class UserTransformer extends TransformerAbstract
         $attributes = [
 
             'userIdentifier' => 'user_id',
+            'userStatus' => 'status',
             'fullname' => 'name',
             'emailAddress' => 'email',
             'userType' => 'type',
@@ -70,6 +72,7 @@ class UserTransformer extends TransformerAbstract
         $attributes = [
 
             'user_id' => 'userIdentifier',
+            'status' => 'userStatus',
             'name' => 'fullname',
             'email' => 'emailAddress',
             'type' => 'userType',

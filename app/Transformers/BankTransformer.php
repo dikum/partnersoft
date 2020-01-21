@@ -47,7 +47,7 @@ class BankTransformer extends TransformerAbstract
             'bank' => 'bankName',
             'bank_code' => 'bankShortName',
             'created_at' => 'createdDate',
-            'updated_at' 'changeDate',
+            'updated_at' => 'changeDate',
 
         ];
 

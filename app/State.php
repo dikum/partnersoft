@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Transformers\StateTransformer;
 use Illuminate\Database\Eloquent\Model;
 
 class State extends Model
@@ -10,6 +11,7 @@ class State extends Model
 
 	use Traits\UsesUuid;
 
+	public $transformer = StateTransformer::class;
 	protected $primaryKey = 'state_id';
     protected $fillable = [
     	'state',

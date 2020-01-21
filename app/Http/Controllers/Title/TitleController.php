@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Title;
 use App\Transformers\TitleTransformer;
 use Illuminate\Http\Request;
+use Illuminate\Support\dd;
 
 class TitleController extends ApiBaseController
 {
@@ -28,6 +29,7 @@ class TitleController extends ApiBaseController
         $titles = Title::all();
 
         return $this->showAll($titles);
+        //dd($titles);
     }
 
     /**
