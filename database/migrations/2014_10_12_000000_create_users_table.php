@@ -37,10 +37,11 @@ class CreateUsersTable extends Migration
             $table->text('residential_address');
             $table->text('postal_address');
             $table->string('preflang')->default(Partner::ENGLISH_PREFERRED_LANGUAGE);
-            $table->string('password');
+            
             $table->string('type');
             $table->string('branch');
             $table->string('registered_by')->nullable();
+            $table->string('password');
             $table->rememberToken();
             $table->string('verified')->default(User::UNVERIFIED_USER);
             $table->string('verification_token')->nullable();
