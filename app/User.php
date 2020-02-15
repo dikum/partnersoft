@@ -32,6 +32,19 @@ class User extends Authenticatable
     const INACTIVE_USER = 'inactive';
     const SUSPENDED_USER = 'suspended';
 
+    const MALE = 'male';
+    const FEMALE = 'female';
+
+    const SINGLE_MARITAL_STATUS = 'single';
+    const MARRIED_MARITAL_STATUS = 'married';
+    const DIVORCED_MARITAL_STATUS = 'divorced';
+
+    const EMMANUELTV = 'emmanuel tv partnership';
+
+    const ENGLISH_PREFERRED_LANGUAGE = 'english';
+    const SPANISH_PREFERRED_LANGUAGE = 'spanish';
+    const FRENCH_PREFERRED_LANGUAGE = 'french';
+
     /**
      * The attributes that are mass assignable.
      *
