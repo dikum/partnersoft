@@ -1,5 +1,10 @@
 <?php
 
+use App\Country;
+use App\Currency;
+use App\Partner;
+use App\State;
+use App\Title;
 use App\User;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
@@ -19,6 +24,7 @@ use Ramsey\Uuid\uuid;
 $factory->define(User::class, function (Faker $faker) {
 	static $password;
 	$type = $faker->randomElement([User::ADMIN_USER, User::REGULAR_USER, User::PARTNER_USER]);
+    $gender = $faker->randomElement(['male', 'female']);
     return [
     	'user_id' => (string) Str::uuid(),
     	'partner_id' => $faker->randomElement([Country::all()->random()->country_code . '939748'], null),
@@ -44,7 +50,7 @@ $factory->define(User::class, function (Faker $faker) {
     	'preflang' => $faker->randomElement([Partner::ENGLISH_PREFERRED_LANGUAGE, Partner::SPANISH_PREFERRED_LANGUAGE, Partner::FRENCH_PREFERRED_LANGUAGE]),
     	'type' => $type,
         'branch' => $faker->randomElement([User::LAGOS_BRANCH, User::SOUTH_AFRICA_BRANCH, User::GHANA_BRANCH]),
-        'registered_by' => $faker->randomElement([User::all()->random()->user_id, null]),
+        'registered_by' => null,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
     	'verified' => $verified =  $faker->randomElement([User::VERIFIED_USER, User::UNVERIFIED_USER]),
