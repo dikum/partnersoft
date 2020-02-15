@@ -25,7 +25,7 @@ class UserTransformer extends TransformerAbstract
             'emailAddress' => (string)$user->email,
             'secondaryEmailAddress' => (string)$user->email2,
             'phoneNumber' => (string)$user->phone,
-            'secondaruPhoneNumber' => (string)$user->phone2,
+            'secondaryPhoneNumber' => (string)$user->phone2,
             'gender' => (string)$user->sex,
             'birthDate' => (string)$user->date_of_birth,
             'maritalStatus' => (string)$user->marital_status,
@@ -39,6 +39,8 @@ class UserTransformer extends TransformerAbstract
             'preferredLanguage' => (string)$user->preflang,
             'userType' => $user->type,
             'userBranch' => $user->branch,
+            //'password' => 'password',
+            //'password_confirmation' => 'password_confirmation',
             'registeredBy' => (string)$user->registered_by,
             'isVerified' => (int)$user->verified,
             'createdDate' => (string)$user->created_at,
@@ -96,6 +98,8 @@ class UserTransformer extends TransformerAbstract
             'preferredLanguage' => 'preflang',
             'userType' => 'type',
             'userBranch' => 'branch',
+            'password' => 'password',
+            'password_confirmation' => 'password_confirmation',
             'registeredBy' => 'registered_by',
             'isVerified' => 'verified',
             'createdDate' => 'created_at',
@@ -134,11 +138,12 @@ class UserTransformer extends TransformerAbstract
             'preflang' => 'preferredLanguage',
             'type' => 'userType',
             'branch' => 'userBranch',
+            'password' => 'password',
+            'password_confirmation' => 'password_confirmation',
             'registered_by' => 'registeredBy',
             'verified' => 'isVerified',
             'created_at' => 'createdDate',
             'updated_at' => 'changeDate',
-
 
         ];
 
