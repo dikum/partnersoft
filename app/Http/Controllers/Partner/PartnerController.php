@@ -9,7 +9,10 @@ use App\Http\Controllers\Controller;
 use App\Mail\PartnerCreated;
 use App\Partner;
 use App\State;
+use App\Title;
 use App\Transformers\PartnerTransformer;
+use App\Transformers\UserTransformer;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -21,7 +24,7 @@ class PartnerController extends ApiBaseController
     {
         parent::__construct();
 
-        $this->middleware('transform.input:' . PartnerTransformer::class)->only(['store', 'update']);
+        $this->middleware('transform.input:' . UserTransformer::class)->only(['store', 'update']);
     }
 
     /**
@@ -31,7 +34,9 @@ class PartnerController extends ApiBaseController
      */
     public function index()
     {
-        $partners = Partner::all();
+        $partners = User::
+            where('type', User::PARTNER_USER)
+            ->get();
 
         return $this->showAll($partners);
     }
@@ -54,7 +59,76 @@ class PartnerController extends ApiBaseController
      */
     public function store(Request $request)
     {
-        
+
+        'partner_id',
+        'title_id',
+        'state_id',
+        'currency_id',
+        'status',
+        'name',
+        'email',
+        'email2',
+        'phone',
+        'phone2',
+        'sex',
+        'date_of_birth',
+        'marital_status',
+        'occupation',
+        'donation_type',
+        'donation_amount',
+        'birth_country',
+        'residential_country',
+        'residential_address',
+        'postal_address',
+        'preflang',
+        'type',
+        'branch',
+        'registered_by',
+        'password',
+        'remember_token',
+        'verified',
+        'verification_token',
+
+
+        $rules = [
+            'title_id' => 'required|in:' . Title::all()->title_id,
+            'state_id' => 'in:' . State::all()->state_id,
+            'currency_id' => 'required|in:' . Currency::all()->currency_id,
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'email2' => 'email',
+            'phone' => 'required',
+            'sex' => 'required|in:' . User::MALE . ',' . User::FEMALE,
+            'date_of_birth' => 'required|date',
+            'marital_status' => 'required|in:' . User::SINGLE_MARITAL_STATUS . ',' . User::MARRIED_MARITAL_STATUS . ',' . User::DIVORCED_MARITAL_STATUS,
+            'occupation' => 'required',
+            'donation_amount' => 'required|regex:/^\d+(\.\d{1,2})?$/'
+            'birth_country' => 'required|in:' . Country::all()->country_id,
+            'residential_country' => 'required|in:' . Country::all()->country_id,
+            'residential_address' => 'required',
+            'preflang' => 'required|in:' . User::ENGLISH_PREFERRED_LANGUAGE . ',' . User::FRENCH_PREFERRED_LANGUAGE . ',' . User::SPANISH_PREFERRED_LANGUAGE,
+
+            'branch' => 'required|in:' . User::LAGOS_BRANCH, User::GHANA_BRANCH, User::SOUTH_AFRICA_BRANCH,
+            'password' => 'required|min:6|confirmed',
+        ];
+
+        $this->validate($request, $rules);
+
+        $data = $request->all();
+
+        $data['partner_id'] = null;
+        $data['donation_type'] = User::EMMANUELTV,
+        $data['branch'] = 
+        $data['registered_by'] = 
+        $data['password'] = bcrypt($request->password);
+        $data['verified'] = User::UNVERIFIED_USER;
+        $data['status'] = User::INACTIVE_USER;
+        $data['type'] = User::PARTNER_USER;
+        $data['verification_token'] = User::generateVerificationCode();
+
+        $user = User::create($data);
+
+        return $this->showOne($user, 201);
     }
 
     /**
@@ -63,7 +137,7 @@ class PartnerController extends ApiBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Partner $partner)
+    public function show(User $partner)
     {
         return $this->showOne($partner);
     }
