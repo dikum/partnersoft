@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Partner;
 
 use App\Country;
 use App\Currency;
+use App\Helpers\CurrencyHelper;
 use App\Http\Controllers\ApiBaseController;
 use App\Http\Controllers\Controller;
 use App\Mail\PartnerCreated;
@@ -60,36 +61,6 @@ class PartnerController extends ApiBaseController
     public function store(Request $request)
     {
 
-        'partner_id',
-        'title_id',
-        'state_id',
-        'currency_id',
-        'status',
-        'name',
-        'email',
-        'email2',
-        'phone',
-        'phone2',
-        'sex',
-        'date_of_birth',
-        'marital_status',
-        'occupation',
-        'donation_type',
-        'donation_amount',
-        'birth_country',
-        'residential_country',
-        'residential_address',
-        'postal_address',
-        'preflang',
-        'type',
-        'branch',
-        'registered_by',
-        'password',
-        'remember_token',
-        'verified',
-        'verification_token',
-
-
         $rules = [
             'title_id' => 'required|in:' . Title::all()->title_id,
             'state_id' => 'in:' . State::all()->state_id,
@@ -116,19 +87,31 @@ class PartnerController extends ApiBaseController
 
         $data = $request->all();
 
+        $country_name = CountryHelper::get_country_name($data['residential_country']);
+        $currency_name = CurrencyHelper::get_currency_name($data['currency_id']);
+
+        if($country_name == 'Ghana')
+            $data['branch'] = User::GHANA_BRANCH;
+        else
+            if($country_name == 'South Africa' || $currency_name == 'ZAR')
+                $data['branch'] = User::SOUTH_AFRICA_BRANCH;
+            else
+                $data['branch'] = User::LAGOS_BRANCH;
+
+
+
         $data['partner_id'] = null;
         $data['donation_type'] = User::EMMANUELTV,
-        $data['branch'] = 
-        $data['registered_by'] = 
+        $data['registered_by'] = null,
         $data['password'] = bcrypt($request->password);
         $data['verified'] = User::UNVERIFIED_USER;
         $data['status'] = User::INACTIVE_USER;
         $data['type'] = User::PARTNER_USER;
         $data['verification_token'] = User::generateVerificationCode();
 
-        $user = User::create($data);
+        $partner = User::create($data);
 
-        return $this->showOne($user, 201);
+        return $this->showOne($partner, 201);
     }
 
     /**
