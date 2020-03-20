@@ -17,8 +17,8 @@ class StateTransformer extends TransformerAbstract
         return [
             'stateIdentifier' => (string)$state->state_id,
             'stateName' => (string)$state->state,
-            'createdDate' => (string)$title->created_at,
-            'changeDate' => (string)$title->updated_at,
+            'createdDate' => (string)$state->created_at,
+            'changeDate' => (string)$state->updated_at,
         ];
     }
 
