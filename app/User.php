@@ -40,6 +40,7 @@ class User extends Authenticatable
     const DIVORCED_MARITAL_STATUS = 'divorced';
 
     const EMMANUELTV = 'emmanuel tv partnership';
+    const DONATION = 'donation';
 
     const ENGLISH_PREFERRED_LANGUAGE = 'english';
     const SPANISH_PREFERRED_LANGUAGE = 'spanish';
