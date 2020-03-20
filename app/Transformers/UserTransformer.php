@@ -2,6 +2,7 @@
 
 namespace App\Transformers;
 
+use App\Partner;
 use App\User;
 use League\Fractal\TransformerAbstract;
 
@@ -32,8 +33,8 @@ class UserTransformer extends TransformerAbstract
             'job' => (string)$user->occupation,
             'typeOfDonation' => (string)$user->donation_type,
             'donationAmount' => (string)$user->donation_amount,
-            'countryofBirth' => (string)$user->birth_country,
-            'countryofResidence' => (string)$user->residential_country,
+            'countryOfBirth' => (string)$user->birth_country,
+            'countryOfResidence' => (string)$user->residential_country,
             'residentialAddress' => (string)$user->residential_address,
             'postalAddress' => (string)$user->postal_address,
             'preferredLanguage' => (string)$user->preflang,
@@ -78,7 +79,7 @@ class UserTransformer extends TransformerAbstract
             'partnerIdentifier' => 'partner_id',
             'titleIdentifier' => 'title_id',
             'stateIdentifier' => 'state_id',
-            'currencyIdentififer' => 'currency_id',
+            'currencyIdentifier' => 'currency_id',
             'userStatus' => 'status',
             'fullname' => 'name',
             'emailAddress' => 'email',
@@ -91,8 +92,8 @@ class UserTransformer extends TransformerAbstract
             'job' => 'occupation',
             'typeOfDonation' => 'donation_type',
             'donationAmount' => 'donation_amount',
-            'countryofBirth' => 'birth_country',
-            'countryofResidence' => 'residential_country',
+            'countryOfBirth' => 'birth_country',
+            'countryOfResidence' => 'residential_country',
             'residentialAddress' => 'residential_address',
             'postalAddress' => 'postal_address',
             'preferredLanguage' => 'preflang',
@@ -131,8 +132,8 @@ class UserTransformer extends TransformerAbstract
             'occupation' => 'job' ,
             'donation_type' => 'typeOfDonation' ,
             'donation_amount' => 'donationAmount',
-            'birth_country' => 'countryofBirth',
-            'residential_country' => 'countryofResidence',
+            'birth_country' => 'countryOfBirth',
+            'residential_country' => 'countryOfResidence',
             'residential_address' => 'residentialAddress',
             'postal_address' => 'postalAddress',
             'preflang' => 'preferredLanguage',
