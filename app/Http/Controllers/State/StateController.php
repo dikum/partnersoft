@@ -4,6 +4,7 @@ namespace App\Http\Controllers\State;
 
 use App\Http\Controllers\ApiBaseController;
 use App\Http\Controllers\Controller;
+use App\State;
 use Illuminate\Http\Request;
 
 class StateController extends ApiBaseController
