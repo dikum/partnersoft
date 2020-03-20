@@ -31,8 +31,7 @@ class UserController extends ApiBaseController
     public function index()
     {
         $users = User::
-            where('type', User::REGULAR_USER)
-            ->orWhere('type', User::ADMIN_USER)
+            where('type', '!=', User::PARTNER_USER)
             ->get();
 
         return $this->showAll($users);
@@ -86,7 +85,10 @@ class UserController extends ApiBaseController
      */
     public function show(User $user)
     {
-        return $this->showOne($user);
+        if($user->type != User::PARTNER_USER)
+            return $this->showOne($user);
+
+        return $this->errorResponse('User not found', 404);
     }
 
     /**
@@ -118,7 +120,7 @@ class UserController extends ApiBaseController
             'status' => 'in:' . User::ACTIVE_USER . ',' . User::INACTIVE_USER,
         ];
 
-        //$this->validate($request, $rules);
+        $this->validate($request, $rules);
 
         
         if($request->has('name'))
