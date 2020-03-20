@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Partner;
 
 use App\Country;
 use App\Currency;
+use App\Helpers\CountryHelper;
 use App\Helpers\CurrencyHelper;
 use App\Http\Controllers\ApiBaseController;
 use App\Http\Controllers\Controller;
@@ -62,24 +63,22 @@ class PartnerController extends ApiBaseController
     {
 
         $rules = [
-            'title_id' => 'required|in:' . Title::all()->title_id,
-            'state_id' => 'in:' . State::all()->state_id,
-            'currency_id' => 'required|in:' . Currency::all()->currency_id,
+            'title_id' => 'required|exists:titles',
+            'state_id' => 'exists:states',
+            'currency_id' => 'exists:currencies',
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'email2' => 'email',
-            'phone' => 'required',
+            'phone' => 'required|unique:users',
             'sex' => 'required|in:' . User::MALE . ',' . User::FEMALE,
             'date_of_birth' => 'required|date',
-            'marital_status' => 'required|in:' . User::SINGLE_MARITAL_STATUS . ',' . User::MARRIED_MARITAL_STATUS . ',' . User::DIVORCED_MARITAL_STATUS,
+            'marital_status' => 'required|in:([' . User::SINGLE_MARITAL_STATUS . ',' . User::MARRIED_MARITAL_STATUS . ',' . User::DIVORCED_MARITAL_STATUS . '])',
             'occupation' => 'required',
-            'donation_amount' => 'required|regex:/^\d+(\.\d{1,2})?$/'
-            'birth_country' => 'required|in:' . Country::all()->country_id,
-            'residential_country' => 'required|in:' . Country::all()->country_id,
+            'donation_amount' => 'required|regex:/^\d+(\.\d{1,2})?$/',
+            'birth_country' => 'required|exists:countries,country_id',
+            'residential_country' => 'required|exists:countries,country_id',
             'residential_address' => 'required',
             'preflang' => 'required|in:' . User::ENGLISH_PREFERRED_LANGUAGE . ',' . User::FRENCH_PREFERRED_LANGUAGE . ',' . User::SPANISH_PREFERRED_LANGUAGE,
-
-            'branch' => 'required|in:' . User::LAGOS_BRANCH, User::GHANA_BRANCH, User::SOUTH_AFRICA_BRANCH,
             'password' => 'required|min:6|confirmed',
         ];
 
@@ -101,8 +100,8 @@ class PartnerController extends ApiBaseController
 
 
         $data['partner_id'] = null;
-        $data['donation_type'] = User::EMMANUELTV,
-        $data['registered_by'] = null,
+        $data['donation_type'] = User::EMMANUELTV;
+        $data['registered_by'] = null;
         $data['password'] = bcrypt($request->password);
         $data['verified'] = User::UNVERIFIED_USER;
         $data['status'] = User::INACTIVE_USER;
@@ -143,29 +142,36 @@ class PartnerController extends ApiBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Partner $partner)
+    public function update(Request $request, $partner_id)
     {
 
-        $rules = [
+        $partner = User::where('user_id', $partner_id)->first();
+
+
+        $validate = $request->validate([
             'partner_id' => 'nullable',
-            'email' => 'email|unique:partners, email,' . $partner->id,
+            'email' => 'email|unique:users,email,' . $partner->user_id .  ',user_id',
             'email2' => 'nullable|email',
-            'middle_name' => 'nullable',
             'note' => 'nullable',
+            'phone' => 'unique:users, phone,' . $partner->user_id,
             'phone2' => 'nullable',
             'postal_address' => 'nullable',
             'password' => 'min:6|confirmed',
-            'title' => 'in:' . Partner::all(),
-            'state_id' => 'nullable|in:' . State::all(),
-            'currency_id' => 'in:' . Currency::all(),
-            'sex' => 'in:' . Partner::MALE . ',' . Partner::FEMALE,
+            'title' => 'exists:titles',
+            'state_id' => 'nullable|exists:states',
+            'currency_id' => 'exists.currencies',
+            'sex' => 'in:' . User::MALE . ',' . User::FEMALE,
             'date_of_birth' => 'date',
-            'marital_status' => 'in:' . Partner::DIVORCED_MARITAL_STATUS . ',' . Partner::MARRIED_MARITAL_STATUS . ',' . Partner::SINGLE_MARITAL_STATUS,
-            'preflang' => 'in:' . Partner::ENGLISH_PREFERRED_LANGUAGE . ',' . Partner::SPANISH_PREFERRED_LANGUAGE . ',' . Partner::FRENCH_PREFERRED_LANGUAGE,
-            'birth_country' => 'in:' . Country::all(),
-            'residential_country' => 'in:' . Country::all(),
-            'donation_type' => 'in:' . Partner::EMMANUELTV . ',' . Partner::DONATION,
-        ];
+            'marital_status' => 'in:' . User::DIVORCED_MARITAL_STATUS . ',' . User::MARRIED_MARITAL_STATUS . ',' . User::SINGLE_MARITAL_STATUS,
+            'preflang' => 'in:' . User::ENGLISH_PREFERRED_LANGUAGE . ',' . User::SPANISH_PREFERRED_LANGUAGE . ',' . User::FRENCH_PREFERRED_LANGUAGE,
+            'birth_country' => 'exists.countries',
+            'residential_country' => 'exists.countries',
+            'donation_type' => 'in:' . User::EMMANUELTV . ',' . User::DONATION,
+        ]);
+
+
+
+        //$this->validate($request, $rules);
 
         if($request->has('partner_id'))
         {
@@ -174,8 +180,8 @@ class PartnerController extends ApiBaseController
 
         if($request->has('email'))
         {
-            $partner->verified = Partner::UNVERIFIED_PARTNER;
-            $partner->verification_token = Partner::generateVerificationCode();
+            $partner->verified = User::UNVERIFIED_USER;
+            $partner->verification_token = User::generateVerificationCode();
             $partner->email = $request->email;
         }
 
@@ -191,14 +197,8 @@ class PartnerController extends ApiBaseController
         if($request->has('currency_id'))
             $partner->currency_id = $request->currency_id;
 
-        if($request->has('surname'))
-            $partner->surname = $request->surname;
-
-        if($request->has('middle_name'))
-            $partner->middle_name = $request->middle_name;
-
-        if($request->has('first_name'))
-            $partner->first_name = $request->first_name;
+        if($request->has('name'))
+            $partner->name = $request->name;
 
         if($request->has('occupation'))
             $partner->occupation = $request->occupation;
@@ -256,6 +256,7 @@ class PartnerController extends ApiBaseController
         $partner->save();
 
         return $this->showOne($partner);
+        //dd($request->all());
     }
 
     /**
