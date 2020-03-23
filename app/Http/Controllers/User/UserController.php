@@ -169,5 +169,27 @@ class UserController extends ApiBaseController
         $user->delete();
         return $this->showOne($user);
     }
+
+     public function verify($token)
+    {
+        $user = User::where('verification_token', $token)->firstOrFail();
+
+        $user->verified = User::VERIFIED_PARTNER;
+        $user->verification_token = null;
+
+        $user->save();
+
+        return $this->showMessage("Account Verified");
+    }
+
+    public function resend(User $user)
+    {
+        if($user->isVerified())
+            return $this->errorResponse('User is already verified', 409);
+
+        Mail::to($user->email)->send(new UserCreated($user));
+
+        return $this->showMessage('Verification link resent!');
+    }
     
 }
