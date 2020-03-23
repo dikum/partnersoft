@@ -265,31 +265,12 @@ class PartnerController extends ApiBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Partner $partner)
+    public function destroy($partner_id)
     {
+        $partner = User::where('user_id', $partner_id)->first();
+
         $partner->delete();
         return $this->showOne($partner);
     }
 
-    public function verify($token)
-    {
-        $partner = Partner::where('verification_token', $token)->firstOrFail();
-
-        $partner->verified = Partner::VERIFIED_PARTNER;
-        $partner->verification_token = null;
-
-        $partner->save();
-
-        return $this->showMessage("Account Verified");
-    }
-
-    public function resend(Partner $partner)
-    {
-        if($partner->isVerified())
-            return $this->errorResponse('Partner is already verified', 409);
-
-        Mail::to($partner->email)->send(new PartnerCreated($partner));
-
-        return $this->showMessage('Verification link resent!');
-    }
 }
