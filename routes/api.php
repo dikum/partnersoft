@@ -56,7 +56,7 @@ Route::resource('partnercomments', 'PartnerComment\PartnerCommentController', ['
 /**
 *PartnerMessage
 */
-Route::resource('partnermessages', 'PartnerMessage\PartnerMessageController', ['only' => ['index', 'show', 'store']]);
+//Route::resource('partnermessages', 'PartnerMessage\PartnerMessageController', ['only' => ['index', 'show', 'store']]);
 
 /**
 *BankStatement
@@ -104,3 +104,6 @@ Route::resource('countries', 'Country\CountryController', ['only' => ['show', 'i
 *State
 */
 Route::resource('states', 'State\StateController', ['only' => ['show', 'index']]);
+
+
+Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken');
