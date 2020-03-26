@@ -21,8 +21,8 @@ use Ramsey\Uuid\uuid;
 $factory->define(PartnerComment::class, function (Faker $faker) {
     return [
     	'comment_id' => (string) Str::uuid(),
-        'partner_id' => Partner::all()->random()->partner_uuid,
-        'user_id' => User::all()->random()->user_id,
+        'to' => User::all()->random()->user_id,
+        'made_by' => User::all()->random()->user_id,
         'comment' => $faker->paragraph(2),
     ];
 });
