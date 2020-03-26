@@ -18,7 +18,7 @@ class PartnerCommentController extends ApiBaseController
     public function index($partner_id)
     {
 
-        $partner = User::where('user_id', $partner_id)->findOrFail();
+        $partner = User::where('user_id', $partner_id)->firstOrFail();
         $comments = $partner->partner_comments;
 
         return $this->showAll($comments);
