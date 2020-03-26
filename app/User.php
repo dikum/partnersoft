@@ -11,11 +11,12 @@ use App\Transformers\UserTransformer;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
     use Traits\UsesUuid;
-    use Notifiable, SoftDeletes;
+    use Notifiable, HasApiTokens, SoftDeletes;
 
     const ADMIN_USER = 'admin';
     const REGULAR_USER = 'regular';
