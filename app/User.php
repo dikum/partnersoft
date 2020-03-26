@@ -11,6 +11,7 @@ use App\Transformers\UserTransformer;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
@@ -159,7 +160,7 @@ class User extends Authenticatable
 
     public static function generateVerificationCode()
     {
-        return str_random(40);
+        return Str::random(40);
     }
 
 
