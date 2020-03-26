@@ -19,11 +19,11 @@ use Ramsey\Uuid\uuid;
 */
 
 $factory->define(Sms::class, function (Faker $faker) {
-	$partner = Partner::all()->random();
+	$partner = User::all()->random();
     return [
     	'sms_id' => (string) Str::uuid(),
-        'partner_id' => $partner->partner_uuid,
-        'user_id' => User::all()->random()->user_id,
+        'to' => $partner->user_id,
+        'sent_by' => User::all()->random()->user_id,
         'sender' => '+234808765527',
         'recipient' => $faker->numberBetween(1000,50000),
         'message' => $faker->paragraph(2),
