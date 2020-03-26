@@ -17,8 +17,8 @@ class CreateEmailsTable extends Migration
     {
         Schema::create('emails', function (Blueprint $table) {
             $table->uuid('email_id')->primary();
-            $table->string('partner_id')->nullable();
-            $table->string('user_id')->nullable();
+            $table->string('to')->nullable();
+            $table->string('sent_by')->nullable();
             $table->string('sender');
             $table->string('recipient');
             $table->string('subject');
@@ -27,8 +27,8 @@ class CreateEmailsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('partner_id')->references('partner_uuid')->on('partners');
-            $table->foreign('user_id')->references('user_id')->on('users');
+            $table->foreign('to')->references('user_id')->on('users');
+            $table->foreign('sent_by')->references('user_id')->on('users');
         });
     }
 
