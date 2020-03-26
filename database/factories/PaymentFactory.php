@@ -22,8 +22,8 @@ use Ramsey\Uuid\uuid;
 $factory->define(Payment::class, function (Faker $faker) {
     return [
     	'payment_id' => (string) Str::uuid(),
-        'partner_id' => Partner::all()->random()->partner_uuid,
+        'made_by' => User::all()->random()->user_id,
         'bank_statement_id' => BankStatement::all()->random()->bank_statement_id,
-        'user_id' => $faker->randomElement([User::all()->random()->user_id, null]),
+        'entered_by' => $faker->randomElement([User::all()->random()->user_id, null]),
     ];
 });
