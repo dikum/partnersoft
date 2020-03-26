@@ -145,7 +145,7 @@ class PartnerController extends ApiBaseController
     public function update(Request $request, $partner_id)
     {
 
-        $partner = User::where('user_id', $partner_id)->first();
+        $partner = User::where('user_id', $partner_id)->findOrFail();
 
 
         $validate = $request->validate([
@@ -267,7 +267,7 @@ class PartnerController extends ApiBaseController
      */
     public function destroy($partner_id)
     {
-        $partner = User::where('user_id', $partner_id)->first();
+        $partner = User::where('user_id', $partner_id)->findOrFail();
 
         $partner->delete();
         return $this->showOne($partner);
