@@ -19,11 +19,11 @@ use Ramsey\Uuid\uuid;
 */
 
 $factory->define(Email::class, function (Faker $faker) {
-	$partner = Partner::all()->random();
+	$partner = User::all()->random();
     return [
     	'email_id' => (string) Str::uuid(),
-        'partner_id' => $partner->partner_uuid,
-        'user_id' => User::all()->random()->user_id,
+        'to' => $partner->user_id,
+        'sent_by' => User::all()->random()->user_id,
         'sender' => 'info@emmanuel.tv',
         'recipient' => $faker->safeEmail,
         'subject' => $faker->word,
