@@ -17,7 +17,7 @@ class PartnerMessageController extends ApiBaseController
      */
     public function index($partner_id)
     {
-        $partner = User::where('user_id', $partner_id)->findOrFail();
+        $partner = User::where('user_id', $partner_id)->firstOrFail();
         $sms = $partner->sms;
         $emails = $partner->emails;
 
