@@ -10,6 +10,12 @@ use Illuminate\Http\Request;
 
 class PartnerMessageController extends ApiBaseController
 {
+    public function __construct()
+    {
+        parent::__construct();
+
+    }
+
     /**
      * Display a listing of the resource.
      *
