@@ -24,7 +24,9 @@ class PartnerController extends ApiBaseController
 
     public function __construct()
     {
-        parent::__construct();
+        $this->middleware('client.credentials:')->only(['store']);
+
+        $this->middleware('auth:api')->except(['store']);
 
         $this->middleware('transform.input:' . UserTransformer::class)->only(['store', 'update']);
     }
@@ -119,8 +121,9 @@ class PartnerController extends ApiBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $partner)
+    public function show($partner_id)
     {
+        $partner = User::where('user_id', $partner_id)->firstOrFail();
         return $this->showOne($partner);
     }
 
@@ -145,7 +148,7 @@ class PartnerController extends ApiBaseController
     public function update(Request $request, $partner_id)
     {
 
-        $partner = User::where('user_id', $partner_id)->findOrFail();
+        $partner = User::where('user_id', $partner_id)->firstOrFail();
 
 
         $validate = $request->validate([
@@ -267,7 +270,7 @@ class PartnerController extends ApiBaseController
      */
     public function destroy($partner_id)
     {
-        $partner = User::where('user_id', $partner_id)->findOrFail();
+        $partner = User::where('user_id', $partner_id)->firstOrFail();
 
         $partner->delete();
         return $this->showOne($partner);
