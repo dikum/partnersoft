@@ -10,6 +10,14 @@ use Illuminate\Support\Facades\DB;
 
 class PaymentBankStatementController extends ApiBaseController
 {
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->middleware('transform.input:' . BankTransformer::class)->only(['store', 'update']);
+    }
+    
     /**
      * Display a listing of the resource.
      *
