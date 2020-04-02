@@ -8,6 +8,14 @@ use Illuminate\Http\Request;
 
 class LastPartnerNumber extends ApiBaseController
 {
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->middleware('transform.input:' . BankTransformer::class)->only(['store', 'update']);
+    }
+    
     /**
      * Display a listing of the resource.
      *
