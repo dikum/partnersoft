@@ -31,5 +31,12 @@ class AuthServiceProvider extends ServiceProvider
 
         Passport::tokensExpireIn(Carbon::now()->addMinutes(30));
         Passport::refreshTokensExpireIn(Carbon::now()->addDays(30));
+
+        Passport::tokensCan([
+
+            'read-partner' => 'View partner information', //For third partner application that would want to retrieve partner's information e.g the visitation app.
+        ]);
+
+
     }
 }
