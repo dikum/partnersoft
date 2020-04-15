@@ -32,6 +32,8 @@ class UserController extends ApiBaseController
      */
     public function index()
     {
+        $this->authorize('viewAny');
+
         $users = User::
             where('type', '!=', User::PARTNER_USER)
             ->get();
@@ -57,6 +59,8 @@ class UserController extends ApiBaseController
      */
     public function store(Request $request)
     {
+        $this->authorize('create');
+
         $rules = [
             'name' => 'required',
             'email' => 'required|email|unique:users',
@@ -114,6 +118,8 @@ class UserController extends ApiBaseController
      */
     public function update(Request $request, User $user)
     {
+        $this->authorize('update', $user);
+
         $rules = [
 
             'email' => 'email|unique:users, email,' . $user->id,
@@ -169,11 +175,13 @@ class UserController extends ApiBaseController
      */
     public function destroy(User $user)
     {
+        $this->authorize('delete', $user);
+
         $user->delete();
         return $this->showOne($user);
     }
 
-     public function verify($token)
+    public function verify($token)
     {
         $user = User::where('verification_token', $token)->firstOrFail();
 
