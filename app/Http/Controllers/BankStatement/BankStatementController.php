@@ -27,6 +27,8 @@ class BankStatementController extends ApiBaseController
      */
     public function index()
     {
+        $this->authorize('viewAny');
+
         $bank_statements = BankStatement::all();
         return $this->showAll($bank_statements);
     }
@@ -80,6 +82,8 @@ class BankStatementController extends ApiBaseController
      */
     public function show(BankStatement $bank_statement)
     {
+        $this->authorize('view', $bank_statement);
+
         return $this->showOne($bank_statement);
     }
 
@@ -103,7 +107,7 @@ class BankStatementController extends ApiBaseController
      */
     public function update(Request $request, $id)
     {
-        
+        //$this->authorize('update', $id);
     }
 
     /**
@@ -114,6 +118,8 @@ class BankStatementController extends ApiBaseController
      */
     public function destroy(BankStatement $bank_statement)
     {
+        $this->authorize('delete', $bank_statement);
+
         $bank_statement = BankStatement::findOrFail($id);
         $bank_statement->delete();
         return $this->showOne($bank_statement);
