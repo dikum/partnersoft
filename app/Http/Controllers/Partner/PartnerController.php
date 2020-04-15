@@ -16,6 +16,7 @@ use App\Transformers\PartnerTransformer;
 use App\Transformers\UserTransformer;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
 
 class PartnerController extends ApiBaseController
@@ -24,11 +25,18 @@ class PartnerController extends ApiBaseController
 
     public function __construct()
     {
-        $this->middleware('client.credentials:')->only(['store']);
+        //$this->middleware('client.credentials:read-partner')->only(['store', 'show']); //Routes that can be accessed with client credentials
+        //$this->middleware('client.credentials')->only(['store', 'show']); //Routes that can be accessed with client credentials
+
+        //$this->middleware('auth:api')->except(['store', 'show']);   //Routes that need a valid access token
 
         $this->middleware('auth:api')->except(['store']);
 
         $this->middleware('transform.input:' . UserTransformer::class)->only(['store', 'update']);
+
+        //$this->middleware('can:view,user')->only(['show']);
+
+        //$this->middleware('scope:read-partner')->only(['store', 'show']);
     }
 
     /**
@@ -38,11 +46,17 @@ class PartnerController extends ApiBaseController
      */
     public function index()
     {
-        $partners = User::
-            where('type', User::PARTNER_USER)
-            ->get();
+        if(Gate::allows('view-partners'))
+        {
+            $partners = User::
+                where('type', User::PARTNER_USER)
+                ->get();
 
-        return $this->showAll($partners);
+            return $this->showAll($partners);
+        }
+
+        
+        return $this->errorResponse('Sorry, This action is not authorized', 403);
     }
 
     /**
@@ -123,8 +137,12 @@ class PartnerController extends ApiBaseController
      */
     public function show($partner_id)
     {
-        $partner = User::where('user_id', $partner_id)->firstOrFail();
-        return $this->showOne($partner);
+        $partner = User::findOrFail($partner_id);
+
+        if(Gate::allows('view-partner', $partner))
+            return $this->showOne($partner);
+        
+        return $this->errorResponse('Sorry, This action is not authorized', 403);
     }
 
     /**
@@ -148,7 +166,10 @@ class PartnerController extends ApiBaseController
     public function update(Request $request, $partner_id)
     {
 
-        $partner = User::where('user_id', $partner_id)->firstOrFail();
+        $partner = User::findOrFail($partner_id);
+
+        if(Gate::denies('view-partner', $partner))
+            return $this->errorResponse('Sorry, This action is not authorized', 403);
 
 
         $validate = $request->validate([
@@ -270,7 +291,7 @@ class PartnerController extends ApiBaseController
      */
     public function destroy($partner_id)
     {
-        $partner = User::where('user_id', $partner_id)->firstOrFail();
+        $partner = User::findOrFail($partner_id);
 
         $partner->delete();
         return $this->showOne($partner);
