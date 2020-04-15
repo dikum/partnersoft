@@ -4,6 +4,7 @@ use App\Bank;
 use App\BankStatement;
 use App\Currency;
 use App\Partner;
+use App\User;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 use Ramsey\Uuid\uuid;
@@ -20,7 +21,7 @@ use Ramsey\Uuid\uuid;
 */
 
 $factory->define(BankStatement::class, function (Faker $faker) {
-	$partner = Partner::all()->random();
+	$partner = User::all()->random();
     return [
         'bank_statement_id' => (string) Str::uuid(),
     	'transaction_id' => $faker->md5,
