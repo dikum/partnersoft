@@ -46,25 +46,32 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('view-partner', function ($user, $partner) 
         {
-            if($user->type == 'admin' || $user->type == 'regular' || $user->user_id == $partner->user_id);
+            if($user->isAdmin() || $user->isRegularUser() || $user->user_id == $partner->user_id);
                 return true;
             return false;
         });
 
         Gate::define('view-partners', function ($user) 
         {
-            if($user->type == 'admin' || $user->type == 'regular')
+            if($user->isAdmin() || $user->isRegularUser())
                 return true;
             return false;
         });
 
-         Gate::define('update-partner', function ($user, $partner) 
+        Gate::define('update-partner', function ($user, $partner) 
         {
-            if($user->type == 'admin' || $user->type == 'regular' || $user->user_id == $partner->user_id)
+            if($user->isAdmin() || $user->isRegularUser() || $user->user_id == $partner->user_id)
                 return true;
             return false;
         });
 
+
+        Gate::define('delete-partner', function ($user, $partner) 
+        {
+            if($user->isAdmin())
+                return true;
+            return false;
+        });
 
 
     }
