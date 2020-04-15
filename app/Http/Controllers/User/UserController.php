@@ -87,6 +87,7 @@ class UserController extends ApiBaseController
      */
     public function show(User $user)
     {
+
         if($user->type != User::PARTNER_USER)
             return $this->showOne($user);
 
