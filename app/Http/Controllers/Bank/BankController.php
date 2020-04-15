@@ -25,6 +25,8 @@ class BankController extends ApiBaseController
      */
     public function index()
     {
+        $this->authorize('viewAny');
+
         $banks = Bank::all();
 
         return $this->showAll($banks);
@@ -48,6 +50,8 @@ class BankController extends ApiBaseController
      */
     public function store(Request $request)
     {
+        $this->authorize('create');
+
         $rules = [
             'bank' => 'required',
             'bank_code' => 'required',
@@ -70,6 +74,8 @@ class BankController extends ApiBaseController
      */
     public function show(Bank $bank)
     {
+        $this->authorize('view', $bank);
+
         return $this->showOne($bank);
     }
 
@@ -93,6 +99,8 @@ class BankController extends ApiBaseController
      */
     public function update(Request $request, Bank $bank)
     {
+        $this->authorize('update', $bank);
+
         if($request->has('bank'))
             $bank->bank = $request->bank;
 
@@ -118,6 +126,8 @@ class BankController extends ApiBaseController
      */
     public function destroy(Bank $bank)
     {
+        $this->authorize('delete', $bank);
+
         $bank->delete();
         return $this->showOne($bank);
     }
