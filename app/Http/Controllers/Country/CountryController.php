@@ -12,7 +12,8 @@ class CountryController extends ApiBaseController
 
     public function __construct()
     {
-        parent::__construct();
+
+        $this->middleware('auth:api');
     }
     /**
      * Display a listing of the resource.
