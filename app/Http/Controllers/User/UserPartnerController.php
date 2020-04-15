@@ -11,7 +11,8 @@ class UserPartnerController extends ApiBaseController
 {
     public function __construct()
     {
-        parent::__construct();
+
+        $this->middleware('auth:api');
     }
 
     /**
