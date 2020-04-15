@@ -17,7 +17,7 @@ class PaymentController extends ApiBaseController
 
     public function __construct()
     {
-        parent::__construct();
+        $this->middleware('auth:api');
 
         $this->middleware('transform.input:' . PaymentTransformer::class)->only(['store', 'update']);
     }
