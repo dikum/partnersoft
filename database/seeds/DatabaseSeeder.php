@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
         Email::truncate();
         LastPartnerNumber::truncate();
         MessageTemplate::truncate();
-        Partner::truncate();
+        //Partner::truncate();
         PartnerComment::truncate();
         Payment::truncate();
         Sms::truncate();
@@ -54,7 +54,7 @@ class DatabaseSeeder extends Seeder
         Email::flushEventListeners();
         LastPartnerNumber::flushEventListeners();
         MessageTemplate::flushEventListeners();
-        Partner::flushEventListeners();
+        //Partner::flushEventListeners();
         PartnerComment::flushEventListeners();
         Payment::flushEventListeners();
         Sms::flushEventListeners();
@@ -73,7 +73,7 @@ class DatabaseSeeder extends Seeder
         $lastPartnerNumberQuantity = 1;
         $messageTemplateQuantity = 1;
         $partnerComment = 200;
-        $partnerQuantity = 50;
+        //$partnerQuantity = 50;
         $paymnentQuantity = 100;
         $smsQuantity = 25;
         $emailQuantity = 25;
@@ -91,7 +91,7 @@ class DatabaseSeeder extends Seeder
        	factory(State::class, $stateQuantity)->create();
         factory(User::class, $userQuantity)->create();
         factory(LastPartnerNumber::class, $lastPartnerNumberQuantity);
-        factory(Partner::class, $partnerQuantity,)->create();
+        //factory(Partner::class, $partnerQuantity,)->create();
         factory(BankStatement::class, $bankStatementQuantity)->create();
         factory(Email::class, $emailQuantity)->create();
         factory(PartnerComment::class, $partnerComment)->create();
