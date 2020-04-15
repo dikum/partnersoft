@@ -13,7 +13,7 @@ class BankController extends ApiBaseController
 
     public function __construct()
     {
-        parent::__construct();
+        $this->middleware('auth:api');
 
         $this->middleware('transform.input:' . BankTransformer::class)->only(['store', 'update']);
     }
