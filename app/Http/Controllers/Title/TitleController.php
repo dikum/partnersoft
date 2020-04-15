@@ -14,7 +14,8 @@ class TitleController extends ApiBaseController
 
     public function __construct()
     {
-        parent::__construct();
+
+        $this->middleware('auth:api');
 
         $this->middleware('transform.input:' . TitleTransformer::class)->only(['store', 'update']);
     }
