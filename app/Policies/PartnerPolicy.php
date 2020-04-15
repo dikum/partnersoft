@@ -78,8 +78,9 @@ class PartnerPolicy
     }
 
 
-    public function test(User $user, $partner)
+    public function before($user, $ability)
     {
+        if($user->isAdmin()) {
         return true;
     }
 
