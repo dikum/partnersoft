@@ -17,7 +17,9 @@ class UserPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        if($user->isAdmin())
+            return true;
+        return false;
     }
 
     /**
@@ -29,7 +31,9 @@ class UserPolicy
      */
     public function view(User $user, User $model)
     {
-        
+        if($user->isAdmin())
+            return true;
+        return false;
     }
 
     /**
@@ -40,7 +44,9 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        //
+        if($user->isAdmin())
+            return true;
+        return false;
     }
 
     /**
@@ -52,7 +58,9 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-        //
+        if($user->isAdmin() || $user->user_id == $model->user_id)
+            return true;
+        return false;
     }
 
     /**
@@ -64,10 +72,9 @@ class UserPolicy
      */
     public function delete(User $user, User $model)
     {
-        if($user->type == 'admin' && $user->user_id != $model->user_id)
+        if($user->isAdmin())
             return true;
-        else
-            return false;
+        return false;
     }
 
     /**
@@ -93,4 +100,11 @@ class UserPolicy
     {
         //
     }
+
+    public function before($user, $ability)
+{
+    if ($user->isAdmin()) {
+        return true;
+    }
+}
 }
