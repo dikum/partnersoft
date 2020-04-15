@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 *User
 */
 Route::resource('users', 'User\UserController', ['except' => ['edit', 'create']]);
+
 Route::resource('users.payments', 'User\UserPaymentController', ['only' => ['index']]);
 Route::resource('users.comments', 'User\UserCommentController', ['only' => ['index']]);
 Route::resource('users.partners', 'User\UserPartnerController', ['only' => ['index']]);
@@ -40,6 +41,7 @@ Route::resource('messagetemplates', 'MessageTemplate\MessageTemplateController')
 *Partner
 */
 Route::resource('partners', 'Partner\PartnerController', ['except' => ['create', 'edit']]);
+
 Route::resource('partners.messages', 'Partner\PartnerMessageController', ['only' => ['index']]);
 Route::resource('partners.comments', 'Partner\PartnerCommentController', ['only' => ['index']]);
 Route::resource('partners.payments', 'Partner\PartnerPaymentController', ['only' => ['index']]);
