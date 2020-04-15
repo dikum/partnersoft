@@ -3,11 +3,19 @@
 namespace App\Http\Controllers\BankStatement;
 
 use App\BankStatement;
-use Illuminate\Http\Request;
+use App\Http\Controllers\ApiBaseController;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
-class BankStatementPaymentController extends Controller
+class BankStatementPaymentController extends ApiBaseController
 {
+
+    public function __construct()
+    {
+
+        $this->middleware('auth:api');
+    }
+
     /**
      * Display a listing of the resource.
      *
