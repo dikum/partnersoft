@@ -293,6 +293,9 @@ class PartnerController extends ApiBaseController
     {
         $partner = User::findOrFail($partner_id);
 
+        if(Gate::denies('view-partner', $partner))
+            return $this->errorResponse('Sorry, This action is not authorized', 403); 
+
         $partner->delete();
         return $this->showOne($partner);
     }
