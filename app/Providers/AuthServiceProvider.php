@@ -2,7 +2,11 @@
 
 namespace App\Providers;
 
+use App\Bank;
+use App\BankStatement;
 use App\Partner;
+use App\Policies\BankPolicy;
+use App\Policies\BankStatementPolicy;
 use App\Policies\PartnerPolicy;
 use App\Policies\UserPolicy;
 use App\User;
@@ -21,6 +25,8 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         //Partner::class => PartnerPolicy::class,
         User::class => UserPolicy::class,
+        Bank::class => BankPolicy::class,
+        BankStatement::class => BankStatementPolicy::class,
     ];
 
     /**
