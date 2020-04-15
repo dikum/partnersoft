@@ -15,6 +15,8 @@ class CurrencyController extends ApiBaseController
     {
         parent::__construct();
 
+        $this->middleware('auth:api');
+
         $this->middleware('transform.input:' . CurrencyTransformer::class)->only(['store', 'update']);
     }
 
