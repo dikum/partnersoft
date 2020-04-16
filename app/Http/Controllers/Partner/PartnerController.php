@@ -300,4 +300,15 @@ class PartnerController extends ApiBaseController
         return $this->showOne($partner);
     }
 
+
+    //Comments made on a partner
+    public function comments($partner_id)
+    {
+
+        $partner = User::where('user_id', $partner_id)->firstOrFail();
+        $comments = $partner->comments;
+
+        return $this->showAll($comments);
+    }
+
 }
