@@ -4,9 +4,19 @@ namespace App\Providers;
 
 use App\Bank;
 use App\BankStatement;
+use App\Continent;
+use App\Country;
+use App\Currency;
+use App\Email;
+use App\MessageTemplate;
 use App\Partner;
 use App\Policies\BankPolicy;
 use App\Policies\BankStatementPolicy;
+use App\Policies\ContinentPolicy;
+use App\Policies\CountryPolicy;
+use App\Policies\CurrencyPolicy;
+use App\Policies\EmailPolicy;
+use App\Policies\MessageTemplatePolicy;
 use App\Policies\PartnerPolicy;
 use App\Policies\UserPolicy;
 use App\User;
@@ -27,6 +37,11 @@ class AuthServiceProvider extends ServiceProvider
         User::class => UserPolicy::class,
         Bank::class => BankPolicy::class,
         BankStatement::class => BankStatementPolicy::class,
+        Continent::class => ContinentPolicy::class,
+        Country::class => CountryPolicy::class,
+        Currency::class => CurrencyPolicy::class,
+        Email::class => EmailPolicy::class,
+        MessageTemplate::class => MessageTemplatePolicy::class,
     ];
 
     /**
