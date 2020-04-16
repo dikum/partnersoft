@@ -125,7 +125,13 @@ class User extends Authenticatable
 
     public function comments()
     {
-        return $this->hasMany(PartnerComment::class, 'user_id');
+        return $this->hasMany(PartnerComment::class, 'to');
+    }
+
+
+    public function comments_made_by()
+    {
+        return $this->hasMany(PartnerComment::class, 'made_by');
     }
 
     public function sms()
