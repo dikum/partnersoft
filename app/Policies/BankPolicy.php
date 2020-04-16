@@ -18,7 +18,7 @@ class BankPolicy
      */
     public function viewAny(User $user)
     {
-        if($user->isAdmin() || $user->isRegularUser())
+        if($user->isAdmin() || $user->isRegularUser() || $user->isPartner())
             return true;
         return false;
     }
@@ -45,9 +45,7 @@ class BankPolicy
      */
     public function create(User $user)
     {
-        if($user->isAdmin()))
-            return true;
-        return false;
+        return $user->isAdmin();
     }
 
     /**
@@ -59,9 +57,7 @@ class BankPolicy
      */
     public function update(User $user, Bank $bank)
     {
-        if($user->isAdmin())
-            return true;
-        return false;
+        return $user->isAdmin();
     }
 
     /**
@@ -73,9 +69,7 @@ class BankPolicy
      */
     public function delete(User $user, Bank $bank)
     {
-        if($user->isAdmin())
-            return true;
-        return false;
+        return $user->isAdmin();
     }
 
     /**
@@ -104,7 +98,6 @@ class BankPolicy
 
     public function before($user, $ability)
     {
-        if($user->isAdmin()) {
-        return true;
+        return $user->isAdmin();
     }
 }
