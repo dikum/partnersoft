@@ -19,7 +19,7 @@ use Illuminate\Http\Request;
 Route::resource('users', 'User\UserController', ['except' => ['edit', 'create']]);
 
 Route::resource('users.payments', 'User\UserPaymentController', ['only' => ['index']]);
-Route::resource('users.comments', 'User\UserCommentController', ['only' => ['index']]);
+Route::get('users/{user}/comments', 'User\UserController@comments');
 Route::resource('users.partners', 'User\UserPartnerController', ['only' => ['index']]);
 Route::resource('users.messages', 'User\UserMessageController', ['only' => ['index']]);
 /**
@@ -43,7 +43,7 @@ Route::resource('messagetemplates', 'MessageTemplate\MessageTemplateController')
 Route::resource('partners', 'Partner\PartnerController', ['except' => ['create', 'edit']]);
 
 Route::resource('partners.messages', 'Partner\PartnerMessageController', ['only' => ['index']]);
-Route::resource('partners.comments', 'Partner\PartnerCommentController', ['only' => ['index']]);
+Route::get('partners/{partner_id}/comments', 'Partner\PartnerController@comments');
 Route::resource('partners.payments', 'Partner\PartnerPaymentController', ['only' => ['index']]);
 Route::resource('partners.user', 'Partner\PartnerUserController', ['only' => ['index']]);
 Route::resource('partners.register', 'Partner\PartnerRegisterController', ['only' => ['index']]);
@@ -54,6 +54,7 @@ Route::name('resend')->get('partners/{partner}/resend', 'Partner\PartnerControll
 *PartnerComment
 */
 Route::resource('partnercomments', 'PartnerComment\PartnerCommentController', ['except' => ['edit', 'create']]);
+Route::get('partner_comment/{partner_id}', 'PartnerComment\PartnerCommentController@partner_comment');
 
 /**
 *PartnerMessage
