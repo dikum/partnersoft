@@ -129,4 +129,18 @@ class PartnerCommentController extends ApiBaseController
         $comment->delete();
         return $this->showOne($comment);
     }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function partner_comments($partner_id)
+    {
+        $partner = User::where('user_id', $partner_id)->firstOrFail();
+        $comments = $partner->partner_comments;
+
+        return $this->showAll($comments);
+    }
 }
