@@ -94,6 +94,14 @@ class AuthServiceProvider extends ServiceProvider
             return false;
         });
 
+        Gate::define('view-comments', function ($user) 
+        {
+            if($user->isAdmin() || $user->isRegularUser())
+                return true;
+            return false;
+        });
+
+
 
     }
 }
