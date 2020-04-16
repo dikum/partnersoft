@@ -306,6 +306,9 @@ class PartnerController extends ApiBaseController
     {
 
         $partner = User::where('user_id', $partner_id)->firstOrFail();
+        if(Gate::denies('view-partner', $partner))
+            return $this->errorResponse('Sorry, This action is not authorized', 403);
+        
         $comments = $partner->comments;
 
         return $this->showAll($comments);
