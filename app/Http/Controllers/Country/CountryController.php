@@ -22,6 +22,8 @@ class CountryController extends ApiBaseController
      */
     public function index()
     {
+        $this->authorize('viewAny');
+
         $countries = Country::all();
 
         return $this->showAll($countries);
@@ -56,6 +58,8 @@ class CountryController extends ApiBaseController
      */
     public function show(Country $country)
     {
+        $this->authorize('view', $country);
+
         return $this->showOne($country);
     }
 
@@ -90,6 +94,8 @@ class CountryController extends ApiBaseController
      */
     public function destroy(Country $country)
     {
+        $this->authorize('delete', $destroy);
+        
         $country->delete();
         return $this->showOne($country);
     }
