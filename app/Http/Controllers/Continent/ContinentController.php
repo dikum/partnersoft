@@ -12,7 +12,6 @@ class ContinentController extends ApiBaseController
 
     public function __construct()
     {
-
         $this->middleware('auth:api');
     }
     /**
@@ -22,6 +21,8 @@ class ContinentController extends ApiBaseController
      */
     public function index()
     {
+        $this->authorize('viewAny');
+
         $continents = Continent::all();
         return $this->showAll($continents);
     }
@@ -55,6 +56,8 @@ class ContinentController extends ApiBaseController
      */
     public function show(Continent $continent)
     {
+        $this->authorize('view', $continent);
+
         return $this->showOne($continent);
     }
 
@@ -89,7 +92,15 @@ class ContinentController extends ApiBaseController
      */
     public function destroy(Continent $continent)
     {
+        $this->authorize('delete', $continent);
+
         $continent->delete();
         return $this->showOne($continent);
+    }
+
+    public function before($user, $ability)
+    {
+        if($user->isAdmin()) {
+        return true;
     }
 }
