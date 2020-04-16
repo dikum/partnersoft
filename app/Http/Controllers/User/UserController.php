@@ -202,5 +202,15 @@ class UserController extends ApiBaseController
 
         return $this->showMessage('Verification link resent!');
     }
+
+
+    //Comments made on a partner
+    public function comments(User $user)
+    {
+
+        $comments = $user->comments;
+
+        return $this->showAll($comments);
+    }
     
 }
