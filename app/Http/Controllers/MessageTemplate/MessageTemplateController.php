@@ -26,6 +26,8 @@ class MessageTemplateController extends ApiBaseController
      */
     public function index()
     {
+        $this->authorize('viewAny');
+
         $messages = MessageTemplate::all();
 
         return showAll($messages);
@@ -49,6 +51,8 @@ class MessageTemplateController extends ApiBaseController
      */
     public function store(Request $request)
     {
+        $this->authorize('create');
+
          $rules = [
             'title' => 'required',
             'message' => 'required',
@@ -71,6 +75,8 @@ class MessageTemplateController extends ApiBaseController
      */
     public function show(MessageTemplate $message)
     {
+        $this->authorize('view', $message);
+
         return $this->showOne($message);
     }
 
@@ -95,6 +101,8 @@ class MessageTemplateController extends ApiBaseController
     public function update(Request $request, MessageTemplate $message)
     {
         //$this->validate($request, $rules);
+
+        $this->authorize('update', $message);
 
         if($request->has('title'))
             $message->title = $request->title;
@@ -121,6 +129,8 @@ class MessageTemplateController extends ApiBaseController
      */
     public function destroy(MessageTemplate $message)
     {
+        $this->authorize('delete', $message);
+        
         $message->delete();
         return $this->showOne($message);
     }
