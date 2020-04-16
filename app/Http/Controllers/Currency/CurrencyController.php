@@ -27,6 +27,8 @@ class CurrencyController extends ApiBaseController
      */
     public function index()
     {
+        $this->authorize('viewAny');
+
         $currencies = Currency::all();
 
         return $this->showAll($currencies);
@@ -50,6 +52,8 @@ class CurrencyController extends ApiBaseController
      */
     public function store(Request $request)
     {
+        $this->authorize('create');
+
         $rules = [
             'currency' => 'required',
             'currency_code' => 'required',
@@ -73,6 +77,8 @@ class CurrencyController extends ApiBaseController
      */
     public function show(Currency $currency)
     {
+        $this->authorize('view', $currency);
+
         return $this->showOne($currency);
     }
 
@@ -96,8 +102,10 @@ class CurrencyController extends ApiBaseController
      */
     public function update(Request $request, $id)
     {
+
         $currency = Currency::findOrFail($id);
 
+        $this->authorize('update', $currency);
 
         if($request->has('currency'))
             $currency->currency = $request->currency;
@@ -126,6 +134,8 @@ class CurrencyController extends ApiBaseController
      */
     public function destroy(Currency $currency)
     {
+        $this->authorize('delete', $currency);
+
         $currency->delete();
         return $this->showOne($currency);
     }
