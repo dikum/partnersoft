@@ -27,6 +27,8 @@ class EmailController extends ApiBaseController
      */
     public function index()
     {
+        $this->authorize('viewAny');
+
         $emails = Email::all();
 
         return $this->showAll($emails);
@@ -77,6 +79,8 @@ class EmailController extends ApiBaseController
      */
     public function show(Email $email)
     {
+        $this->authorize('view', $email);
+
         return $this->showOne($email);
     }
 
@@ -109,8 +113,12 @@ class EmailController extends ApiBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Email $email)
     {
-        //
+        $this->authorize('delete', $email);
+
+        $email->delete();
+        return $this->showOne($email);
+
     }
 }
