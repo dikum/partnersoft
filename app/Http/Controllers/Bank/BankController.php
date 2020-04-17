@@ -25,7 +25,7 @@ class BankController extends ApiBaseController
      */
     public function index()
     {
-        $this->authorize('viewAny');
+        $this->authorize('viewAny', Bank::class);
 
         $banks = Bank::all();
 
