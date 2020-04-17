@@ -21,7 +21,7 @@ class ContinentController extends ApiBaseController
      */
     public function index()
     {
-        $this->authorize('viewAny');
+        $this->authorize('viewAny', Continent::class);
 
         $continents = Continent::all();
         return $this->showAll($continents);
@@ -100,7 +100,6 @@ class ContinentController extends ApiBaseController
 
     public function before($user, $ability)
     {
-        if($user->isAdmin()) {
-        return true;
+        return $user->isAdmin();
     }
 }
