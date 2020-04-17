@@ -20,6 +20,7 @@ class ContinentPolicy
     {
         if($user->isAdmin() || $user->isRegularUser()) {
         return true;
+        }
     }
 
     /**
@@ -33,6 +34,7 @@ class ContinentPolicy
     {
         if($user->isAdmin() || $user->isRegularUser()) {
         return true;
+        }
     }
 
     /**
@@ -43,8 +45,7 @@ class ContinentPolicy
      */
     public function create(User $user)
     {
-        if($user->isAdmin()) {
-        return true;
+        return $user->isAdmin();
     }
 
     /**
@@ -56,8 +57,7 @@ class ContinentPolicy
      */
     public function update(User $user, Continent $continent)
     {
-        if($user->isAdmin()) {
-        return true;
+        return $user->isAdmin();
     }
 
     /**
@@ -69,8 +69,7 @@ class ContinentPolicy
      */
     public function delete(User $user, Continent $continent)
     {
-        if($user->isAdmin()) {
-        return true;
+        return $user->isAdmin();
     }
 
     /**
@@ -99,7 +98,6 @@ class ContinentPolicy
 
     public function before($user, $ability)
     {
-        if($user->isAdmin()) {
-        return true;
+        return $user->isAdmin();
     }
 }
