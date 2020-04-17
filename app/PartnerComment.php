@@ -18,8 +18,8 @@ class PartnerComment extends Model
 	public $transformer = PartnerCommentTransformer::class;
 	protected $dates = ['deleted_at'];
 	protected $fillable = [
-		'partner_id',
-		'user_id',
+		'to',
+		'made_by',
     	'comment',
 	];
 
