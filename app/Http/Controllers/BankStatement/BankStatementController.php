@@ -27,7 +27,7 @@ class BankStatementController extends ApiBaseController
      */
     public function index()
     {
-        $this->authorize('viewAny');
+        $this->authorize('viewAny', BankStatement::class);
 
         $bank_statements = BankStatement::all();
         return $this->showAll($bank_statements);
