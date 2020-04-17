@@ -22,7 +22,7 @@ class CountryController extends ApiBaseController
      */
     public function index()
     {
-        $this->authorize('viewAny');
+        $this->authorize('viewAny', Country::class);
 
         $countries = Country::all();
 
