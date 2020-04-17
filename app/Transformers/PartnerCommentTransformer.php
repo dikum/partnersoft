@@ -16,8 +16,8 @@ class PartnerCommentTransformer extends TransformerAbstract
     {
         return [
             'commentIdentifier' => (string)$comment->comment_id,
-            'partnerIdentifier' => (string)$comment->partner_id,
-            'userIdentifier' => (string)$comment->user_id,
+            'partnerIdentifier' => (string)$comment->to,
+            'userIdentifier' => (string)$comment->made_by,
             'commentBody' => (string)$comment->comment,
             'createdDate' => (string)$comment->created_at,
             'changeDate' => (string)$comment->updated_at,
@@ -29,8 +29,8 @@ class PartnerCommentTransformer extends TransformerAbstract
         $attributes = [
 
             'commentIdentifier' => 'comment_id',
-            'partnerIdentifier' => 'partner_id',
-            'userIdentifier' => 'user_id',
+            'partnerIdentifier' => 'to',
+            'userIdentifier' => 'made_by',
             'commentBody' => 'comment',
             'createdDate' => 'created_at',
             'changeDate' => 'updated_at',
@@ -45,8 +45,8 @@ class PartnerCommentTransformer extends TransformerAbstract
         $attributes = [
 
             'comment_id' => 'commentIdentifier',
-            'partner_id' => 'partnerIdentifier',
-            'user_id' => 'userIdentifier',
+            'to' => 'partnerIdentifier',
+            'made_by' => 'userIdentifier',
             'comment' => 'commentBody',
             'created_at' => 'createdDate',
             'updated_at' => 'changeDate',
