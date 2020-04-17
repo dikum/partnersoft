@@ -23,6 +23,13 @@ class BankPolicy
         return false;
     }
 
+     public function viewAll(User $user)
+    {
+        if($user->isAdmin() || $user->isRegularUser() || $user->isPartner())
+            return true;
+        return false;
+    }
+
     /**
      * Determine whether the user can view the bank.
      *
@@ -94,10 +101,5 @@ class BankPolicy
     public function forceDelete(User $user, Bank $bank)
     {
         //
-    }
-
-    public function before($user, $ability)
-    {
-        return $user->isAdmin();
     }
 }
