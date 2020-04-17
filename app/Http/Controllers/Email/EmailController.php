@@ -27,7 +27,7 @@ class EmailController extends ApiBaseController
      */
     public function index()
     {
-        $this->authorize('viewAny');
+        $this->authorize('viewAny', Email::class);
 
         $emails = Email::all();
 
