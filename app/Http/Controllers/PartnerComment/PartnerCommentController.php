@@ -16,7 +16,8 @@ class PartnerCommentController extends ApiBaseController
 
         $this->middleware('auth:api');
 
-        $this->middleware('transform.input:' . PartnerCommentTransformer::class)->only(['store', 'update']);
+        //$this->middleware('transform.input:' . PartnerCommentTransformer::class)->only(['store', 'update']);
+        $this->middleware('transform.input:' . PartnerCommentTransformer::class);
     }
 
     /**
@@ -26,9 +27,11 @@ class PartnerCommentController extends ApiBaseController
      */
     public function index()
     {
-         $comments = PartnerComment::all();
+        $this->authorize('viewAny', PartnerComment::class);
 
-         return $this->showAll($comments);
+        $comments = PartnerComment::all();
+
+        return $this->showAll($comments);
     }
 
     /**
@@ -49,18 +52,21 @@ class PartnerCommentController extends ApiBaseController
      */
     public function store(Request $request)
     {
+        $this->authorize('create');
+
         $rules = [
-            'partner_id' => 'required',
-            'comment' => 'required',
+            'made_by' => 'required',
+            'to' => 'required|exists.users',
+            'comment' => 'required|exists.users',
         ];
 
         $this->validate($request, $rules);
 
         $data = $request->all();
 
-        $sms = Sms::create($data);
+        $comment = PartnerComment::create($data);
 
-        return $this->showOne($sms, 201);
+        return $this->showOne($comment, 201);
     }
 
     /**
@@ -71,6 +77,8 @@ class PartnerCommentController extends ApiBaseController
      */
     public function show(PartnerComment $comment)
     {
+        $this->authorize('view', $comment);
+
         return $this->showOne($comment);
     }
 
@@ -94,15 +102,16 @@ class PartnerCommentController extends ApiBaseController
      */
     public function update(Request $request, PartnerComment $comment)
     {
+        $this->authorize('update', $comment);
 
-        if($request->has('partner_id'))
+        if($request->has('made_by'))
         {
-            return $this->errorResponse('Sorry, the Partnership ID field cannot be updated', 409);
+            return $this->errorResponse('Sorry, creator of this comment cannot be updated', 409);
         }
 
-        if($request->has('user_id'))
+        if($request->has('to'))
         {
-            return $this->errorResponse('Sorry, the User ID field cannot be updated', 409);
+            return $this->errorResponse('Sorry, this recipient of this comment cannot be updated', 409);
         }
 
         if($request->has('comment'))
@@ -126,21 +135,10 @@ class PartnerCommentController extends ApiBaseController
      */
     public function destroy(PartnerComment $comment)
     {
+        $this->authorize('delete', $comment);
+
         $comment->delete();
         return $this->showOne($comment);
     }
 
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function partner_comments($partner_id)
-    {
-        $partner = User::where('user_id', $partner_id)->firstOrFail();
-        $comments = $partner->partner_comments;
-
-        return $this->showAll($comments);
-    }
 }
