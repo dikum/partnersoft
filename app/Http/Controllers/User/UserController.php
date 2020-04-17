@@ -204,12 +204,12 @@ class UserController extends ApiBaseController
     }
 
 
-    //Comments made on a partner
+    //Comments made by a partner
     public function comments(User $user)
     {
         $this->authorize('comments', $user);
-        
-        $comments = $user->comments;
+
+        $comments = $user->comments_made_by;
 
         return $this->showAll($comments);
     }
