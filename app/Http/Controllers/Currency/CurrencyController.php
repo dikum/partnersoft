@@ -27,7 +27,7 @@ class CurrencyController extends ApiBaseController
      */
     public function index()
     {
-        $this->authorize('viewAny');
+        $this->authorize('viewAny', Currency::class);
 
         $currencies = Currency::all();
 
