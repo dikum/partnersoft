@@ -54,7 +54,6 @@ Route::name('resend')->get('partners/{partner}/resend', 'Partner\PartnerControll
 *PartnerComment
 */
 Route::resource('partnercomments', 'PartnerComment\PartnerCommentController', ['except' => ['edit', 'create']]);
-Route::get('partner_comment/{partner_id}', 'PartnerComment\PartnerCommentController@partner_comment');
 
 /**
 *PartnerMessage
