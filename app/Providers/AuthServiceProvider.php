@@ -19,8 +19,15 @@ use App\Policies\CurrencyPolicy;
 use App\Policies\EmailPolicy;
 use App\Policies\MessageTemplatePolicy;
 use App\Policies\PartnerCommentPolicy;
+use App\Policies\PartnerPaymentPolicy;
 use App\Policies\PartnerPolicy;
+use App\Policies\SmsPolicy;
+use App\Policies\StatePolicy;
+use App\Policies\TitlePolicy;
 use App\Policies\UserPolicy;
+use App\Sms;
+use App\State;
+use App\Title;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -45,6 +52,10 @@ class AuthServiceProvider extends ServiceProvider
         Email::class => EmailPolicy::class,
         MessageTemplate::class => MessageTemplatePolicy::class,
         PartnerComment::class => PartnerCommentPolicy::class,
+        Payment::class => PartnerPaymentPolicy::class,
+        Sms::class => SmsPolicy::class,
+        State::class => StatePolicy::class,
+        Title::class => TitlePolicy::class,
     ];
 
     /**
@@ -58,7 +69,7 @@ class AuthServiceProvider extends ServiceProvider
 
         Passport::routes();
 
-        Passport::tokensExpireIn(Carbon::now()->addMinutes(30));
+        Passport::tokensExpireIn(Carbon::now()->addMinutes(60));
         Passport::refreshTokensExpireIn(Carbon::now()->addDays(30));
 
         Passport::tokensCan([
@@ -106,7 +117,21 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('view-messages', function ($user) 
         {
-            if($user->isAdmin() || $user->isRegularUser())
+            if($user->isAdmin() || $user->isRegularUser() || $user->user_id == $partner->user_id);
+                return true;
+            return false;
+        });
+
+        Gate::define('view-messages', function ($user) 
+        {
+            if($user->isAdmin() || $user->isRegularUser() || $user->user_id == $partner->user_id);
+                return true;
+            return false;
+        });
+
+        Gate::define('view-payments', function ($user) 
+        {
+            if($user->isAdmin() || $user->isRegularUser() || $user->user_id == $partner->user_id);
                 return true;
             return false;
         });
