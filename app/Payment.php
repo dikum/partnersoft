@@ -21,9 +21,9 @@ class Payment extends Model
     public $transformer = PaymentTransformer::class;
     protected $dates = ['deleted_at'];
     protected $fillable = [
-    	'partner_id',
+    	'made_by',
     	'bank_statement_id',
-    	'user_id',
+    	'entered_by',
     ];
 
 
