@@ -30,7 +30,7 @@ class MessageTemplateController extends ApiBaseController
 
         $messages = MessageTemplate::all();
 
-        return showAll($messages);
+        return $this->showAll($messages);
     }
 
     /**
@@ -73,11 +73,11 @@ class MessageTemplateController extends ApiBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(MessageTemplate $message)
+    public function show(MessageTemplate $messagetemplate)
     {
-        $this->authorize('view', $message);
+        $this->authorize('view', $messagetemplate);
 
-        return $this->showOne($message);
+        return $this->showOne($messagetemplate);
     }
 
     /**
