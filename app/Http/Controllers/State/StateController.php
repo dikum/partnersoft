@@ -23,6 +23,8 @@ class StateController extends ApiBaseController
      */
     public function index()
     {
+        $this->authorize('viewAny', State::class);
+
         $states = State::all();
 
         return $this->showAll($states);
@@ -57,6 +59,8 @@ class StateController extends ApiBaseController
      */
     public function show(State $state)
     {
+        $this->authorize('view', $state);
+
         return $this->showOne($state);
     }
 
@@ -80,7 +84,7 @@ class StateController extends ApiBaseController
      */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**
@@ -89,8 +93,12 @@ class StateController extends ApiBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(State $state)
     {
-        //
+        $this->authorize('delete', $state);
+
+        $state->delete();
+
+        return $this->showOne($state);
     }
 }
