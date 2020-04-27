@@ -120,7 +120,7 @@ class User extends Authenticatable
 
     public function payments()
     {
-        return $this->hasMany(Payment::class, 'user_id');
+        return $this->hasMany(Payment::class, 'made_by');
     }
 
     public function comments()
@@ -134,14 +134,24 @@ class User extends Authenticatable
         return $this->hasMany(PartnerComment::class, 'made_by');
     }
 
-    public function sms()
+    public function sms_to()
     {
-        return $this->hasMany(Sms::class, 'user_id');
+        return $this->hasMany(Sms::class, 'to');
     }
 
-    public function emails()
+    public function sms_sent_by()
     {
-        return $this->hasMany(Email::class, 'user_id');
+        return $this->hasMany(Sms::class, 'sent_by');
+    }
+
+    public function emails_to()
+    {
+        return $this->hasMany(Email::class, 'to');
+    }
+
+    public function emails_sent_by()
+    {
+        return $this->hasMany(Email::class, 'sent_by');
     }
 
     public function isAdmin()
