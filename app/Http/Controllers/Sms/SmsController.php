@@ -26,6 +26,8 @@ class SmsController extends ApiBaseController
      */
     public function index()
     {
+        $this->authorize('viewAny', Sms::class);
+
         $sms = Sms::all();
 
         return $this->showAll($sms);
@@ -75,6 +77,8 @@ class SmsController extends ApiBaseController
      */
     public function show(Sms $sms)
     {
+        $this->authorize('view', $sms);
+
         return $this->showOne($sms);
     }
 
@@ -107,8 +111,11 @@ class SmsController extends ApiBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Sms $sms)
     {
-        //
+        $this->authorize('delete', $sms);
+
+         $sms->delete();
+        return $this->showOne($sms);
     }
 }
