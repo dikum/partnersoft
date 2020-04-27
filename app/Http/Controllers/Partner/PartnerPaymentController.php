@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Partner;
 
+use App\BankStatement;
 use App\Http\Controllers\ApiBaseController;
 use App\Http\Controllers\Controller;
 use App\Partner;
@@ -26,10 +27,10 @@ class PartnerPaymentController extends ApiBaseController
      */
     public function index($partner_id)
     {
+        $this->authorize('view-payments', Partner::class);
+
         $partner = User::where('user_id', $partner_id)->firstOrFail();
 
-        $payments = $partner->payments()->with('bank_statement')->get();
-        
-        return $this->showAll($payments);
+        return $this->showAll($partner->payments);
     }
 }
