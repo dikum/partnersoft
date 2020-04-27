@@ -32,7 +32,7 @@ class UserController extends ApiBaseController
      */
     public function index()
     {
-        $this->authorize('viewAny');
+        $this->authorize('viewAny', User::class);
 
         $users = User::
             where('type', '!=', User::PARTNER_USER)
@@ -91,6 +91,7 @@ class UserController extends ApiBaseController
      */
     public function show(User $user)
     {
+        $this->authorize('view', $user);
 
         if($user->type != User::PARTNER_USER)
             return $this->showOne($user);
