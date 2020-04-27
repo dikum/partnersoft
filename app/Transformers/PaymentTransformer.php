@@ -2,6 +2,9 @@
 
 namespace App\Transformers;
 
+use App\BankStatement;
+use App\Http\Controllers\BankStatement\BankStatementController;
+use App\Http\Controllers\Payment\PaymentBankStatementController;
 use App\Payment;
 use League\Fractal\TransformerAbstract;
 
@@ -14,23 +17,22 @@ class PaymentTransformer extends TransformerAbstract
      */
     public function transform(Payment $payment)
     {
+        $paymentBankStatement = new PaymentBankStatementController();
         return [
             'paymentIdentifier' => (string)$payment->payment_id,
             'partnerIdentifier' => (string)$payment->partner_id,
-            'bankStatementIdentifier' => (string)$payment->bank_statment_id,
+            'bankStatementIdentifier' => (string)$payment->bank_statement_id,
             'userIdentifier' => (string)$payment->user_id,
             'createdDate' => (string)$payment->created_at,
             'changeDate' => (string)$payment->updated_at,
+            'bank_statement' => $paymentBankStatement->index($payment),
+
 
             'links' => [
                 [
                     'rel' => 'self',
                     'href' => route('payments.show', $payment->payment_id),
                 ],
-                [
-                    'rel' => 'payments.bankstatements',
-                    'href' => route('payments.bankstatements.index', $payment->payment_id),
-                ], 
             ],
         ];
     }
