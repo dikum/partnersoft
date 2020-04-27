@@ -27,6 +27,7 @@ class TitleController extends ApiBaseController
      */
     public function index()
     {
+        $this->authorize('viewAny', Title::class);
         $titles = Title::all();
 
         return $this->showAll($titles);
@@ -51,6 +52,7 @@ class TitleController extends ApiBaseController
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Title::class)
         $rules = [
             'title' => 'required',
         ];
@@ -72,6 +74,8 @@ class TitleController extends ApiBaseController
      */
     public function show(Title $title)
     {
+        $this->authorize('view', $title);
+
         return $this->showOne($title);
     }
 
@@ -95,6 +99,8 @@ class TitleController extends ApiBaseController
      */
     public function update(Request $request, Title $title)
     {
+        $this->authorize('update', $title);
+
         if($request->has('title'))
             $title->title = $request->title;
 
@@ -116,6 +122,8 @@ class TitleController extends ApiBaseController
      */
     public function destroy(Title $title)
     {
+        $this->authorize('delete', $title);
+        
         $title->delete();
         return $this->showOne($title);
     }
