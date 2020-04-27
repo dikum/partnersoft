@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Payment;
 
+use App\BankStatement;
 use App\Http\Controllers\ApiBaseController;
 use App\Http\Controllers\Controller;
 use App\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+
+//This class should be deleted, has no use for now.
 class PaymentBankStatementController extends ApiBaseController
 {
 
@@ -27,9 +30,8 @@ class PaymentBankStatementController extends ApiBaseController
     public function index(Payment $payment)
     {
         DB::enableQueryLog();
-        $payments = $payment->bank_statement;
 
-        return $this->showOne($payments);
+        return $this->showOne(BankStatement::find($payment->bank_statement_id));
         //dd(DB::getQueryLog());
     }
 
