@@ -24,9 +24,10 @@ class PartnerMessageController extends ApiBaseController
      */
     public function index($partner_id)
     {
+        $this->authorize('view-messages', Partner::class);
         $partner = User::where('user_id', $partner_id)->firstOrFail();
-        $sms = $partner->sms;
-        $emails = $partner->emails;
+        $sms = $partner->sms_to;
+        $emails = $partner->emails_to;
 
         $messages = $sms->merge($emails);
         
