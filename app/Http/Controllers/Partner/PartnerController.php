@@ -48,9 +48,18 @@ class PartnerController extends ApiBaseController
     {
         if(Gate::allows('view-partners'))
         {
-            $partners = User::
-                where('type', User::PARTNER_USER)
-                ->get();
+            $branch = auth()->user()->branch;
+            $type = auth()->user()->type;
+
+            if($type == User::ADMIN_USER || $branch == 'lagos')
+                $partners = User::
+                    where('type', User::PARTNER_USER)
+                    ->get();
+            else
+                $partners = User::
+                    where('type', User::PARTNER_USER)
+                    ->where('branch', $branch)
+                    ->get();
 
             return $this->showAll($partners);
         }
@@ -137,10 +146,17 @@ class PartnerController extends ApiBaseController
      */
     public function show($partner_id)
     {
+        $branch = auth()->user()->branch;
+        $type = auth()->user()->type;
+
         $partner = User::findOrFail($partner_id);
 
         if(Gate::allows('view-partner', $partner))
-            return $this->showOne($partner);
+        {
+            if($type == User::ADMIN_USER || $branch == User::LAGOS_BRANCH || $branch == $partner->branch)
+                return $this->showOne($partner);
+            return $this->errorResponse('Sorry, This action is not authorized', 403);
+        }
         
         return $this->errorResponse('Sorry, This action is not authorized', 403);
     }
@@ -168,7 +184,7 @@ class PartnerController extends ApiBaseController
 
         $partner = User::findOrFail($partner_id);
 
-        if(Gate::denies('view-partner', $partner))
+        if(Gate::denies('update-partner', $partner))
             return $this->errorResponse('Sorry, This action is not authorized', 403);
 
 
