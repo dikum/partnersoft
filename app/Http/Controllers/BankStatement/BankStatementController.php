@@ -4,9 +4,11 @@ namespace App\Http\Controllers\BankStatement;
 
 use App\BankStatement;
 use App\Currency;
+use App\Helpers\CurrencyHelper;
 use App\Http\Controllers\ApiBaseController;
 use App\Http\Controllers\Controller;
 use App\Transformers\BankStatementTransformer;
+use App\User;
 use Illuminate\Http\Request;
 
 class BankStatementController extends ApiBaseController
@@ -17,7 +19,7 @@ class BankStatementController extends ApiBaseController
 
         $this->middleware('auth:api');
 
-        $this->middleware('transform.input:' . BankStatementTransformer::class)->only(['store']);
+        //$this->middleware('transform.input:' . BankStatementTransformer::class)->only(['store']);
     }
 
     /**
@@ -29,8 +31,17 @@ class BankStatementController extends ApiBaseController
     {
         $this->authorize('viewAny', BankStatement::class);
 
-        $bank_statements = BankStatement::all();
-        return $this->showAll($bank_statements);
+        $branch = auth()->user()->branch;
+        $type = auth()->user()->type;
+
+        if($type == User::ADMIN_USER || $branch == User::LAGOS_BRANCH)
+            return $this->showAll(BankStatement::all());
+
+        if($branch == User::SOUTH_AFRICA_BRANCH)
+            return $this->showAll(BankStatement::where('currency_id', CurrencyHelper::get_currency_id_with_code('ZAR'))->get());
+
+        if($branch == User::GHANA_BRANCH)
+            return $this->showAll(BankStatement::where('currency_id', CurrencyHelper::get_currency_id_with_code('GHS'))->get());
     }
 
     /**
@@ -80,11 +91,26 @@ class BankStatementController extends ApiBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(BankStatement $bank_statement)
+    public function show(BankStatement $bankstatement)
     {
-        $this->authorize('view', $bank_statement);
+        
+        $this->authorize('view', $bankstatement);
 
-        return $this->showOne($bank_statement);
+        $branch = auth()->user()->branch;
+        $type = auth()->user()->type;
+        //dd($bank_statement);
+
+        if($type == User::ADMIN_USER || $branch == User::LAGOS_BRANCH)
+            return $this->showOne($bankstatement);
+
+        if($branch == User::SOUTH_AFRICA_BRANCH && CurrencyHelper::get_currency_code($bank_statement->bank_statement_id) == 'ZAR')
+            return $this->showOne($bankstatement);
+
+        if($branch == User::GHANA_BRANCH && CurrencyHelper::get_currency_code($bank_statement->bank_statement_id) == 'GHS')
+            return $this->showOne($bankstatement);
+
+        return $this->errorResponse('Sorry, This action is not authorized', 403);
+
     }
 
     /**
@@ -116,12 +142,10 @@ class BankStatementController extends ApiBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(BankStatement $bank_statement)
+    public function destroy(BankStatement $bankstatement)
     {
-        $this->authorize('delete', $bank_statement);
-
-        $bank_statement = BankStatement::findOrFail($id);
+        $this->authorize('delete', $bankstatement);
         $bank_statement->delete();
-        return $this->showOne($bank_statement);
+        return $this->showOne($bankstatement);
     }
 }
