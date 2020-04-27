@@ -29,6 +29,7 @@ class PaymentController extends ApiBaseController
      */
     public function index(Payment $payment)
     {
+        $this->authorize('viewAny', Payment::class);
         $payments = Payment::all();
         
         return $this->showAll($payments);
@@ -76,6 +77,7 @@ class PaymentController extends ApiBaseController
      */
     public function show(Payment $payment)
     {
+        $this->authorize('view', $payment);
         return $this->showOne($payment);
     }
 
@@ -99,6 +101,7 @@ class PaymentController extends ApiBaseController
      */
     public function update(Request $request, Payment $payment)
     {
+        $this->authorize('update', $payment);
 
         $rules = [
 
@@ -135,6 +138,7 @@ class PaymentController extends ApiBaseController
      */
     public function destroy(Payment $payment)
     {
+        $this->authorize('delete', $payment);
         $payment->delete();
         return response()->json(['data' => $payment], 200);
     }
