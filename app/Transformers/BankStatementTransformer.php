@@ -17,7 +17,7 @@ class BankStatementTransformer extends TransformerAbstract
          return [
             'bankStatementIdentifier' => (string)$bank_statement->bank_statement_id,
             'transactionIdentifier' => (string)$bank_statement->transaction_id,
-            'currency_id' => (string)$bank_statement->currency_id,
+            'currencyIdentifier' => (string)$bank_statement->currency_id,
             'partnerIdentifier' => (string)$bank_statement->partner_id,
             'depositorName' => (string)$bank_statement->depositor,
             'paymentDescription' => (string)$bank_statement->description,
@@ -37,7 +37,7 @@ class BankStatementTransformer extends TransformerAbstract
                 ],
                 [
                     'rel' => 'bankstatements.payment',
-                    'href' => route('bankstatements.messages.index', $bank_statement->bank_statement_id),
+                    'href' => route('bankstatements.payment.index', $bank_statement->bank_statement_id),
                 ],
             ],
         ];
