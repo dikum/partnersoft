@@ -23,8 +23,8 @@ class Sms extends Model
 
     protected $dates = ['deleted_at'];
     protected $fillable = [
-    	'partner_id',
-        'user_id',
+    	'to',
+        'sent_by',
     	'sender',
     	'recipient',
     	'message',
