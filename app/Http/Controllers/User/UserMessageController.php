@@ -23,8 +23,8 @@ class UserMessageController extends ApiBaseController
      */
     public function index(User $user)
     {
-        $emails = $user->emails;
-        $sms = $user->sms;
+        $emails = $user->emails_sent_by;
+        $sms = $user->sms_sent_by;
 
         $messages = $sms->merge($emails);
 
