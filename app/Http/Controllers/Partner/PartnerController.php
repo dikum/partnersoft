@@ -64,7 +64,6 @@ class PartnerController extends ApiBaseController
             return $this->showAll($partners);
         }
 
-        
         return $this->errorResponse('Sorry, This action is not authorized', 403);
     }
 
