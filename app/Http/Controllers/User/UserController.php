@@ -12,18 +12,56 @@ use App\Title;
 use App\Transformers\UserTransformer;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Cookie;
 
 class UserController extends ApiBaseController
 {
 
     public function __construct()
     {
-        $this->middleware('client.credentials:')->only(['resend']);
+        $this->middleware('client.credentials:')->only(['resend', 'login']);
 
-        $this->middleware('auth:api')->except(['resend', 'verify']);
+        $this->middleware('auth:api')->except(['resend', 'verify', 'login', 'logout']);
 
         $this->middleware('transform.input:' . UserTransformer::class)->only(['store', 'update']);
     }
+
+    public function login(Request $request){
+
+        $credentials = $request->validate([
+
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+
+            if(Auth::attempt($credentials)){
+
+                $client = new \GuzzleHttp\Client;
+
+                $response = $client->post('partnersoft.test/oauth/token', [
+                    'form_params' => [
+                        'grant_type' => 'password',
+                        'client_id' => $request->password_client_id,
+                        'client_secret' => $request->password_client_secret,
+                        'username' => $request->email,
+                        'password' => $request->password,
+                        'scope' => '*',
+                    ],
+                ]);
+
+                //Cookie::queue('laravel_token', $response->getBody());
+                //Cookie::queue('user', Auth::user());
+
+                return $this->successResponse(['user' => Auth::user(), 'token' => json_decode((string) $response->getBody(), true)], 200);
+            }
+
+            else
+                return $this->errorResponse('Unauthenticated', 401);
+
+    }
+
 
     /**
      * Display a listing of the resource.

@@ -22,6 +22,7 @@ Route::resource('users.payments', 'User\UserPaymentController', ['only' => ['ind
 Route::get('users/{user}/comments', 'User\UserController@comments');
 Route::resource('users.partners', 'User\UserPartnerController', ['only' => ['index']]);
 Route::resource('users.messages', 'User\UserMessageController', ['only' => ['index']]);
+Route::post('user-login', 'User\UserController@login');
 /**
 *BankStatement
 */

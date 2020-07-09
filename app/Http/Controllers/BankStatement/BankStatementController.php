@@ -67,6 +67,7 @@ class BankStatementController extends ApiBaseController
             'bank_id' => 'required',
             'currency_id' => 'required',
             'partner_id' => 'nullable',
+            'depositor' => 'required|string',
             'description' => 'nullable',
             'amount' => 'required',
             'payment_date' => 'required|date',

@@ -18,7 +18,7 @@ class CountryPolicy
      */
     public function viewAny(User $user)
     {
-        if($user->isAdmin() || $user->isRegularUser() || $user->isPartner()) {
+        if($user->isAdmin() || $user->isRegularUser() || $user->isPartner())
         return true;
     }
 
@@ -31,7 +31,7 @@ class CountryPolicy
      */
     public function view(User $user, Country $country)
     {
-        if($user->isAdmin() || $user->isRegularUser()) {
+        if($user->isAdmin() || $user->isRegularUser())
         return true;
     }
 
@@ -43,7 +43,7 @@ class CountryPolicy
      */
     public function create(User $user)
     {
-        if($user->isAdmin()) {
+        if($user->isAdmin())
         return true;
     }
 
@@ -56,7 +56,7 @@ class CountryPolicy
      */
     public function update(User $user, Country $country)
     {
-        if($user->isAdmin()) {
+        if($user->isAdmin())
         return true;
     }
 
@@ -69,7 +69,7 @@ class CountryPolicy
      */
     public function delete(User $user, Country $country)
     {
-        if($user->isAdmin()) {
+        if($user->isAdmin())
         return true;
     }
 
@@ -99,7 +99,7 @@ class CountryPolicy
 
     public function before($user, $ability)
     {
-        if($user->isAdmin()) {
+        if($user->isAdmin())
         return true;
     }
 }

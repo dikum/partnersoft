@@ -77,7 +77,7 @@ class AuthServiceProvider extends ServiceProvider
             'read-partner' => 'View partner information', //For third partner application that would want to retrieve partner's information e.g the visitation app.
         ]);
 
-        //Using gates of Partner model, policy won't work in it's case.
+        //Using gates of Partner model, policy doesn't work in it's case.
 
         Gate::define('view-partner', function ($user, $partner) 
         {
