@@ -52,7 +52,7 @@ class TitleController extends ApiBaseController
      */
     public function store(Request $request)
     {
-        $this->authorize('create', Title::class)
+        $this->authorize('create', Title::class);
         $rules = [
             'title' => 'required',
         ];
