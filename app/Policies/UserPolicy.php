@@ -29,7 +29,9 @@ class UserPolicy
      */
     public function view(User $user, User $model)
     {
-        return $user->isAdmin();
+        if($user->isAdmin() || $user->user_id === $model->user_id)
+            return true;
+        return false;
     }
 
     /**
@@ -93,10 +95,6 @@ class UserPolicy
         //
     }
 
-    public function before($user, $ability)
-    {
-        return $user->isAdmin();
-    }
 
      public function comments(User $user, User $model)
     {
