@@ -23,7 +23,7 @@ class UserController extends ApiBaseController
     {
         $this->middleware('client.credentials:')->only(['resend', 'login']);
 
-        $this->middleware('auth:api')->except(['resend', 'verify', 'login', 'logout']);
+        $this->middleware('auth:api')->except(['resend', 'verify', 'login']);
 
         $this->middleware('transform.input:' . UserTransformer::class)->only(['store', 'update']);
     }
@@ -38,9 +38,12 @@ class UserController extends ApiBaseController
 
             if(Auth::attempt($credentials)){
 
+                if(Auth::user()['type'] != User::ADMIN_USER && Auth::user()['type'] != User::REGULAR_USER)
+                    return $this->errorResponse('Unauthenticated', 401);
+
                 $client = new \GuzzleHttp\Client;
 
-                $response = $client->post('partnersoft.test/oauth/token', [
+                $response = $client->post(config('app.url').'/oauth/token', [
                     'form_params' => [
                         'grant_type' => 'password',
                         'client_id' => $request->password_client_id,
@@ -51,15 +54,21 @@ class UserController extends ApiBaseController
                     ],
                 ]);
 
-                //Cookie::queue('laravel_token', $response->getBody());
-                //Cookie::queue('user', Auth::user());
-
                 return $this->successResponse(['user' => Auth::user(), 'token' => json_decode((string) $response->getBody(), true)], 200);
             }
 
             else
                 return $this->errorResponse('Unauthenticated', 401);
 
+    }
+
+    public function logout()
+    { 
+        if (Auth::check()){
+           Auth::user()->AauthAcessToken()->delete();
+        }
+
+        return $this->successResponse(null, 204);
     }
 
 
