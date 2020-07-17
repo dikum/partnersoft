@@ -15,10 +15,10 @@ class TitleTransformer extends TransformerAbstract
     public function transform(Title $title)
     {
         return [
-            'titleIdentifier' => (string)$title->title_id,
-            'titleName' => (string)$title->title,
-            'createdDate' => (string)$title->created_at,
-            'changeDate' => (string)$title->updated_at,
+            'titleIdentifier'=>(string)$title->title_id,
+            'titleName'=>(string)$title->title,
+            'createdDate'=>(string)$title->created_at,
+            'changeDate'=>(string)$title->updated_at,
         ];
     }
 
@@ -26,10 +26,10 @@ class TitleTransformer extends TransformerAbstract
     {
         $attributes = [
 
-            'titleIdentifier' => 'title_id',
-            'titleName' => 'title',
-            'createdDate' => 'created_at',
-            'changeDate' => 'updated_at',
+            'titleIdentifier'=>'title_id',
+            'titleName'=>'title',
+            'createdDate'=>'created_at',
+            'changeDate'=>'updated_at',
 
         ];
 
@@ -40,10 +40,10 @@ class TitleTransformer extends TransformerAbstract
     {
         $attributes = [
 
-            'title_id' => 'titleIdentifier',
-            'title' => 'titleName',
-            'created_at' => 'createdDate',
-            'updated_at' => 'changeDate',
+            'title_id'=>'titleIdentifier',
+            'title'=>'titleName',
+            'created_at'=>'createdDate',
+            'updated_at'=>'changeDate',
 
         ];
 
