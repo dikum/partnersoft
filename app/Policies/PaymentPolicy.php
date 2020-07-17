@@ -98,8 +98,4 @@ class PaymentPolicy
         //
     }
 
-     public function before($user, $ability)
-    {
-        return $user->isAdmin();
-    }
 }
