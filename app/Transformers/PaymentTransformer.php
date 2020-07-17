@@ -20,9 +20,9 @@ class PaymentTransformer extends TransformerAbstract
         $paymentBankStatement = new PaymentBankStatementController();
         return [
             'paymentIdentifier' => (string)$payment->payment_id,
-            'partnerIdentifier' => (string)$payment->partner_id,
+            'partnerIdentifier' => (string)$payment->made_by,
             'bankStatementIdentifier' => (string)$payment->bank_statement_id,
-            'userIdentifier' => (string)$payment->user_id,
+            'userIdentifier' => (string)$payment->entered_by,
             'createdDate' => (string)$payment->created_at,
             'changeDate' => (string)$payment->updated_at,
             'bank_statement' => $paymentBankStatement->index($payment),
