@@ -77,10 +77,4 @@ class PartnerPolicy
         return $user->type === 'admin';
     }
 
-
-    public function before($user, $ability)
-    {
-        return $user->isAdmin();
-    }
-
 }
