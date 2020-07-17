@@ -10,6 +10,7 @@ use App\Http\Controllers\ApiBaseController;
 use App\Http\Controllers\Controller;
 use App\Mail\PartnerCreated;
 use App\Partner;
+use App\Rules\PledgeAmount;
 use App\State;
 use App\Title;
 use App\Transformers\PartnerTransformer;
@@ -189,33 +190,26 @@ class PartnerController extends ApiBaseController
 
         $validate = $request->validate([
             'partner_id' => 'nullable',
-            'email' => 'email|unique:users,email,' . $partner->user_id .  ',user_id',
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users,email,' . $partner->user_id .  ',user_id',
             'email2' => 'nullable|email',
-            'note' => 'nullable',
-            'phone' => 'unique:users, phone,' . $partner->user_id,
+            'phone' => 'required|unique:users,phone,' . $partner->user_id . ',user_id',
             'phone2' => 'nullable',
             'postal_address' => 'nullable',
-            'password' => 'min:6|confirmed',
-            'title' => 'exists:titles',
+            //'password' => 'required|min:6|confirmed',
+            'title_id' => 'required|exists:titles',
             'state_id' => 'nullable|exists:states',
-            'currency_id' => 'exists.currencies',
-            'sex' => 'in:' . User::MALE . ',' . User::FEMALE,
-            'date_of_birth' => 'date',
-            'marital_status' => 'in:' . User::DIVORCED_MARITAL_STATUS . ',' . User::MARRIED_MARITAL_STATUS . ',' . User::SINGLE_MARITAL_STATUS,
-            'preflang' => 'in:' . User::ENGLISH_PREFERRED_LANGUAGE . ',' . User::SPANISH_PREFERRED_LANGUAGE . ',' . User::FRENCH_PREFERRED_LANGUAGE,
-            'birth_country' => 'exists.countries',
-            'residential_country' => 'exists.countries',
-            'donation_type' => 'in:' . User::EMMANUELTV . ',' . User::DONATION,
+            'currency_id' => 'required|exists:currencies',
+            'sex' => 'required|in:' . User::MALE . ',' . User::FEMALE,
+            'date_of_birth' => 'required|date',
+            'marital_status' => 'required|in:' . User::DIVORCED_MARITAL_STATUS . ',' . User::MARRIED_MARITAL_STATUS . ',' . User::SINGLE_MARITAL_STATUS,
+            'preflang' => 'required|in:' . User::ENGLISH_PREFERRED_LANGUAGE . ',' . User::SPANISH_PREFERRED_LANGUAGE . ',' . User::FRENCH_PREFERRED_LANGUAGE,
+            'birth_country' => 'required|exists:countries,country_id',
+            'residential_country' => 'required|exists:countries,country_id',
+            'donation_amount' => ['required', 'regex:/^\d+(\.\d{1,2})?$/', new PledgeAmount($request->currency_id, $request->title_id)]
+            //'donation_type' => 'in:' . User::EMMANUELTV . ',' . User::DONATION,
         ]);
 
-
-
-        //$this->validate($request, $rules);
-
-        if($request->has('partner_id'))
-        {
-            return $this->errorResponse('Sorry, the Partnership ID field cannot be updated', 409);
-        }
 
         if($request->has('email'))
         {
@@ -227,8 +221,8 @@ class PartnerController extends ApiBaseController
         if($request->has('email2'))
             $partner->email2 = $request->email2;
 
-        if($request->has('title'))
-            $partner->title = $request->title;
+        if($request->has('title_id'))
+            $partner->title_id = $request->title_id;
 
         if($request->has('state_id'))
             $partner->state_id = $request->state_id;
@@ -281,11 +275,13 @@ class PartnerController extends ApiBaseController
         if($request->has('status'))
             $partner->status = $request->status;
 
+        if($request->has('branch'))
+            $partner->branch = $request->branch;
+
         if($request->has('registered_by'))
             $partner->registered_by = $request->registered_by;
 
-        if($request->has('email2'))
-            $partner->email2 = $request->email2;
+        $partner->donation_type = User::EMMANUELTV;
 
         if(!$partner->isDirty())
         {
