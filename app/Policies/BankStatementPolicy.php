@@ -100,8 +100,4 @@ class BankStatementPolicy
         //
     }
 
-    public function before($user, $ability)
-    {
-        return $user->isAdmin();
-    }
 }
