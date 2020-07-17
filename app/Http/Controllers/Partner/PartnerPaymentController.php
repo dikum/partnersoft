@@ -6,6 +6,7 @@ use App\BankStatement;
 use App\Http\Controllers\ApiBaseController;
 use App\Http\Controllers\Controller;
 use App\Partner;
+use App\Payment;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -29,8 +30,8 @@ class PartnerPaymentController extends ApiBaseController
     {
         $this->authorize('view-payments', Partner::class);
 
-        $partner = User::where('user_id', $partner_id)->firstOrFail();
+        $payments = Payment::where('made_by', $partner_id)->get();
 
-        return $this->showAll($partner->payments);
+        return $this->showAll($payments);
     }
 }
