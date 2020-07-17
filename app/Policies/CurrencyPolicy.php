@@ -96,8 +96,4 @@ class CurrencyPolicy
         //
     }
 
-    public function before($user, $ability)
-    {
-        return $user->isAdmin();
-    }
 }
