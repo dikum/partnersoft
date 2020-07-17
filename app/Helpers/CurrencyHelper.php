@@ -27,6 +27,13 @@ class CurrencyHelper
 
 		return $currency_id;
 	}
-}
 
-?>
+	public static function getMinimumAmount($currency_id){
+		$minimum_amount = DB::table('currencies')
+			->select('minimum_amount')
+			->where('currency_id', '=', $currency_id)
+			->value('minimum_amount');
+
+		return $minimum_amount;
+	}
+}
