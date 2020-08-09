@@ -29,11 +29,12 @@ trait ApiResponser
 
 		$transformer = $collection->first()->transformer;
 
-		$collection = $this->filterData($collection, $transformer);
+		//$collection = $this->filterData($collection, $transformer);
 
 		$collection = $this->sortData($collection, $transformer);
 
-		$collection = $this->paginate($collection);
+		if(!request()->has('do-not-paginate'))
+			$collection = $this->paginate($collection);
 
 		$collection = $this->transformData($collection, $transformer);
 
@@ -77,7 +78,7 @@ trait ApiResponser
 		{
 			$attribute = $transformer::originalAttribute(request()->sort_by);
 
-			$collection = $collection->sortBy->{$attribute};
+			$collection = $collection->sortBy($attribute);
 		}
 
 		return $collection;
