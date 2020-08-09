@@ -20,6 +20,7 @@ class MessageTemplatePolicy
     {
         if($user->isAdmin() || $user->isRegularUser())
             return true;
+        return false;
     }
 
     /**
@@ -33,6 +34,7 @@ class MessageTemplatePolicy
     {
         if($user->isAdmin() || $user->isRegularUser())
             return true;
+        return false;
     }
 
     /**
@@ -45,6 +47,7 @@ class MessageTemplatePolicy
     {
         if($user->isAdmin() || $user->isRegularUser())
             return true;
+        return false;
     }
 
     /**
@@ -58,6 +61,7 @@ class MessageTemplatePolicy
     {
         if($user->isAdmin() || $user->isRegularUser())
             return true;
+        return false;
     }
 
     /**
