@@ -45,7 +45,7 @@ class BankStatement extends Model
 
     public function payment()
     {
-    	return $this->hasOne(Payment::class);
+    	return $this->hasOne(Payment::class, 'bank_statement_id');
     }
 
      protected $hidden = [ 
