@@ -112,6 +112,7 @@ class UserController extends ApiBaseController
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'branch' => 'required|in:' . User::LAGOS_BRANCH, User::GHANA_BRANCH, User::SOUTH_AFRICA_BRANCH,
+            'type' => 'required|in:' . User::REGULAR_USER, User::ADMIN_USER,
             'password' => 'required|min:6|confirmed',
         ];
 
@@ -120,10 +121,10 @@ class UserController extends ApiBaseController
         $data = $request->all();
 
         $data['password'] = bcrypt($request->password);
-        $data['verified'] = User::UNVERIFIED_USER;
-        $data['status'] = User::INACTIVE_USER;
-        $data['type'] = User::REGULAR_USER;
-        $data['verification_token'] = User::generateVerificationCode();
+        $data['verified'] = User::VERIFIED_USER;
+        $data['status'] = User::ACTIVE_USER;
+        //$data['type'] = User::REGULAR_USER;
+        //$data['verification_token'] = User::generateVerificationCode();
 
         $user = User::create($data);
 
