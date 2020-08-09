@@ -10,6 +10,7 @@ use App\Payment;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\dd;
 
 class PartnerPaymentController extends ApiBaseController
@@ -30,7 +31,9 @@ class PartnerPaymentController extends ApiBaseController
     {
         $this->authorize('view-payments', Partner::class);
 
-        $payments = Payment::where('made_by', $partner_id)->get();
+        $payments = Payment::with('bank_statement')
+        ->where('made_by', $partner_id)
+        ->get();
 
         return $this->showAll($payments);
     }
