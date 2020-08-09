@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\MessageTemplate;
 use App\Transformers\MessageTemplateTransformer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class MessageTemplateController extends ApiBaseController
 {
@@ -51,14 +52,14 @@ class MessageTemplateController extends ApiBaseController
      */
     public function store(Request $request)
     {
-        $this->authorize('create');
+        $this->authorize('create', MessageTemplate::class);
 
-         $rules = [
-            'title' => 'required',
-            'message' => 'required',
-        ];
+        $validate = $request->validate([
+            'title' => 'required|string|unique:message_templates',
+            'message' => 'required|string'
+        ]);
 
-        $this->validate($request, $rules);
+        //$this->validate($request, $rules);
 
         $data = $request->all();
 
@@ -98,27 +99,32 @@ class MessageTemplateController extends ApiBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, MessageTemplate $message)
+    public function update(Request $request, MessageTemplate $messagetemplate)
     {
-        //$this->validate($request, $rules);
+        $this->authorize('update', $messagetemplate);
+        $validate = $request->validate([
+            'title' => 'string|unique:message_templates,title,' . $messagetemplate->message_template_id . ',message_template_id',
+            'message' => 'string'
+        ]);
 
-        $this->authorize('update', $message);
+        //$this->authorize('update', $messagetemplate);
 
         if($request->has('title'))
-            $message->title = $request->title;
+            $messagetemplate->title = $request->title;
 
         if($request->has('message'))
-            $message->message = $request->message;
+            $messagetemplate->message = $request->message;
 
 
-        if(!$message->isDirty())
+        if(!$messagetemplate->isDirty())
         {
-            return $this->errorResponse()->json('No field has been updated', 422);
+            return $this->errorResponse('No field has been updated', 422);
         }
 
-        $message->save();
+        
+        $messagetemplate->save();
 
-        return $this->showOne($message);
+        return $this->showOne($messagetemplate);
     }
 
     /**
@@ -127,11 +133,11 @@ class MessageTemplateController extends ApiBaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MessageTemplate $message)
+    public function destroy(MessageTemplate $messagetemplate)
     {
-        $this->authorize('delete', $message);
+        $this->authorize('delete', $messagetemplate);
         
-        $message->delete();
-        return $this->showOne($message);
+        $messagetemplate->delete();
+        return $this->showOne($messagetemplate);
     }
 }
