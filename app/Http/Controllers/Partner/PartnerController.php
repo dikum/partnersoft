@@ -51,16 +51,29 @@ class PartnerController extends ApiBaseController
         {
             $branch = auth()->user()->branch;
             $type = auth()->user()->type;
+            $partners = null;
 
             if($type == User::ADMIN_USER || $branch == 'lagos')
                 $partners = User::
-                    where('type', User::PARTNER_USER)
-                    ->get();
+                    where('type', User::PARTNER_USER);
             else
                 $partners = User::
                     where('type', User::PARTNER_USER)
-                    ->where('branch', $branch)
-                    ->get();
+                    ->where('branch', $branch);
+
+            foreach(request()->query as $query => $value){
+                $attribute = UserTransformer::originalAttribute($query);
+
+                if(isset($attribute, $value))
+                {
+                    if($attribute == 'status')
+                        $partners->where($attribute, $value);
+                    else
+                        $partners->where($attribute, 'LIKE', "%$value%");
+                }
+            }
+
+            $partners = $partners->get();
 
             return $this->showAll($partners);
         }
@@ -92,17 +105,18 @@ class PartnerController extends ApiBaseController
             'state_id' => 'exists:states',
             'currency_id' => 'exists:currencies',
             'name' => 'required',
-            'email' => 'required|email|unique:users',
+            'email' => 'email|unique:users',
             'email2' => 'email',
             'phone' => 'required|unique:users',
             'sex' => 'required|in:' . User::MALE . ',' . User::FEMALE,
             'date_of_birth' => 'required|date',
-            'marital_status' => 'required|in:([' . User::SINGLE_MARITAL_STATUS . ',' . User::MARRIED_MARITAL_STATUS . ',' . User::DIVORCED_MARITAL_STATUS . '])',
+            'marital_status' => 'required|in:' . User::SINGLE_MARITAL_STATUS . ',' . User::MARRIED_MARITAL_STATUS . ',' . User::DIVORCED_MARITAL_STATUS,
             'occupation' => 'required',
             'donation_amount' => 'required|regex:/^\d+(\.\d{1,2})?$/',
             'birth_country' => 'required|exists:countries,country_id',
             'residential_country' => 'required|exists:countries,country_id',
             'residential_address' => 'required',
+            'photo' => 'image',
             'preflang' => 'required|in:' . User::ENGLISH_PREFERRED_LANGUAGE . ',' . User::FRENCH_PREFERRED_LANGUAGE . ',' . User::SPANISH_PREFERRED_LANGUAGE,
             'password' => 'required|min:6|confirmed',
         ];
@@ -112,7 +126,7 @@ class PartnerController extends ApiBaseController
         $data = $request->all();
 
         $country_name = CountryHelper::get_country_name($data['residential_country']);
-        $currency_name = CurrencyHelper::get_currency_name($data['currency_id']);
+        $currency_name = CurrencyHelper::get_currency_code($data['currency_id']);
 
         if($country_name == 'Ghana')
             $data['branch'] = User::GHANA_BRANCH;
@@ -121,8 +135,6 @@ class PartnerController extends ApiBaseController
                 $data['branch'] = User::SOUTH_AFRICA_BRANCH;
             else
                 $data['branch'] = User::LAGOS_BRANCH;
-
-
 
         $data['partner_id'] = null;
         $data['donation_type'] = User::EMMANUELTV;
@@ -206,6 +218,7 @@ class PartnerController extends ApiBaseController
             'preflang' => 'required|in:' . User::ENGLISH_PREFERRED_LANGUAGE . ',' . User::SPANISH_PREFERRED_LANGUAGE . ',' . User::FRENCH_PREFERRED_LANGUAGE,
             'birth_country' => 'required|exists:countries,country_id',
             'residential_country' => 'required|exists:countries,country_id',
+            'photo' => 'image',
             'donation_amount' => ['required', 'regex:/^\d+(\.\d{1,2})?$/', new PledgeAmount($request->currency_id, $request->title_id)]
             //'donation_type' => 'in:' . User::EMMANUELTV . ',' . User::DONATION,
         ]);
