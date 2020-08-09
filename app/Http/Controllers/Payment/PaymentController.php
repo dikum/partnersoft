@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Payment;
 
 use App\BankStatement;
+use App\Helpers\UserHelper;
 use App\Http\Controllers\ApiBaseController;
 use App\Http\Controllers\Controller;
 use App\Partner;
@@ -11,6 +12,7 @@ use App\Transformers\PaymentTransformer;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Log;
 
 class PaymentController extends ApiBaseController
 {
@@ -29,9 +31,28 @@ class PaymentController extends ApiBaseController
      */
     public function index(Payment $payment)
     {
+    
         $this->authorize('viewAny', Payment::class);
-        $payments = Payment::all();
-        
+
+        $payments = Payment::with('bank_statement');
+               
+        foreach(request()->query as $query => $value){
+            if($query == 'sort_by')
+                $sort_by_attribute = PaymentTransformer::originalAttribute($value);
+            else
+                $attribute = PaymentTransformer::originalAttribute($query);
+
+            if(isset($attribute, $value))
+            {
+                $payments->whereHas('bank_statement', function($query) use ($attribute, $value){
+                    $query->where($attribute, 'LIKE',  "%$value%");
+                });
+            }
+        }
+        $payments = $payments
+        ->orderBy($sort_by_attribute, 'desc')
+        ->get();
+
         return $this->showAll($payments);
     }
 
@@ -63,6 +84,11 @@ class PaymentController extends ApiBaseController
         $this->validate($request, $rules);
 
         $data = $request->all();
+
+        if(isset($request->entered_by))
+            $data['entered_by'] = UserHelper::get_users_name($request->entered_by);
+        else
+            $data['entered_by'] = Payment::PAYMENT_ENTERED_BY_SYSTEM;
 
         $payment = Payment::create($data);
 
