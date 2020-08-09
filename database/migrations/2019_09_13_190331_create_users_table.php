@@ -41,6 +41,7 @@ class CreateUsersTable extends Migration
             
             $table->string('type');
             $table->string('branch');
+            $table->string('photo');
             $table->string('registered_by')->nullable();
             $table->string('password');
             $table->rememberToken();
