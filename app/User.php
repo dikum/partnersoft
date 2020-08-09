@@ -47,6 +47,7 @@ class User extends Authenticatable
     const ENGLISH_PREFERRED_LANGUAGE = 'english';
     const SPANISH_PREFERRED_LANGUAGE = 'spanish';
     const FRENCH_PREFERRED_LANGUAGE = 'french';
+    const PORTUGUESE_PREFERRED_LANGUAGE = 'portuguese';
 
     /**
      * The attributes that are mass assignable.
@@ -83,6 +84,7 @@ class User extends Authenticatable
         'preflang',
         'type',
         'branch',
+        'photo',
         'registered_by',
         'password',
         'remember_token',
@@ -177,6 +179,10 @@ class User extends Authenticatable
     public static function generateVerificationCode()
     {
         return Str::random(40);
+    }
+
+    public function AauthAcessToken(){
+        return $this->hasMany('\App\OauthAccessToken', 'user_id');
     }
 
 
