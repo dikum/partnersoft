@@ -47,7 +47,7 @@ Route::resource('partners', 'Partner\PartnerController', ['except' => ['create',
 Route::resource('partners.messages', 'Partner\PartnerMessageController', ['only' => ['index']]);
 Route::get('partners/{partner_id}/comments', 'Partner\PartnerController@comments');
 Route::resource('partners.payments', 'Partner\PartnerPaymentController', ['only' => ['index']]);
-Route::resource('partners.user', 'Partner\PartnerUserController', ['only' => ['index']]);
+//Route::resource('partners.user', 'Partner\PartnerUserController', ['only' => ['index']]);
 Route::name('verify')->get('partners/verify/{token}', 'Partner\PartnerController@verify');
 Route::name('resend')->get('partners/{partner}/resend', 'Partner\PartnerController@resend');
 
