@@ -19,7 +19,7 @@ class BankStatementController extends ApiBaseController
 
         $this->middleware('auth:api');
 
-        //$this->middleware('transform.input:' . BankStatementTransformer::class)->only(['store']);
+        $this->middleware('transform.input:' . BankStatementTransformer::class)->only(['store']);
     }
 
     /**
